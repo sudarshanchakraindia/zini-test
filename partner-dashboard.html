@@ -1,0 +1,3517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<script>/* ZINI TEST: keep browser storage separate from the live app on the same domain */
+(function(){var P='zt_',S=Storage.prototype,g=S.getItem,s=S.setItem,r=S.removeItem;
+S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.call(this,P+k,v)};S.removeItem=function(k){return r.call(this,P+k)};})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[TEST] City Channel Partner Dashboard — Sudarshan Chakra India</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --saffron:#FF6B00; --gold:#F5A623; --maroon:#8B1E3F; --deep:#1A1206;
+    --cream:#FFF8F0; --dim:#7C4A1E;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; font-family:'Segoe UI',sans-serif; background:var(--cream); color:var(--deep); }
+  header{
+    background:linear-gradient(135deg,#1A0A00,#3D1A00); color:#fff;
+    padding:18px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+  header h1{ font-size:18px; margin:0; }
+  header .sub{ font-size:12px; color:#e8c9a0; }
+  .wrap{ max-width:920px; margin:0 auto; padding:20px; }
+
+  #gate{ max-width:360px; margin:70px auto; text-align:center; }
+  #gate input{ width:100%; padding:13px; font-size:15px; border:1px solid #ddd; border-radius:10px; margin:12px 0; text-transform:uppercase; }
+  #gate button{ width:100%; padding:13px; font-size:15px; font-weight:700; color:#fff; background:var(--saffron); border:none; border-radius:10px; cursor:pointer; }
+  #gate p.err{ color:#c0392b; font-size:13px; }
+  #gate p.hint{ color:var(--dim); font-size:13px; }
+
+  #app{ display:none; }
+
+  .card{ background:#fff; border-radius:14px; padding:20px; margin-bottom:18px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+  .card h2{ font-size:16px; margin:0 0 14px; color:var(--maroon); }
+
+  .profile-row{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .avatar{ width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--saffron),var(--gold)); display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:22px; flex-shrink:0; }
+  .badge{ display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+  .badge.active{ background:#dcf7dc; color:#1e7d1e; }
+  .badge.probation{ background:#fff3cd; color:#8a6d1a; }
+
+  .stat-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; }
+  .stat{ background:#FFF3E0; border-radius:10px; padding:14px; text-align:center; }
+  .stat b{ display:block; font-size:26px; color:var(--saffron); }
+  .stat span{ font-size:12px; color:var(--dim); }
+
+  .progress-bar{ height:10px; background:#f0e4d4; border-radius:6px; overflow:hidden; margin-top:8px; }
+  .progress-bar div{ height:100%; background:linear-gradient(90deg,var(--saffron),var(--gold)); }
+
+  .ref-box{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .ref-link{ flex:1; min-width:220px; background:#FFF3E0; border-radius:10px; padding:12px 14px; font-size:13px; word-break:break-all; }
+  .btn{ padding:10px 16px; border-radius:10px; border:none; font-weight:700; font-size:13px; cursor:pointer; }
+  .btn.primary{ background:var(--saffron); color:#fff; }
+  .btn.ghost{ background:#fff; border:1px solid var(--saffron); color:var(--saffron); }
+  #qrcode{ display:flex; justify-content:center; margin-top:14px; }
+  #qrcode img, #qrcode canvas{ border-radius:10px; }
+
+  .steps{ counter-reset:step; }
+  .step{ display:flex; gap:12px; margin-bottom:16px; }
+  .step .num{
+    counter-increment:step; flex-shrink:0; width:28px; height:28px; border-radius:50%;
+    background:var(--saffron); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px;
+  }
+  .step .num::before{ content:counter(step); }
+  .step .body b{ display:block; margin-bottom:2px; font-size:14px; }
+  .step .body p{ margin:0; font-size:13px; color:var(--dim); line-height:1.5; }
+
+  .accordion-item{ border-bottom:1px solid #f0e4d4; }
+  .accordion-item:last-child{ border-bottom:none; }
+  .accordion-head{ padding:14px 4px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-weight:700; font-size:14px; }
+  .accordion-body{ display:none; padding:0 4px 14px; font-size:13px; color:var(--dim); line-height:1.6; }
+  .accordion-body.open{ display:block; }
+
+  table{ width:100%; border-collapse:collapse; font-size:13px; }
+  th,td{ text-align:left; padding:8px 10px; border-bottom:1px solid #f0e4d4; }
+  th{ background:#FFF3E0; }
+
+  .material-list a{ display:flex; align-items:center; gap:10px; padding:10px; border-radius:10px; text-decoration:none; color:var(--deep); background:#FFF3E0; margin-bottom:8px; font-size:13px; font-weight:600; }
+  .material-list a:hover{ background:#FFE8CC; }
+
+  .empty{ text-align:center; color:var(--dim); font-size:13px; padding:20px; }
+
+  /* ── Lead Tracker ── */
+  .lead-form{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .lead-form input, .lead-form select{ padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px; background:#fff; }
+  .lead-form input.full{ grid-column:1 / -1; }
+  .lead-item{ border:1px solid #f0e4d4; border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .lead-item .lead-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:8px; flex-wrap:wrap; }
+  .lead-item .lead-name{ font-weight:700; font-size:14px; }
+  .lead-item .lead-meta{ font-size:12px; color:var(--dim); margin-top:2px; }
+  .lead-status-select{ padding:6px 10px; border-radius:20px; font-size:12px; font-weight:700; border:none; cursor:pointer; }
+  .status-not_contacted{ background:#FFF3E0; color:#B8600A; }
+  .status-contacted{ background:#E3F2FD; color:#1565C0; }
+  .status-interested{ background:#F3E5F5; color:#7B1FA2; }
+  .status-registered{ background:#E8F5E9; color:#2E7D32; }
+  .status-not_interested{ background:#FFEBEE; color:#C62828; }
+  .lead-item .lead-actions{ margin-top:8px; }
+  .lead-item .lead-actions button{ font-size:11px; padding:5px 10px; border-radius:6px; border:none; cursor:pointer; background:#eee; color:var(--deep); }
+
+  /* Message Templates */
+  .template-item{ border:1px solid #f0e4d4; border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .template-item .template-title{ font-weight:700; font-size:14px; }
+  .template-item .template-body{ font-size:12px; color:var(--dim); margin-top:4px; white-space:pre-wrap; }
+  .template-item .template-actions{ margin-top:8px; display:flex; gap:6px; }
+  .template-item .template-actions button{ font-size:11px; padding:5px 10px; border-radius:6px; border:none; cursor:pointer; background:#eee; color:var(--deep); }
+
+  /* Template picker overlay (choosing a template to send to a specific lead/client) */
+  .tpl-picker-overlay{ display:none; position:fixed; inset:0; background:rgba(26,18,6,0.6); z-index:998; align-items:center; justify-content:center; padding:20px; }
+  .tpl-picker-overlay.open{ display:flex; }
+  .tpl-picker-box{ background:#fff; border-radius:16px; max-width:420px; width:100%; padding:20px; max-height:80vh; overflow-y:auto; }
+  .tpl-picker-box h3{ margin:0 0 12px; font-size:16px; color:var(--deep); }
+  .tpl-pick-item{ border:1px solid #f0e4d4; border-radius:10px; padding:10px 12px; margin-bottom:8px; cursor:pointer; }
+  .tpl-pick-item:hover{ background:#FFF8F0; border-color:var(--saffron); }
+  .tpl-pick-item .tpl-pick-title{ font-weight:700; font-size:13px; }
+  .tpl-pick-item .tpl-pick-preview{ font-size:11px; color:var(--dim); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+  /* Marketing & Client Materials */
+  .material-item{ display:flex; justify-content:space-between; align-items:center; gap:10px; border:1px solid #f0e4d4; border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .material-item .material-name{ font-weight:700; font-size:14px; }
+  .material-item .material-desc{ font-size:12px; color:var(--dim); margin-top:2px; }
+  .material-item .material-actions{ display:flex; gap:6px; flex-shrink:0; }
+  .material-item .material-actions a{ font-size:12px; padding:7px 12px; border-radius:6px; text-decoration:none; font-weight:700; white-space:nowrap; }
+  .material-open{ background:var(--saffron); color:#fff; }
+  .material-share{ background:#25D366; color:#fff; }
+  .lead-filter-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+  .lead-filter-row button{ font-size:12px; padding:6px 12px; border-radius:20px; border:1px solid #f0e4d4; background:#fff; cursor:pointer; color:var(--dim); }
+  .lead-filter-row button.active{ background:var(--saffron); color:#fff; border-color:var(--saffron); }
+
+  /* ── Collapsible cards (added: long lists shouldn't force endless scrolling) ── */
+  .card-toggle{ display:flex; align-items:center; justify-content:space-between; gap:10px; cursor:pointer; user-select:none; }
+  .card-toggle .card-toggle-right{ display:flex; align-items:center; gap:8px; flex-shrink:0; }
+  .card-toggle .chev{ font-size:13px; color:var(--dim); transition:transform .15s; }
+  .card.collapsed .card-body{ display:none; }
+  .card.collapsed .card-toggle .chev{ transform:rotate(-90deg); }
+  .count-pill{ font-size:12px; font-weight:700; background:#FFF3E0; color:#B8600A; border-radius:20px; padding:3px 10px; }
+
+  /* Compact lead/client rows — tap a row to open its details */
+  .lead-head{ display:flex; align-items:center; gap:8px; cursor:pointer; }
+  .lead-head .lead-line{ flex:1; min-width:0; }
+  .lead-head .lead-name{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .lead-item .row-chev{ color:var(--dim); font-size:12px; display:inline-block; transition:transform .15s; }
+  .lead-item:not(.collapsed) .row-chev{ transform:rotate(90deg); }
+  .lead-item .lead-body{ margin-top:10px; }
+  .lead-item.collapsed .lead-body{ display:none; }
+  .list-tools{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+  .list-tools button{ font-size:12px; padding:6px 10px; border-radius:20px; border:1px solid #f0e4d4; background:#fff; cursor:pointer; color:var(--dim); }
+  #backToTop{ position:fixed; right:16px; bottom:16px; z-index:900; display:none; width:46px; height:46px; border-radius:50%; border:none; background:var(--saffron); color:#fff; font-size:20px; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,0.25); }
+
+  /* Marketing material gallery — posters, flyers, reels and documents */
+  .mat-filter-row{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+  .mat-filter-row button{ font-size:12px; padding:6px 12px; border-radius:20px; border:1px solid #f0e4d4; background:#fff; cursor:pointer; color:var(--dim); }
+  .mat-filter-row button.active{ background:var(--saffron); color:#fff; border-color:var(--saffron); }
+  .mat-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+  .mat-card{ border:1px solid #f0e4d4; border-radius:12px; overflow:hidden; background:#fff; display:flex; flex-direction:column; }
+  .mat-thumb{ height:120px; background:#FFF3E0; display:flex; align-items:center; justify-content:center; font-size:32px; overflow:hidden; cursor:pointer; }
+  .mat-thumb img, .mat-thumb video{ width:100%; height:100%; object-fit:cover; }
+  .mat-info{ padding:8px 10px; flex:1; }
+  .mat-info .mat-name{ font-size:12.5px; font-weight:700; line-height:1.3; }
+  .mat-info .mat-desc{ font-size:11px; color:var(--dim); margin-top:3px; }
+  .mat-type{ display:inline-block; font-size:10px; font-weight:700; border-radius:20px; padding:2px 8px; background:#FFF3E0; color:#B8600A; margin-bottom:5px; }
+  .mat-actions{ display:flex; gap:6px; padding:8px 10px; border-top:1px solid #f7ecdd; }
+  .mat-actions a, .mat-actions button{ flex:1; text-align:center; font-size:11px; font-weight:700; padding:7px 4px; border-radius:6px; text-decoration:none; border:none; cursor:pointer; }
+  .mat-open{ background:#eee; color:var(--deep); }
+  .mat-share{ background:#25D366; color:#fff; }
+  .mat-del{ background:#FFEBEE; color:#C62828; flex:0 0 auto !important; }
+
+
+  /* WhatsApp API sender panel */
+  .api-panel{ background:#FFF8F0; border:1px solid #f0d9bd; border-radius:12px; padding:12px; margin:12px 0; }
+  .api-panel select, .api-panel input[type=number]{ width:100%; padding:8px; border:1px solid #ddd; border-radius:8px; font-size:13px; background:#fff; box-sizing:border-box; }
+  .api-head{ font-weight:800; font-size:15px; margin-bottom:8px; }
+  .api-tabs{ display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
+  .api-tabs button{ flex:1; min-width:140px; padding:8px; border-radius:8px; border:1px solid #e0c9a8; background:#fff; font-size:12px; font-weight:700; cursor:pointer; }
+  .api-tabs button.active{ background:#8B1E3F; color:#fff; border-color:#8B1E3F; }
+  .api-lbl{ display:block; font-size:12px; font-weight:700; margin:8px 0 4px; }
+  .api-note{ font-size:11px; color:var(--dim); margin-top:6px; }
+  .api-warn{ font-size:12px; color:#8a4b00; background:#FFF1D6; border-radius:8px; padding:6px 8px; margin-top:8px; }
+  .api-row{ display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+  .api-row > *{ flex:1; min-width:120px; }
+  .api-check{ display:flex; gap:6px; align-items:center; font-size:12px; margin-top:8px; }
+  .api-summary{ font-size:13px; margin-top:8px; }
+  .api-bar{ height:10px; background:#eee; border-radius:6px; overflow:hidden; margin-top:10px; }
+  .api-bar div{ height:100%; background:#25D366; transition:width .3s; }
+  .api-stats{ font-size:12px; margin:6px 0; font-weight:700; }
+  .api-fails{ font-size:12px; margin-top:6px; max-height:200px; overflow:auto; }
+  /* Attachment chip on a message template */
+  .tpl-attach{ display:flex; align-items:center; gap:8px; font-size:12px; margin:8px 0; background:#FFF8F0; border:1px dashed #f0d9bd; border-radius:8px; padding:6px 8px; }
+  .tpl-attach img, .tpl-attach video{ width:40px; height:40px; object-fit:cover; border-radius:6px; flex-shrink:0; }
+  .tpl-attach .tpl-attach-name{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:700; }
+  .tpl-attach button{ font-size:11px; padding:4px 8px; border-radius:6px; border:none; background:#eee; cursor:pointer; }
+
+  /* Campaign CRM - WhatsApp outreach ka nateeja */
+  .crm-funnel{ display:grid; grid-template-columns:repeat(auto-fit,minmax(96px,1fr)); gap:8px; margin-bottom:14px; }
+  .crm-tile{ border:1px solid #f0e4d4; border-radius:10px; padding:10px 6px; background:#fff; cursor:pointer; text-align:center; }
+  .crm-tile.active{ border-color:var(--saffron); background:#FFF8F0; }
+  .crm-tile .crm-n{ font-size:20px; font-weight:800; line-height:1.1; }
+  .crm-tile .crm-l{ font-size:11px; color:var(--dim); margin-top:3px; }
+  .crm-row{ border:1px solid #f0e4d4; border-radius:10px; padding:10px 12px; margin-bottom:8px; }
+  .crm-top{ display:flex; align-items:center; gap:8px; }
+  .crm-name{ font-weight:700; font-size:14px; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .crm-badge{ font-size:10px; font-weight:800; border-radius:20px; padding:3px 9px; white-space:nowrap; flex-shrink:0; }
+  .crm-meta{ font-size:12px; color:var(--dim); margin-top:4px; }
+  .crm-reply{ font-size:12.5px; background:#F3FBF3; border-left:3px solid #1e7d1e; border-radius:6px; padding:6px 8px; margin-top:6px; white-space:pre-wrap; word-break:break-word; }
+  .crm-acts{ display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; align-items:center; }
+  .crm-acts a, .crm-acts button{ font-size:11.5px; font-weight:700; padding:6px 12px; border-radius:6px; text-decoration:none; border:none; cursor:pointer; }
+  .crm-wa{ background:#25D366; color:#fff; }
+  .crm-ghost{ background:#eee; color:var(--deep); }
+  .crm-flyer{ background:var(--saffron, #FF7A00); color:#fff; }
+  .crm-open{ font-size:11px; font-weight:700; color:#1e7d1e; }
+  .crm-shut{ font-size:11px; color:var(--dim); }
+</style>
+</head>
+<body>
+
+  <div id="gate">
+    <h1 style="margin-bottom:4px;">🔱 Partner Login</h1>
+    <p class="hint">Enter the referral code given to you when you were appointed</p>
+    <input type="text" id="codeInput" placeholder="e.g. JODHPUR01">
+    <button onclick="loadPartner()">View My Dashboard</button>
+    <p class="err" id="err"></p>
+  </div>
+
+  <div id="app">
+    <div id="demoBanner" style="display:none; background:#1A0A00; color:#FFD98A; text-align:center; padding:10px 16px; font-size:13px; font-weight:700; position:sticky; top:0; z-index:50;">
+      🎬 DEMO MODE — this is sample data so you can explore the dashboard. Nothing here is saved or sent anywhere real.
+      <a href="share.html" style="color:#FF6B00; text-decoration:underline; margin-left:8px;">Ready to apply for real? →</a>
+    </div>
+    <header>
+      <div>
+        <h1 id="hdrName">🔱 Partner Dashboard</h1>
+        <div class="sub" id="hdrCity">—</div>
+      </div>
+      <span class="badge" id="hdrStatus">—</span>
+    </header>
+
+    <div class="wrap">
+
+      <!-- Profile -->
+      <div class="card">
+        <div class="profile-row">
+          <div class="avatar" id="avatarInitial">?</div>
+          <div style="flex:1;">
+            <div style="font-weight:800; font-size:17px;" id="profName">—</div>
+            <div style="font-size:13px; color:var(--dim);" id="profMeta">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="card">
+        <h2>📊 Your Onboarding Progress</h2>
+        <div class="stat-grid">
+          <div class="stat"><b id="statProviders">0</b><span>Providers onboarded</span></div>
+          <div class="stat"><b id="statSeekers">0</b><span>Seekers onboarded</span></div>
+          <div class="stat"><b id="statVerified">0</b><span>Verified providers</span></div>
+          <div class="stat"><b id="statDaysLeft">—</b><span>Days left in 30-day window</span></div>
+        </div>
+        <div style="margin-top:16px;">
+          <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--dim);">
+            <span>Providers — Year 1 target: 33</span>
+            <span id="progressLabelProviders">0 / 33</span>
+          </div>
+          <div class="progress-bar"><div id="progressFillProviders" style="width:0%"></div></div>
+        </div>
+        <div style="margin-top:14px;">
+          <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--dim);">
+            <span>Seekers — Year 1 target: 66</span>
+            <span id="progressLabelSeekers">0 / 66</span>
+          </div>
+          <div class="progress-bar"><div id="progressFillSeekers" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <!-- Earnings Calculator -->
+      <div class="card">
+        <h2>🧮 Earnings Calculator</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">Plug in your own numbers — based on how many providers/seekers you think you can realistically onboard and how active they'll be, see what that could mean for your monthly and yearly earnings. Use this to set goals that fit your own capability, not just the minimum target.</p>
+
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--dim); margin:12px 0 4px;">Providers you plan to onboard</label>
+        <input type="number" id="calcProviders" value="33" min="0" style="width:100%; padding:9px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--dim); margin:12px 0 4px;">Seekers you plan to onboard</label>
+        <input type="number" id="calcSeekers" value="66" min="0" style="width:100%; padding:9px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--dim); margin:12px 0 4px;">Average completed hires per provider, per month</label>
+        <input type="number" id="calcHires" value="4" min="0" style="width:100%; padding:9px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--dim); margin:12px 0 4px;">Of those providers, how many upgrade to Silver (₹151/quarter)?</label>
+        <input type="number" id="calcSilver" value="5" min="0" style="width:100%; padding:9px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+
+        <label style="display:block; font-size:12px; font-weight:700; color:var(--dim); margin:12px 0 4px;">Of those providers, how many upgrade to Gold (₹251/quarter)?</label>
+        <input type="number" id="calcGold" value="2" min="0" style="width:100%; padding:9px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+
+        <button class="btn primary" style="margin-top:16px; width:100%;" onclick="runCalculator()">Calculate My Earnings</button>
+
+        <div id="calcResults" style="display:none; margin-top:18px;">
+          <div class="stat-grid">
+            <div class="stat"><b id="calcMonthlyFee">₹0</b><span>Monthly — convenience fee share</span></div>
+            <div class="stat"><b id="calcMonthlyMembership">₹0</b><span>Monthly — membership share</span></div>
+            <div class="stat"><b id="calcMonthlyTotal">₹0</b><span>Total estimated monthly</span></div>
+            <div class="stat"><b id="calcYearlyTotal">₹0</b><span>Total estimated yearly</span></div>
+          </div>
+          <p style="font-size:12px; color:var(--dim); margin-top:12px;">This is an estimate based on the numbers you entered, not a guarantee — actual earnings depend on real hires and upgrades happening on the platform. Adjust the inputs above and recalculate any time to model different goals.</p>
+        </div>
+      </div>
+
+      <!-- Referral link -->
+      <div class="card">
+        <h2>🔗 Your Referral Link</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">Share this link or QR with providers and seekers in your city — anyone who registers through it is automatically credited to you.</p>
+        <div class="ref-box">
+          <div class="ref-link" id="refLinkText">—</div>
+          <button class="btn primary" onclick="copyRefLink()">Copy Link</button>
+        </div>
+        <div id="qrcode"></div>
+      </div>
+
+      <!-- Getting started guide -->
+      <div class="card">
+        <h2>🚀 Getting Started — How This Works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="num"></div>
+            <div class="body">
+              <b>Share your referral link</b>
+              <p>Send your link (above) via WhatsApp, or show the QR code in person. It takes people straight into the Sudarshan Chakra India app.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div class="body">
+              <b>Help providers register</b>
+              <p>Guide local plumbers, electricians, beauticians, tutors etc. through the "Register as Provider" flow — they pick a category, add their details, and submit an ID for verification.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div class="body">
+              <b>Get providers ID-verified</b>
+              <p>Verified providers earn more trust from seekers and are more likely to get hired — encourage everyone you onboard to complete ID verification.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div class="body">
+              <b>Promote to seekers too</b>
+              <p>The more seekers actively using the app in your city, the more your onboarded providers get hired — and the more you earn.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num"></div>
+            <div class="body">
+              <b>Track your progress here</b>
+              <p>Check back on this dashboard anytime to see your onboarding numbers and payout history.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Templates -->
+      <div class="card" id="templatesCard">
+        <h2>✉️ Message Templates</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">Write your own messages once, then send them to any lead or client with one tap. Use <code>{name}</code> anywhere in your message — it'll be replaced automatically with that person's name. चाहें तो हर टेम्पलेट के साथ एक पोस्टर, फ्लायर या रील भी अटैच कर सकते हैं।</p>
+
+        <div class="lead-form" style="grid-template-columns:1fr;">
+          <input type="text" id="templateTitle" placeholder="Template name (e.g. Follow-up after 1 week)">
+          <textarea id="templateBody" rows="3" placeholder="Write your message here... e.g. Namaste {name}! Just checking in — have you had a chance to look at SAARTHI?" style="padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px; font-family:inherit; resize:vertical;"></textarea>
+        </div>
+        <div id="tplAttachRow"></div>
+        <button type="button" class="btn ghost" style="width:100%; margin-bottom:8px;" onclick="openMaterialChooser()">📎 पोस्टर / फ्लायर / रील अटैच करें</button>
+        <button class="btn primary" style="width:100%;" onclick="addTemplate()">➕ Save Template</button>
+        <p id="templateErr" style="color:#c0392b; font-size:12px; margin-top:6px;"></p>
+
+        <div id="templateListEl" style="margin-top:16px;"><div class="empty">Loading…</div></div>
+      </div>
+
+      <!-- Lead Tracker -->
+      <div class="card" id="leadsCard">
+        <h2>🎯 My Leads</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">Keep track of local businesses you've spotted — while walking around, browsing Google Maps, or hearing about them locally. Add them here so you don't lose track, and move them through the pipeline as you follow up.</p>
+
+        <div class="lead-form">
+          <input type="text" id="leadName" placeholder="Business / person name *">
+          <select id="leadType" style="padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+            <option value="provider">Lead type: Provider</option>
+            <option value="seeker">Lead type: Seeker</option>
+          </select>
+          <input type="text" id="leadCategory" list="categoryOptions" placeholder="Category — start typing...">
+          <datalist id="categoryOptions"></datalist>
+          <input type="text" id="leadPhone" placeholder="Phone number (needed to WhatsApp them)">
+          <input type="text" id="leadArea" placeholder="Area / locality">
+          <input type="text" id="leadNotes" class="full" placeholder="Notes (optional)">
+        </div>
+        <button class="btn primary" style="width:100%;" onclick="addLead()">➕ Add Lead</button>
+        <p id="leadErr" style="color:#c0392b; font-size:12px; margin-top:6px;"></p>
+
+        <button id="importToggleBtn" style="width:100%; margin-top:12px; padding:10px; border-radius:8px; border:1px dashed #ccc; background:#FAFAFA; color:var(--dim); font-size:13px; cursor:pointer;" onclick="toggleImportPanel()">📥 Import leads from a CSV / Excel file</button>
+
+        <div id="importPanel" style="display:none; margin-top:14px; border:1px solid #f0e4d4; border-radius:10px; padding:14px; background:#FFFDF9;">
+          <p style="font-size:12px; color:var(--dim); margin:0 0 10px;">Works with a spreadsheet from any source — a list you built yourself, a directory export, notes from an event, etc. Upload it, match the columns, and review before importing.</p>
+          <input type="file" id="importFileInput" accept=".csv,.xlsx,.xls" onchange="handleImportFile(this)">
+          <div id="importMapArea" style="display:none; margin-top:14px;">
+            <div id="importMapFields"></div>
+            <div id="importPreviewWrap" style="margin-top:12px; overflow-x:auto;">
+              <table style="width:100%; border-collapse:collapse; font-size:12px;">
+                <thead><tr id="importPreviewHead"></tr></thead>
+                <tbody id="importPreviewBody"></tbody>
+              </table>
+            </div>
+            <p style="font-size:11px; color:var(--dim); margin-top:8px;" id="importRowCount"></p>
+            <div style="display:flex; gap:8px; margin-top:10px;">
+              <button class="btn primary" style="flex:1;" onclick="commitImport(this)">✅ Import Leads</button>
+              <button style="padding:10px 16px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;" onclick="toggleImportPanel(false)">Cancel</button>
+            </div>
+            <p id="importErr" style="color:#c0392b; font-size:12px; margin-top:8px;"></p>
+          </div>
+        </div>
+
+        <input type="text" id="leadSearchInput" placeholder="🔍 Search by name or mobile number..." oninput="setLeadSearch(this.value)" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px; margin-top:20px; margin-bottom:12px;">
+
+        <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+          <label style="font-size:13px; font-weight:700; margin:0;">Sort by</label>
+          <select id="leadSortSelect" onchange="resetLeadPaging()" style="padding:8px; border:1px solid #ddd; border-radius:8px; font-size:13px;">
+            <option value="date_desc">Newest first</option>
+            <option value="date_asc">Oldest first</option>
+            <option value="mobile">Mobile number</option>
+            <option value="pincode">Pincode</option>
+            <option value="name">Name (A–Z)</option>
+          </select>
+          <label style="display:flex; align-items:center; gap:6px; font-size:13px; margin:0;">
+            <input type="checkbox" id="leadDupOnlyCheck" onchange="renderLeads()">
+            Show duplicates only
+          </label>
+          <span id="leadDupSummary" style="font-size:12px; color:#c0392b; font-weight:700;"></span>
+        </div>
+
+        <div class="lead-filter-row">
+          <button class="active" data-filter="all" onclick="setLeadFilter('all')">All</button>
+          <button data-filter="not_contacted" onclick="setLeadFilter('not_contacted')">Not Contacted</button>
+          <button data-filter="contacted" onclick="setLeadFilter('contacted')">Contacted</button>
+          <button data-filter="interested" onclick="setLeadFilter('interested')">Interested</button>
+          <button data-filter="not_interested" onclick="setLeadFilter('not_interested')">Not Interested</button>
+        </div>
+
+        <div id="apiSendPanel" class="api-panel" style="display:none;"></div>
+
+        <div class="list-tools">
+          <button onclick="expandAllLeads(true)">⬇ सब खोलें</button>
+          <button onclick="expandAllLeads(false)">⬆ सब बंद करें</button>
+          <span id="leadCountInfo" style="font-size:12px; color:var(--dim);"></span>
+        </div>
+        <div id="leadListEl"><div class="empty">Loading…</div></div>
+      </div>
+
+      <!-- Campaign CRM - bheje hue WhatsApp messages ka nateeja -->
+      <div class="card" id="crmCard">
+        <h2>📈 Campaign CRM</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">आपके भेजे हुए WhatsApp मैसेज का क्या हुआ — किस तक पहुँचा, किसने पढ़ा, किसने जवाब दिया, किसने मना किया। किसी भी खाने पर दबाकर सिर्फ़ वैसे लोग देखिए।</p>
+
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+          <select id="crmCampaignSelect" onchange="setCrmCampaign(this.value)" style="flex:1; min-width:180px; padding:8px; border:1px solid #ddd; border-radius:8px; font-size:13px;">
+            <option value="all">सभी campaigns</option>
+          </select>
+          <button class="btn ghost" style="padding:8px 14px;" onclick="loadCrm()">🔄 ताज़ा करें</button>
+          <button class="btn ghost" style="padding:8px 14px;" onclick="loadCrm(true)" title="partnerCode के बिना वाले रिकॉर्ड भी ढूँढता है">🔎 पूरा scan</button>
+          <button class="btn ghost" style="padding:8px 14px;" onclick="exportCrmCsv()">⬇ CSV</button>
+        </div>
+
+        <div id="crmFunnel" class="crm-funnel"></div>
+
+        <input type="text" id="crmSearchInput" placeholder="🔍 नाम या नंबर से ढूँढ़ें..." oninput="setCrmSearch(this.value)" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px; margin-bottom:12px;">
+
+        <p id="crmNote" style="font-size:11.5px; color:var(--dim); margin:0 0 10px;"></p>
+        <div id="crmListEl"><div class="empty">कोड डालने पर लोड होगा…</div></div>
+      </div>
+
+      <!-- My Clients (converted / registered leads) -->
+      <div class="card" id="clientsCard">
+        <h2>🤝 My Clients</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">Everyone who has actually registered through you — verified automatically from real sign-ups, plus any leads you've manually marked Registered. Stay in touch — a quick check-in message goes a long way.</p>
+        <input type="text" id="clientSearchInput" placeholder="🔍 Search by name or mobile number..." oninput="setClientSearch(this.value)" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px; margin-bottom:12px;">
+        <div id="clientListEl"><div class="empty">Loading…</div></div>
+      </div>
+
+      <!-- Training Videos -->
+      <div class="card" id="trainingCard">
+        <h2>🎥 Training Videos</h2>
+        <div id="trainingVideoList"><div class="empty">Loading…</div></div>
+      </div>
+
+      <!-- Marketing & Client Materials -->
+      <div class="card" id="materialsCard">
+        <h2>🎨 Marketing Material</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">पोस्टर, फ्लायर, रील और डॉक्युमेंट — सब एक जगह। सीधे WhatsApp पर भेजें, या अपने मैसेज टेम्पलेट में अटैच करें।</p>
+
+        <div class="mat-filter-row" id="matFilterRow">
+          <button class="active" data-mat="all" onclick="setMaterialFilter('all')">All</button>
+          <button data-mat="poster" onclick="setMaterialFilter('poster')">🖼️ Posters</button>
+          <button data-mat="flyer" onclick="setMaterialFilter('flyer')">📋 Flyers</button>
+          <button data-mat="reel" onclick="setMaterialFilter('reel')">🎬 Reels / Video</button>
+          <button data-mat="document" onclick="setMaterialFilter('document')">📄 Documents</button>
+        </div>
+
+        <div id="materialsList"><div class="empty">Loading…</div></div>
+
+        <button id="matAddToggle" style="width:100%; margin-top:14px; padding:10px; border-radius:8px; border:1px dashed #ccc; background:#FAFAFA; color:var(--dim); font-size:13px; cursor:pointer;" onclick="toggleMyMaterialPanel()">➕ अपना पोस्टर / फ्लायर / रील जोड़ें</button>
+
+        <div id="myMaterialPanel" style="display:none; margin-top:14px; border:1px solid #f0e4d4; border-radius:10px; padding:14px; background:#FFFDF9;">
+          <p style="font-size:12px; color:var(--dim); margin:0 0 10px;">आपका अपना मटेरियल सिर्फ़ आपको दिखेगा। फ़ाइल अपलोड करें, या YouTube / Instagram रील का लिंक पेस्ट करें।</p>
+          <div class="lead-form" style="grid-template-columns:1fr;">
+            <input type="text" id="myMatName" placeholder="नाम (जैसे: Diwali offer poster)">
+            <select id="myMatType" style="padding:10px; border:1px solid #ddd; border-radius:8px; font-size:14px;">
+              <option value="poster">🖼️ Poster</option>
+              <option value="flyer">📋 Flyer</option>
+              <option value="reel">🎬 Reel / Video</option>
+              <option value="document">📄 Document</option>
+            </select>
+            <input type="text" id="myMatDesc" placeholder="छोटा विवरण (optional)">
+            <input type="file" id="myMatFile" accept="image/*,video/*,.pdf,.doc,.docx,.ppt,.pptx" style="font-size:13px;">
+            <input type="text" id="myMatLink" placeholder="या लिंक पेस्ट करें (https://…)">
+          </div>
+          <button class="btn primary" style="width:100%;" onclick="addMyMaterial(this)">💾 सेव करें</button>
+          <p id="myMatStatus" style="font-size:12px; color:#2E7D32; margin-top:6px;"></p>
+          <p id="myMatErr" style="color:#c0392b; font-size:12px; margin-top:2px;"></p>
+        </div>
+      </div>
+
+      <!-- FAQ / education -->
+      <div class="card">
+        <h2>📖 Partner FAQ</h2>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-head" onclick="toggleAcc(this)">How do I earn money? <span>+</span></div>
+            <div class="accordion-body">You earn 25% of the ₹51 platform convenience fee on every completed hire involving a provider or seeker you onboarded, plus 20% of membership plan revenue (₹151 Silver / ₹251 Gold) when your onboarded providers upgrade. Payouts are logged below and paid monthly via UPI.</div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-head" onclick="toggleAcc(this)">What counts as "my" provider or seeker? <span>+</span></div>
+            <div class="accordion-body">Anyone who registers using your referral link or QR code is automatically attributed to you — permanently, as long as they stay active on the platform.</div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-head" onclick="toggleAcc(this)">What if someone registers without my link? <span>+</span></div>
+            <div class="accordion-body">Even if the person registers without using your specific referral link or QR code, they'll still be credited to you as long as the pincode they enter matches the pincode assigned to your city. Your link/QR is still the more reliable way to guarantee credit, but pincode matching covers people who find the app on their own.</div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-head" onclick="toggleAcc(this)">What is the activity requirement? <span>+</span></div>
+            <div class="accordion-body">To keep your city exclusivity, you need to onboard at least 33 verified providers and 66 seekers within your first 30 days, and maintain similar monthly activity after that. This target applies for your first year as a partner — Sudarshan Chakra India already lists 525+ services with room to keep growing, so this is set to match real market scale, not an arbitrary minimum. It may be revised in future years as the platform and each city's market mature. This dashboard's progress bar tracks it live.</div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-head" onclick="toggleAcc(this)">Where do I get marketing materials? <span>+</span></div>
+            <div class="accordion-body">See the "Share & Promote" section above — it generates a poster personalized with your own name, phone number, and your tracked QR code automatically. Use "Share My Poster" to send it directly to WhatsApp, Instagram, Facebook or any app on your phone, or "Download My Poster" to save it first. Generic (non-personalized) materials are also available further down if you prefer those.</div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-head" onclick="toggleAcc(this)">Does my shared QR/link still track location? <span>+</span></div>
+            <div class="accordion-body">Yes — every link and QR code generated for you (including the one baked into your personalized poster) includes location tracking automatically. This isn't for surveillance; it's what lets the central team confirm scans are genuinely coming from your assigned city, which protects your exclusivity and credibility as a partner.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Portal Activity -->
+      <div class="card" id="activityCard">
+        <h2>📊 My Portal Activity</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">Real, admin-verified activity from people you've referred — every entry here is a payment that's actually gone through, not just a claim.</p>
+        <div id="activityListEl"><div class="empty">Loading…</div></div>
+      </div>
+
+      <!-- Territory earnings (25% of ₹51 portal fee on every verified hire in my pincodes) -->
+      <div class="card" id="earningsCard">
+        <h2>💵 My Territory Earnings</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">You earn <b>25% of the ₹51 portal fee (₹12.75)</b> on every admin-verified hire of a provider located in your territory pincodes.</p>
+        <p style="font-size:13px; margin:6px 0 12px;">📍 Your pincodes: <b id="territoryPins">—</b></p>
+        <div class="stats" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin-bottom:12px;">
+          <div class="stat"><b id="earnTotal">₹0</b><span>Total earned</span></div>
+          <div class="stat"><b id="earnPaid">₹0</b><span>Paid to you</span></div>
+          <div class="stat"><b id="earnDue">₹0</b><span>Balance due</span></div>
+          <div class="stat"><b id="earnCount">0</b><span>Verified hires</span></div>
+        </div>
+        <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Date</th><th>Service / Provider</th><th>Pincode</th><th>Fee</th><th>Your share</th></tr></thead>
+          <tbody id="earningsBody"><tr><td colspan="5" class="empty">Loading…</td></tr></tbody>
+        </table>
+        </div>
+      </div>
+
+      <!-- Payout history -->
+      <div class="card" id="payoutCard">
+        <h2>💰 Payout History</h2>
+        <table>
+          <thead><tr><th>Date</th><th>Amount</th><th>Note</th></tr></thead>
+          <tbody id="payoutBody"><tr><td colspan="3" class="empty">Loading…</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- Share & Promote -->
+      <div class="card">
+        <h2>📢 Share &amp; Promote</h2>
+        <p style="font-size:13px; color:var(--dim); margin-top:-6px;">This poster is personalized just for you — your name, phone number, and your own tracked QR code are built in automatically.</p>
+        <canvas id="posterCanvas" style="display:none;"></canvas>
+        <img id="posterPreview" style="width:100%; border-radius:12px; margin-bottom:14px; display:none;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn primary" onclick="downloadPoster()">⬇️ Download My Poster</button>
+          <button class="btn primary" onclick="shareMyPoster()">📤 Share My Poster</button>
+        </div>
+        <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a id="waShareBtn" class="btn ghost" target="_blank" style="text-decoration:none; display:inline-block;">💬 Share Link on WhatsApp</a>
+          <a id="fbShareBtn" class="btn ghost" target="_blank" style="text-decoration:none; display:inline-block;">📘 Share Link on Facebook</a>
+        </div>
+        <p style="font-size:12px; color:var(--dim); margin-top:10px;">Instagram doesn't support direct web sharing — tap "Share My Poster" on your phone and pick Instagram from the share menu that pops up.</p>
+      </div>
+
+      <!-- Support -->
+      <div class="card">
+        <h2>🙋 Need Help?</h2>
+        <p style="font-size:13px; color:var(--dim);">Contact the central team any time:</p>
+        <p style="font-size:13px;"><b>WhatsApp:</b> +91 92511 15013<br><b>Email:</b> sudarshanchakraindia@gmail.com</p>
+      </div>
+
+    </div>
+  </div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getDatabase, ref, get, set, push, query, orderByChild, equalTo } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+  import { getStorage, ref as sref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signInAnonymously }
+      from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+  const firebaseConfig = {
+    apiKey: "AIzaSyBNw9FVgBjrjnVnMoADVH0eBW2z1rjUKtw",
+    authDomain: "zini-42c3e.firebaseapp.com",
+    databaseURL: "https://zini-42c3e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "zini-42c3e",
+    storageBucket: "zini-42c3e.firebasestorage.app",
+    messagingSenderId: "250171818533",
+    appId: "1:250171818533:web:89210d289a95bdac32b5cc"
+  };
+  const app = initializeApp(firebaseConfig);
+  const db  = getDatabase(app);
+  window._pdb = db;
+  window._pref = ref;
+  window._pget = get;
+  window._pset = set;
+  window._ppush = push;
+  // Campaign CRM waContacts ko partnerCode se query karta hai, poora node nahi
+  // padhta - 100k leads par bhi tez rahega (index database.rules.json me hai).
+  window._pquery        = query;
+  window._porderByChild = orderByChild;
+  window._pequalTo      = equalTo;
+  // Storage is used by the partner's own marketing-material uploads.
+  const storage = getStorage(app);
+  window._pstorage        = storage;
+  window._psref           = sref;
+  window._puploadBytes    = uploadBytes;
+  window._pgetDownloadURL = getDownloadURL;
+  window._pdeleteObject   = deleteObject;
+  const auth = getAuth(app);
+  window._pauth   = auth;
+  window._psignIn = (email, pass) => signInWithEmailAndPassword(auth, email, pass);
+  onAuthStateChanged(auth, u => { window._puser = u || null; });
+
+  // A partner opens this page with only their referral code — no account, no
+  // password. Signing in anonymously gives the page a throwaway identity so the
+  // database can demand an authenticated caller instead of being world-readable.
+  // Nothing is shown to the partner. If someone is already signed in properly
+  // (the admin, for the WhatsApp gateway), that session is left alone.
+  //
+  // Signing in ONCE at load is not enough. Firebase keeps one auth session per
+  // origin, shared by every tab, so the main app signing a seeker or admin out
+  // in another tab clears this page's session too. After that every read and
+  // write comes back permission_denied while the page still looks perfectly
+  // normal — the partner types a template, presses Save, and is told
+  // "Permission denied" for no visible reason. So the session is re-established
+  // on demand, immediately before each database call, instead of only at load.
+  let _authPending = null;
+  window._pEnsureAuth = function(){
+    if (auth.currentUser) return Promise.resolve(auth.currentUser);
+    if (!_authPending) {
+      _authPending = signInAnonymously(auth)
+        .then(c => c.user)
+        .catch(e => { console.warn('Anonymous sign-in failed:', e.code || e.message); return null; })
+        .finally(() => { _authPending = null; });
+    }
+    return _authPending;
+  };
+  window._pAuthReady = window._pEnsureAuth();
+
+  // Every database and storage call on this page goes through these wrappers,
+  // so the guard above covers the whole dashboard at once — templates, leads,
+  // payouts, activity and marketing uploads alike. push() only generates a key
+  // locally, so it needs no session.
+  window._pget = async (r)          => { await window._pEnsureAuth(); return get(r); };
+  window._pset = async (r, v)       => { await window._pEnsureAuth(); return set(r, v); };
+  window._puploadBytes    = async (r, d, m) => { await window._pEnsureAuth(); return uploadBytes(r, d, m); };
+  window._pgetDownloadURL = async (r)       => { await window._pEnsureAuth(); return getDownloadURL(r); };
+  window._pdeleteObject   = async (r)       => { await window._pEnsureAuth(); return deleteObject(r); };
+
+  // Auto-fill code from URL (?code=XYZ) if present, and auto-load.
+  // Module scripts already execute after the DOM is parsed, so the plain
+  // <script> below (which defines loadPartner) has already run by now.
+  const urlCode = new URLSearchParams(location.search).get('code');
+  if (urlCode) {
+    document.getElementById('codeInput').value = urlCode.replace(/\s+/g, '');
+    // Wait for the anonymous sign-in above, or the first read races it and
+    // comes back permission-denied.
+    window._pAuthReady.then(() => { if (window.loadPartner) window.loadPartner(); });
+  }
+
+  // Demo mode — ?demo=1 — lets a prospect explore the real dashboard UI with
+  // realistic sample data, with zero risk to real data: no writes ever reach
+  // Firebase while in this mode (every write action checks window._demoMode
+  // first and short-circuits to a local-only, in-memory version instead).
+  if (new URLSearchParams(location.search).get('demo') === '1' && window.enterDemoMode) {
+    window.enterDemoMode();
+  }
+
+  // Cosmetic-only gate for the SAARTHI invite button — real enforcement is
+  // server-side in the Cloud Function (checks X-Admin-Secret), not here.
+  window._saarthiAdminUnlocked = new URLSearchParams(location.search).get('admin') === 'JODHPUR 342001';
+</script>
+
+<script>
+  function runCalculator(){
+    const providers = Number(document.getElementById('calcProviders').value) || 0;
+    const hiresPerProvider = Number(document.getElementById('calcHires').value) || 0;
+    const silverCount = Number(document.getElementById('calcSilver').value) || 0;
+    const goldCount = Number(document.getElementById('calcGold').value) || 0;
+
+    const CONV_FEE = 51, CONV_SHARE = 0.25;
+    const SILVER_FEE = 151, GOLD_FEE = 251, MEMBERSHIP_SHARE = 0.20;
+
+    const monthlyHires = providers * hiresPerProvider;
+    const monthlyFeeEarnings = monthlyHires * CONV_FEE * CONV_SHARE;
+
+    // Membership fees are per quarter — convert to a monthly-equivalent share
+    const quarterlyMembershipRevenue = (silverCount * SILVER_FEE) + (goldCount * GOLD_FEE);
+    const monthlyMembershipEarnings = (quarterlyMembershipRevenue * MEMBERSHIP_SHARE) / 3;
+
+    const monthlyTotal = monthlyFeeEarnings + monthlyMembershipEarnings;
+    const yearlyTotal = monthlyTotal * 12;
+
+    document.getElementById('calcMonthlyFee').textContent = '₹' + Math.round(monthlyFeeEarnings).toLocaleString('en-IN');
+    document.getElementById('calcMonthlyMembership').textContent = '₹' + Math.round(monthlyMembershipEarnings).toLocaleString('en-IN');
+    document.getElementById('calcMonthlyTotal').textContent = '₹' + Math.round(monthlyTotal).toLocaleString('en-IN');
+    document.getElementById('calcYearlyTotal').textContent = '₹' + Math.round(yearlyTotal).toLocaleString('en-IN');
+    document.getElementById('calcResults').style.display = 'block';
+  }
+
+  // ── Personalized poster: draws the partner's name, phone, and their own
+  // tracked QR code onto fixed zones of a shared template image. ──
+  const POSTER_TEXT_ZONE = { x: 60, y: 690, w: 960, h: 140 };
+  const POSTER_QR_ZONE   = { x: 340, y: 870, size: 400 };
+
+  async function renderPersonalizedPoster(partnerName, phone, refLink){
+    const canvas = document.getElementById('posterCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const baseImg = new Image();
+    await new Promise((resolve, reject) => {
+      baseImg.onload = resolve;
+      baseImg.onerror = reject;
+      baseImg.src = 'partner_poster_template.png';
+    });
+
+    canvas.width = baseImg.width;
+    canvas.height = baseImg.height;
+    ctx.drawImage(baseImg, 0, 0);
+
+    // Name + phone, centered in the fixed text zone
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#8B1E3F';
+    ctx.font = "bold 40px 'Segoe UI', Arial, sans-serif";
+    ctx.fillText(partnerName || 'Channel Partner', canvas.width/2, POSTER_TEXT_ZONE.y + 95);
+    ctx.font = "30px 'Segoe UI', Arial, sans-serif";
+    ctx.fillText('📞 ' + (phone || '—'), canvas.width/2, POSTER_TEXT_ZONE.y + 132);
+
+    // QR code, drawn into the fixed QR zone
+    const qrHolder = document.createElement('div');
+    qrHolder.style.display = 'none';
+    document.body.appendChild(qrHolder);
+    new QRCode(qrHolder, { text: refLink, width: POSTER_QR_ZONE.size, height: POSTER_QR_ZONE.size });
+    await new Promise(r => setTimeout(r, 150)); // let QRCode.js finish rendering
+    const qrEl = qrHolder.querySelector('canvas') || qrHolder.querySelector('img');
+    if (qrEl.tagName === 'IMG' && !qrEl.complete) {
+      await new Promise(r => { qrEl.onload = r; });
+    }
+    ctx.drawImage(qrEl, POSTER_QR_ZONE.x, POSTER_QR_ZONE.y, POSTER_QR_ZONE.size, POSTER_QR_ZONE.size);
+    document.body.removeChild(qrHolder);
+
+    const preview = document.getElementById('posterPreview');
+    preview.src = canvas.toDataURL('image/png');
+    preview.style.display = 'block';
+  }
+
+  function downloadPoster(){
+    const canvas = document.getElementById('posterCanvas');
+    const link = document.createElement('a');
+    link.download = 'my-sudarshan-chakra-poster.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+
+  function shareMyPoster(){
+    const canvas = document.getElementById('posterCanvas');
+    canvas.toBlob(async (blob) => {
+      const file = new File([blob], 'my-sudarshan-chakra-poster.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: 'Sudarshan Chakra India',
+            text: 'Join Sudarshan Chakra India — register as a service provider or seeker today!'
+          });
+        } catch (e) {
+          console.warn('Share cancelled or failed:', e);
+        }
+      } else {
+        alert('Direct sharing isn\'t supported on this browser. Please use "Download My Poster" instead and share it manually via WhatsApp, Instagram, etc.');
+      }
+    }, 'image/png');
+  }
+
+  function toggleAcc(el){
+    const body = el.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.accordion-body.open').forEach(b => b.classList.remove('open'));
+    if (!isOpen) body.classList.add('open');
+  }
+
+  function copyRefLink(){
+    const text = document.getElementById('refLinkText').textContent;
+    navigator.clipboard.writeText(text).then(() => alert('✅ Link copied!'));
+  }
+
+  window.enterDemoMode = async function(){
+    window._demoMode = true;
+
+    const demoPartner = {
+      name: 'Demo Partner',
+      city: 'Jodhpur',
+      phone: '9876500000',
+      pincode: '342001',
+      status: 'active',
+      appointedDate: new Date(Date.now() - 12 * 86400000).toISOString() // 12 days "in"
+    };
+
+    await showDashboard('DEMO-PREVIEW', demoPartner);
+
+    document.getElementById('demoBanner').style.display = 'block';
+
+    // Override the live (empty, since this code doesn't really exist) stats
+    // and history with realistic-looking sample figures, purely for display.
+    document.getElementById('statProviders').textContent = 14;
+    document.getElementById('statSeekers').textContent = 27;
+    document.getElementById('statVerified').textContent = 11;
+    document.getElementById('progressFillProviders').style.width = Math.round((14/33)*100) + '%';
+    document.getElementById('progressLabelProviders').textContent = '14 / 33';
+    document.getElementById('progressFillSeekers').style.width = Math.round((27/66)*100) + '%';
+    document.getElementById('progressLabelSeekers').textContent = '27 / 66';
+    document.getElementById('statDaysLeft').textContent = 18;
+
+    const payoutBody = document.getElementById('payoutBody');
+    if (payoutBody) {
+      const sample = [
+        { date: new Date(Date.now() - 3*86400000).toISOString(), amount: 415, note: 'Weekly convenience-fee share' },
+        { date: new Date(Date.now() - 10*86400000).toISOString(), amount: 302, note: 'Weekly convenience-fee share' },
+        { date: new Date(Date.now() - 17*86400000).toISOString(), amount: 150, note: 'Gold membership upgrade share (Rajesh Electricals)' }
+      ];
+      payoutBody.innerHTML = sample.map(p => `
+        <tr>
+          <td>${new Date(p.date).toLocaleDateString()}</td>
+          <td>₹${p.amount}</td>
+          <td>${p.note}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Seed sample leads + a converted client directly into the in-memory
+    // cache (never touches Firebase), so the Leads/Clients sections show
+    // something realistic instead of an empty state.
+    leadsCache = {
+      demo_lead_1: { businessName: 'Sharma Electricals', type: 'provider', category: '🏠 Home Services', phone: '9876543210', area: 'Ratanada', notes: 'Met at the hardware store — interested, said he\u2019ll join this week.', status: 'interested', addedAt: new Date(Date.now()-2*86400000).toISOString() },
+      demo_lead_2: { businessName: 'Priya Beauty Parlour', type: 'provider', category: '💄 Beauty & Wellness', phone: '9876500001', area: 'Shastri Nagar', notes: '', status: 'contacted', addedAt: new Date(Date.now()-1*86400000).toISOString() },
+      demo_lead_3: { businessName: 'Ankit (looking for a tutor)', type: 'seeker', category: '📚 Education & Skill Services', phone: '9876500002', area: 'Paota', notes: 'Needs a Class 10 Maths tutor', status: 'not_contacted', addedAt: new Date().toISOString() },
+      demo_client_1: { businessName: 'Rajesh Electricals', type: 'provider', category: '🏠 Home Services', phone: '9876500003', area: 'Sardarpura', status: 'registered', addedAt: new Date(Date.now()-8*86400000).toISOString() }
+    };
+    renderLeads();
+    renderClients();
+    renderMaterials().catch(e => console.warn('renderMaterials failed:', e));
+    initCollapsibleCards();
+  };
+
+  async function loadPartner(){
+    const code = document.getElementById('codeInput').value.replace(/\s+/g, '').toUpperCase();
+    if (!code) return;
+    document.getElementById('err').textContent = '';
+    try {
+      const snap = await window._pget(window._pref(window._pdb, 'partners/' + code));
+      if (!snap.exists()) {
+        document.getElementById('err').textContent = 'Code not found. Check with the central team if you believe this is an error.';
+        return;
+      }
+      const partner = snap.val();
+      showDashboard(code, partner);
+    } catch (e) {
+      document.getElementById('err').textContent = 'Error loading dashboard: ' + e.message;
+    }
+  }
+
+  async function showDashboard(code, partner){
+    window._currentPartnerCode = code;
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+
+    document.getElementById('hdrName').textContent = '🔱 ' + (partner.name || 'Partner') + "'s Dashboard";
+    document.getElementById('hdrCity').textContent = (partner.city || '—') + ' · Code: ' + code;
+    const statusEl = document.getElementById('hdrStatus');
+    statusEl.textContent = (partner.status || 'active').toUpperCase();
+    statusEl.className = 'badge ' + (partner.status === 'probation' ? 'probation' : 'active');
+
+    document.getElementById('avatarInitial').textContent = (partner.name || '?').charAt(0).toUpperCase();
+    document.getElementById('profName').textContent = partner.name || '—';
+    document.getElementById('profMeta').textContent =
+      (partner.city ? partner.city + ' — ' : '') +
+      'Appointed ' + (partner.appointedDate ? new Date(partner.appointedDate).toLocaleDateString() : '—');
+
+    // Referral link + QR
+    // Includes BOTH ?ref (attribution) AND ?qr=1 (location capture) — every
+    // scan of a partner's QR/link logs a location, tagged with that partner's
+    // code, so you can verify they're actually promoting in their own city.
+    const refLink = location.origin + location.pathname.replace('partner-dashboard.html', 'index.html') + '?ref=' + code + '&qr=1&label=partner-' + code;
+    document.getElementById('refLinkText').textContent = refLink;
+    document.getElementById('qrcode').innerHTML = '';
+    new QRCode(document.getElementById('qrcode'), { text: refLink, width: 180, height: 180 });
+    window._currentRefLink = refLink;
+    window._currentPartnerName = partner.name || '';
+    window._currentPartnerCity = partner.city || '';
+
+    // Personalized poster + share buttons
+    renderPersonalizedPoster(partner.name, partner.phone, refLink).catch(e => console.warn('Poster render failed:', e));
+    const shareText = 'Join Sudarshan Chakra India — register as a service provider or seeker today! ' + refLink;
+    document.getElementById('waShareBtn').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
+    document.getElementById('fbShareBtn').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(refLink);
+
+    runCalculator();
+    // CRM leadsCache par nirbhar hai (naam, "jud gaye", phone-milaan), isliye
+    // leads pehle - warna pehli baar khaali ya adhoora dikhta hai.
+    loadLeads()
+      .then(function(){ return loadCrm(); })
+      .catch(e => console.warn('leads/CRM load failed:', e));
+    renderMaterials().catch(e => console.warn('renderMaterials failed:', e));
+    initCollapsibleCards();
+    loadCategoryOptions();
+    loadPartnerActivity();
+    loadTemplates();
+
+    // Training videos for partners
+    try {
+      const trainSnap = await window._pget(window._pref(window._pdb, 'trainingVideos'));
+      const all = trainSnap.exists() ? trainSnap.val() : {};
+      const rows = Object.values(all)
+        .filter(v => v.audience === 'partner')
+        .sort((a,b) => (a.order||0) - (b.order||0));
+
+      const listEl = document.getElementById('trainingVideoList');
+      if (rows.length === 0) {
+        listEl.innerHTML = '<div class="empty">No training videos available yet</div>';
+      } else {
+        listEl.innerHTML = rows.map(v => `
+          <div style="margin-bottom:18px;">
+            <div style="font-weight:700; font-size:14px; margin-bottom:8px;">${v.title}</div>
+            <div style="position:relative; padding-top:56.25%; border-radius:10px; overflow:hidden;">
+              <iframe src="https://www.loom.com/embed/${v.loomId}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen
+                style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+            </div>
+          </div>
+        `).join('');
+      }
+    } catch (e) {
+      document.getElementById('trainingVideoList').innerHTML = '<div class="empty">Could not load training videos</div>';
+      console.warn('Training video load error:', e);
+    }
+
+    // Live progress: count providers/seekers referred by this partner.
+    // Providers are publicly readable. Seekers are NOT read from the global
+    // 'seekers' node (admin-only, to protect seeker privacy) — instead we
+    // read 'partnerSeekerRefs/{code}', a lightweight name+mobile-only record
+    // written automatically at seeker registration, scoped to this partner.
+    try {
+      const [provResult, seekRefResult] = await Promise.allSettled([
+        window._pget(window._pref(window._pdb, 'providers')),
+        window._pget(window._pref(window._pdb, 'partnerSeekerRefs/' + code))
+      ]);
+
+      const provSnap = provResult.status === 'fulfilled' ? provResult.value : null;
+      const seekRefSnap = seekRefResult.status === 'fulfilled' ? seekRefResult.value : null;
+      if (seekRefResult.status === 'rejected') {
+        console.warn('Seeker refs load error:', seekRefResult.reason?.message);
+      }
+
+      const allProviders = provSnap && provSnap.exists() ? Object.values(provSnap.val()) : [];
+      const mySeekerRefs = seekRefSnap && seekRefSnap.exists() ? Object.values(seekRefSnap.val()) : [];
+
+      // Normalize both sides before comparing — a stray space (e.g. from a
+      // URL-encoded '%20' in an old link) must never silently break this match.
+      function normalizeCode(c){ return (c || '').toString().replace(/\s+/g, '').toUpperCase(); }
+      const targetCode = normalizeCode(code);
+      const myProviders = allProviders.filter(p => normalizeCode(p.referredByPartner) === targetCode);
+      const mySeekers    = mySeekerRefs; // already scoped to this partner by the DB path itself
+      const myVerified   = myProviders.filter(p => p.verified).length;
+      window._realConversions = { providers: myProviders, seekers: mySeekers };
+      renderClients();
+
+      document.getElementById('statProviders').textContent = myProviders.length;
+      document.getElementById('statSeekers').textContent = mySeekers.length;
+      document.getElementById('statVerified').textContent = myVerified;
+
+      const PROVIDER_TARGET = 33;
+      const SEEKER_TARGET   = 66;
+      const pctP = Math.min(100, Math.round((myProviders.length / PROVIDER_TARGET) * 100));
+      const pctS = Math.min(100, Math.round((mySeekers.length / SEEKER_TARGET) * 100));
+      document.getElementById('progressFillProviders').style.width = pctP + '%';
+      document.getElementById('progressLabelProviders').textContent = myProviders.length + ' / ' + PROVIDER_TARGET;
+      document.getElementById('progressFillSeekers').style.width = pctS + '%';
+      document.getElementById('progressLabelSeekers').textContent = mySeekers.length + ' / ' + SEEKER_TARGET;
+
+      if (partner.appointedDate) {
+        const daysElapsed = Math.floor((Date.now() - new Date(partner.appointedDate)) / 86400000);
+        const daysLeft = Math.max(0, 30 - daysElapsed);
+        document.getElementById('statDaysLeft').textContent = daysLeft;
+      }
+    } catch (e) {
+      console.warn('Progress load error:', e);
+    }
+
+    // Payout history
+    try {
+      const paySnap = await window._pget(window._pref(window._pdb, 'partnerPayouts/' + code));
+      const body = document.getElementById('payoutBody');
+      if (!paySnap.exists()) {
+        body.innerHTML = '<tr><td colspan="3" class="empty">No payouts logged yet</td></tr>';
+      } else {
+        const rows = Object.values(paySnap.val()).sort((a,b) => new Date(b.date) - new Date(a.date));
+        body.innerHTML = rows.map(r => `
+          <tr>
+            <td>${new Date(r.date).toLocaleDateString()}</td>
+            <td>₹${r.amount}</td>
+            <td>${r.note || '—'}</td>
+          </tr>
+        `).join('');
+      }
+    } catch (e) {
+      document.getElementById('payoutBody').innerHTML = '<tr><td colspan="3" class="empty">Could not load payout history</td></tr>';
+    }
+
+    loadTerritoryEarnings(code, partner);
+  }
+
+  async function loadTerritoryEarnings(code, partner){
+    const body = document.getElementById('earningsBody');
+    if (!body) return;
+    const inr = n => '₹' + (Math.round((Number(n)||0) * 100) / 100).toLocaleString('en-IN');
+    const pins = partner && partner.pincodes ? Object.keys(partner.pincodes) : (partner && partner.pincode ? [partner.pincode] : []);
+    document.getElementById('territoryPins').textContent = pins.length ? pins.sort().join(', ') : '—';
+    if (window._demoMode) {
+      document.getElementById('earnTotal').textContent = inr(12.75 * 9);
+      document.getElementById('earnPaid').textContent = inr(12.75 * 6);
+      document.getElementById('earnDue').textContent = inr(12.75 * 3);
+      document.getElementById('earnCount').textContent = 9;
+      body.innerHTML = [['Electrical Repair','Sharma Electricals'],['Plumber','Raju Plumbing'],['AC Repair & Servicing','Cool Care']].map((r,i) =>
+        `<tr><td>${new Date(Date.now()-(i+1)*86400000).toLocaleDateString('en-IN')}</td><td>${r[0]}<div style="font-size:11px; color:var(--dim);">${r[1]}</div></td><td>342001</td><td>₹51</td><td><b>₹12.75</b></td></tr>`).join('');
+      return;
+    }
+    try {
+      const [eSnap, pSnap] = await Promise.all([
+        window._pget(window._pref(window._pdb, 'partnerEarnings/' + code)),
+        window._pget(window._pref(window._pdb, 'partnerPayouts/' + code))
+      ]);
+      const rows = eSnap.exists() ? Object.values(eSnap.val()).sort((a,b) => (b.approvedAt||'').localeCompare(a.approvedAt||'')) : [];
+      const earned = rows.reduce((t, r) => t + (Number(r.shareAmount)||0), 0);
+      const paid = pSnap.exists() ? Object.values(pSnap.val()).reduce((t, r) => t + (Number(r.amount)||0), 0) : 0;
+      document.getElementById('earnTotal').textContent = inr(earned);
+      document.getElementById('earnPaid').textContent = inr(paid);
+      document.getElementById('earnDue').textContent = inr(Math.max(0, earned - paid));
+      document.getElementById('earnCount').textContent = rows.length;
+      const esc = v => String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      body.innerHTML = rows.length ? rows.map(r => `
+        <tr>
+          <td>${esc(r.date || (r.approvedAt ? new Date(r.approvedAt).toLocaleDateString('en-IN') : ''))}</td>
+          <td>${esc(r.service || '—')}<div style="font-size:11px; color:var(--dim);">${esc(r.providerName || '')}</div></td>
+          <td>${esc(r.providerPincode || '—')}</td>
+          <td>${inr(r.fee)}</td>
+          <td><b>${inr(r.shareAmount)}</b></td>
+        </tr>`).join('') : '<tr><td colspan="5" class="empty">No verified hires in your territory yet.</td></tr>';
+    } catch (e) {
+      body.innerHTML = '<tr><td colspan="5" class="empty">Could not load earnings: ' + e.message + '</td></tr>';
+    }
+  }
+
+  document.getElementById('codeInput').addEventListener('keydown', e => { if (e.key === 'Enter') loadPartner(); });
+
+  // ── Lead Tracker ──
+  const LEAD_STATUS_LABEL = {
+    not_contacted: 'Not Contacted',
+    contacted: 'Contacted',
+    interested: 'Interested',
+    registered: 'Registered',
+    not_interested: 'Not Interested'
+  };
+  let leadFilter = 'all';
+  let leadSearchTerm = '';
+  let clientSearchTerm = '';
+  window.setLeadSearch = function(v){ leadSearchTerm = v.trim().toLowerCase(); leadsShown = LEAD_PAGE; renderLeads(); };
+  window.setClientSearch = function(v){ clientSearchTerm = v.trim().toLowerCase(); renderClients(); };
+  function matchesSearch(term, ...fields){
+    if (!term) return true;
+    return fields.some(f => (f || '').toString().toLowerCase().includes(term));
+  }
+  let leadsCache = {};
+
+  window.setLeadFilter = function(filter){
+    leadFilter = filter;
+    document.querySelectorAll('.lead-filter-row button').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+    leadsShown = LEAD_PAGE;
+    renderLeads();
+  };
+
+  window.addLead = async function(){
+    const code = window._currentPartnerCode;
+    const name = document.getElementById('leadName').value.trim();
+    const type = document.getElementById('leadType').value;
+    const category = document.getElementById('leadCategory').value.trim();
+    const phone = document.getElementById('leadPhone').value.trim();
+    const area = document.getElementById('leadArea').value.trim();
+    const notes = document.getElementById('leadNotes').value.trim();
+    const errEl = document.getElementById('leadErr');
+    errEl.textContent = '';
+
+    if (!name) { errEl.textContent = 'Please enter a business or person name.'; return; }
+
+    if (window._demoMode) {
+      const fakeId = 'demo_new_' + Date.now();
+      leadsCache[fakeId] = { businessName: name, type, category, phone, area, notes, status: 'not_contacted', addedAt: new Date().toISOString() };
+      document.getElementById('leadName').value = '';
+      document.getElementById('leadType').value = 'provider';
+      document.getElementById('leadCategory').value = '';
+      document.getElementById('leadPhone').value = '';
+      document.getElementById('leadArea').value = '';
+      document.getElementById('leadNotes').value = '';
+      renderLeads();
+      renderClients();
+      return;
+    }
+
+    try {
+      const leadRef = window._ppush(window._pref(window._pdb, 'partnerLeads/' + code));
+      await window._pset(leadRef, {
+        businessName: name, type, category, phone, area, notes,
+        status: 'not_contacted',
+        addedAt: new Date().toISOString()
+      });
+      document.getElementById('leadName').value = '';
+      document.getElementById('leadType').value = 'provider';
+      document.getElementById('leadCategory').value = '';
+      document.getElementById('leadPhone').value = '';
+      document.getElementById('leadArea').value = '';
+      document.getElementById('leadNotes').value = '';
+      loadLeads();
+    } catch (e) {
+      errEl.textContent = 'Could not save lead: ' + e.message;
+    }
+  };
+
+  window.updateLeadStatus = async function(leadId, newStatus){
+    if (window._demoMode) {
+      leadsCache[leadId].status = newStatus;
+      renderLeads();
+      renderClients();
+      return;
+    }
+    const code = window._currentPartnerCode;
+    try {
+      await window._pset(window._pref(window._pdb, 'partnerLeads/' + code + '/' + leadId + '/status'), newStatus);
+      leadsCache[leadId].status = newStatus;
+      renderLeads();
+      renderClients();
+    } catch (e) {
+      alert('Could not update lead: ' + e.message);
+    }
+  };
+
+  window.removeLead = async function(leadId){
+    if (!confirm('Remove this lead from your list?')) return;
+    if (window._demoMode) {
+      delete leadsCache[leadId];
+      renderLeads();
+      renderClients();
+      return;
+    }
+    const code = window._currentPartnerCode;
+    try {
+      await window._pset(window._pref(window._pdb, 'partnerLeads/' + code + '/' + leadId), null);
+      delete leadsCache[leadId];
+      renderLeads();
+      renderClients();
+    } catch (e) {
+      alert('Could not remove lead: ' + e.message);
+    }
+  };
+
+  function cleanPhoneForWhatsApp(phone){
+    if (!phone) return null;
+    let digits = phone.replace(/\D/g, '');
+    if (digits.length > 10) digits = digits.slice(-10); // strip leading 91/0 etc.
+    if (digits.length !== 10) return null;
+    return '91' + digits;
+  }
+
+  function buildLeadWhatsAppMessage(lead){
+    const partnerName = window._currentPartnerName || 'your City Channel Partner';
+    const city = window._currentPartnerCity || 'your city';
+    const refLink = window._currentRefLink || '';
+    const leadName = lead.businessName || '';
+
+    if (lead.type === 'seeker') {
+      return `Namaste ${leadName} 🙏 Looking for a reliable service provider near you? SAARTHI connects you with verified local providers in ${city} — free to browse, you only pay a small ₹51 fee when you actually book someone. Check it out: ${refLink}\n\n— ${partnerName}, SAARTHI City Channel Partner`;
+    }
+    return `Namaste ${leadName} 🙏 I'm ${partnerName}, City Channel Partner for SAARTHI in ${city}. We're a new app connecting local service providers like you directly with customers — completely free to list, zero commission on what you earn. Takes 5 minutes to set up: ${refLink}\n\nHappy to help you get started if you have any questions!`;
+  }
+
+  window.sendLeadWhatsApp = async function(leadId){
+    const lead = leadsCache[leadId];
+    if (!lead) return;
+    const message = buildLeadWhatsAppMessage(lead);
+
+    if (window._demoMode) {
+      alert('📲 In the real dashboard, WhatsApp would now open with this message pre-filled and ready to send to ' + (lead.businessName || 'this lead') + ':\n\n' + message);
+      if (lead.status === 'not_contacted') {
+        leadsCache[leadId].status = 'contacted';
+        renderLeads();
+      }
+      return;
+    }
+
+    const waNumber = cleanPhoneForWhatsApp(lead.phone);
+    const url = waNumber
+      ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(message)
+      : 'https://wa.me/?text=' + encodeURIComponent(message);
+    window.open(url, '_blank');
+
+    // We can't detect from here whether the message actually sent — wa.me just opens
+    // a chat window, and it opens the same way whether or not the number is on
+    // WhatsApp. So instead of assuming success, ask once you're back on this tab.
+    if (lead.status === 'not_contacted') {
+      const confirmed = confirm('Did the WhatsApp message actually send?\n\nClick OK only if you saw it go through in WhatsApp. Click Cancel if the number didn\u2019t work or you didn\u2019t send it — it will stay as "Not Contacted."');
+      if (confirmed) {
+        const code = window._currentPartnerCode;
+        try {
+          await window._pset(window._pref(window._pdb, 'partnerLeads/' + code + '/' + leadId + '/status'), 'contacted');
+          leadsCache[leadId].status = 'contacted';
+          renderLeads();
+        } catch (e) { /* non-critical, ignore */ }
+      }
+    }
+  };
+
+  // ── Message Templates ──
+  let templatesCache = {};
+  let editingTemplateId = null;
+
+  async function loadTemplates(){
+    const listEl = document.getElementById('templateListEl');
+    if (window._demoMode) {
+      templatesCache = {
+        demo_tpl_1: { title: 'Quick Intro', body: 'Namaste {name} 🙏 I’m your local SAARTHI City Channel Partner — happy to help you get set up, free and takes just a few minutes!' }
+      };
+      renderTemplates();
+      return;
+    }
+    try {
+      const code = window._currentPartnerCode;
+      const snap = await window._pget(window._pref(window._pdb, 'partnerTemplates/' + code));
+      templatesCache = snap.exists() ? snap.val() : {};
+      renderTemplates();
+    } catch (e) {
+      listEl.innerHTML = '<div class="empty">Could not load templates: ' + e.message + '</div>';
+    }
+  }
+
+  // A template is a saved message. It can also carry one piece of media — a
+  // poster, flyer, reel or document — so the words and the artwork go out
+  // together. WhatsApp's web link can only carry text, so media travels two
+  // ways: as a link inside the message (works everywhere), or through the
+  // phone's share sheet with the real file attached (works on mobile).
+  let pendingTplMedia = null;   // staged for the next save: { url, type, name, fileName }
+
+  function tplMediaThumb(media){
+    const meta = MAT_TYPE_META[media.type] || MAT_TYPE_META.link;
+    if (media.url && isImageUrl(media.url, media.fileName)) return '<img src="' + escapeHtml(media.url) + '" alt="">';
+    if (media.url && isVideoUrl(media.url, media.fileName)) return '<video src="' + escapeHtml(media.url) + '" muted playsinline preload="metadata"></video>';
+    return '<span style="font-size:22px;">' + meta.icon + '</span>';
+  }
+
+  function tplMediaChipHtml(media, removable){
+    if (!media || !media.url) return '';
+    return '<div class="tpl-attach">' + tplMediaThumb(media) +
+      '<span class="tpl-attach-name">' + escapeHtml(media.name || 'Attachment') + '</span>' +
+      (removable ? '<button type="button" onclick="clearTplMedia()">✖ हटाएँ</button>' : '') +
+      '</div>';
+  }
+
+  function renderTplAttach(){
+    const row = document.getElementById('tplAttachRow');
+    if (row) row.innerHTML = tplMediaChipHtml(pendingTplMedia, true);
+  }
+
+  window.clearTplMedia = function(){ pendingTplMedia = null; renderTplAttach(); };
+
+  // ── Choosing which material to attach ──
+  window.openMaterialChooser = async function(){
+    const box = document.getElementById('matChooserList');
+    document.getElementById('matChooserOverlay').classList.add('open');
+    box.innerHTML = '<p style="font-size:13px; color:var(--dim);">Loading…</p>';
+    if (!materialsCache.length) {
+      try { await renderMaterials(); } catch (e) { console.warn('material load failed:', e); }
+    }
+    const items = materialsCache.map((m, i) => {
+      const meta = MAT_TYPE_META[m.type] || MAT_TYPE_META.link;
+      return `<div class="tpl-pick-item" onclick="pickMaterialForTemplate(${i})">
+          <div class="tpl-pick-title">${meta.icon} ${escapeHtml(m.name)}</div>
+          <div class="tpl-pick-preview">${meta.label}${m.scope === 'mine' ? ' · मेरा' : ''}</div>
+        </div>`;
+    }).join('');
+    box.innerHTML = (items || '<p style="font-size:13px; color:var(--dim);">अभी कोई मटेरियल नहीं है — Marketing Material सेक्शन से जोड़ें।</p>') +
+      `<div class="tpl-pick-item" onclick="pickTemplateLink()">
+         <div class="tpl-pick-title">🔗 कोई और लिंक पेस्ट करें</div>
+         <div class="tpl-pick-preview">YouTube / Instagram रील या कोई भी URL</div>
+       </div>`;
+  };
+
+  window.closeMaterialChooser = function(){
+    document.getElementById('matChooserOverlay').classList.remove('open');
+  };
+
+  window.pickMaterialForTemplate = function(idx){
+    const m = materialsCache[idx];
+    if (!m) return;
+    pendingTplMedia = { url: m.url, type: m.type, name: m.name, fileName: m.fileName || '' };
+    closeMaterialChooser();
+    renderTplAttach();
+  };
+
+  window.pickTemplateLink = function(){
+    const url = prompt('लिंक पेस्ट करें (https://…)');
+    if (!url) return;
+    if (!/^https?:\/\//i.test(url.trim())) { alert('लिंक https:// से शुरू होना चाहिए।'); return; }
+    const name = prompt('इसका नाम क्या रखें?', 'Reel / Link') || 'Link';
+    pendingTplMedia = { url: url.trim(), type: guessMaterialType(url, ''), name: name, fileName: '' };
+    closeMaterialChooser();
+    renderTplAttach();
+  };
+
+  // ── The saved template list ──
+  function renderTemplates(){
+    const listEl = document.getElementById('templateListEl');
+    const ids = Object.keys(templatesCache);
+    updateCountPill('templates', ids.length);
+    if (ids.length === 0) {
+      listEl.innerHTML = '<div class="empty">No templates yet — save your first one above.</div>';
+      return;
+    }
+    listEl.innerHTML = ids.map(id => {
+      const t = templatesCache[id];
+      return `
+        <div class="template-item">
+          <div class="template-title">${escapeHtml(t.title)}</div>
+          <div class="template-body">${escapeHtml(t.body)}</div>
+          ${tplMediaChipHtml(t.media, false)}
+          <div class="template-actions">
+            <button onclick="editTemplate('${id}')">✏️ Edit</button>
+            <button onclick="deleteTemplate('${id}')">🗑 Delete</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  window.addTemplate = async function(){
+    const title = document.getElementById('templateTitle').value.trim();
+    const body = document.getElementById('templateBody').value.trim();
+    const errEl = document.getElementById('templateErr');
+    errEl.textContent = '';
+    if (!title || !body) { errEl.textContent = 'Give the template a name and a message.'; return; }
+
+    const rec = { title, body };
+    if (pendingTplMedia && pendingTplMedia.url) rec.media = pendingTplMedia;
+
+    const clearForm = () => {
+      document.getElementById('templateTitle').value = '';
+      document.getElementById('templateBody').value = '';
+      pendingTplMedia = null;
+      renderTplAttach();
+    };
+
+    if (window._demoMode) {
+      const id = editingTemplateId || ('demo_tpl_new_' + Date.now());
+      templatesCache[id] = rec;
+      editingTemplateId = null;
+      clearForm();
+      renderTemplates();
+      return;
+    }
+
+    const code = window._currentPartnerCode;
+    try {
+      if (editingTemplateId) {
+        await window._pset(window._pref(window._pdb, 'partnerTemplates/' + code + '/' + editingTemplateId), rec);
+        editingTemplateId = null;
+      } else {
+        const tplRef = window._ppush(window._pref(window._pdb, 'partnerTemplates/' + code));
+        await window._pset(tplRef, rec);
+      }
+      clearForm();
+      loadTemplates();
+    } catch (e) {
+      errEl.textContent = 'Could not save template: ' + e.message;
+    }
+  };
+
+  window.editTemplate = function(id){
+    const t = templatesCache[id];
+    if (!t) return;
+    document.getElementById('templateTitle').value = t.title;
+    document.getElementById('templateBody').value = t.body;
+    pendingTplMedia = t.media || null;
+    renderTplAttach();
+    editingTemplateId = id;
+    document.getElementById('templateTitle').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  window.deleteTemplate = async function(id){
+    if (!confirm('Delete this template?')) return;
+    if (window._demoMode) {
+      delete templatesCache[id];
+      renderTemplates();
+      return;
+    }
+    const code = window._currentPartnerCode;
+    try {
+      await window._pset(window._pref(window._pdb, 'partnerTemplates/' + code + '/' + id), null);
+      delete templatesCache[id];
+      renderTemplates();
+    } catch (e) {
+      document.getElementById('templateErr').textContent = 'Could not delete: ' + e.message;
+    }
+  };
+
+  // ── Template picker: choosing a saved template to send to a specific lead/client ──
+  window.openTemplatePicker = function(name, phone, leadIdForStatusUpdate){
+    window._tplPickerContext = { name: name || 'there', phone: phone || '', leadIdForStatusUpdate: leadIdForStatusUpdate || null };
+    const listEl = document.getElementById('tplPickerList');
+    const ids = Object.keys(templatesCache);
+    if (ids.length === 0) {
+      listEl.innerHTML = '<p style="font-size:13px; color:var(--dim);">You haven’t saved any templates yet. Add one in the Message Templates section above.</p>';
+    } else {
+      listEl.innerHTML = ids.map(id => {
+        const t = templatesCache[id];
+        const media = t.media;
+        return `<div class="tpl-pick-item">
+          <div onclick="sendTemplateMessage('${id}')">
+            <div class="tpl-pick-title">${escapeHtml(t.title)}</div>
+            <div class="tpl-pick-preview">${escapeHtml(t.body)}</div>
+            ${media ? `<div style="font-size:11px; color:#B8600A; font-weight:700; margin-top:4px;">📎 ${escapeHtml(media.name || 'Attachment')}</div>` : ''}
+          </div>
+          ${media ? `<div style="display:flex; gap:6px; margin-top:8px;">
+            <button onclick="event.stopPropagation(); sendTemplateMessage('${id}')" style="flex:1; font-size:11px; font-weight:700; padding:7px 4px; border:none; border-radius:6px; background:#25D366; color:#fff; cursor:pointer;">💬 लिंक के साथ भेजें</button>
+            <button onclick="event.stopPropagation(); sendTemplateWithFile('${id}')" style="flex:1; font-size:11px; font-weight:700; padding:7px 4px; border:none; border-radius:6px; background:#eee; color:var(--deep); cursor:pointer;">📎 फ़ाइल अटैच करके</button>
+          </div>` : ''}
+        </div>`;
+      }).join('');
+    }
+    document.getElementById('tplPickerOverlay').classList.add('open');
+  };
+
+  window.closeTemplatePicker = function(){
+    document.getElementById('tplPickerOverlay').classList.remove('open');
+  };
+
+  function buildTemplateMessage(t, name, withMediaLink){
+    let message = t.body.split('{name}').join(name);
+    if (withMediaLink && t.media && t.media.url) {
+      message += '\n\n' + (t.media.name ? t.media.name + ': ' : '') + t.media.url;
+    }
+    return message;
+  }
+
+  function openWhatsAppWith(phone, message){
+    const waNumber = cleanPhoneForWhatsApp(phone);
+    const url = waNumber
+      ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(message)
+      : 'https://wa.me/?text=' + encodeURIComponent(message);
+    window.open(url, '_blank');
+  }
+
+  function confirmLeadContacted(ctx){
+    if (ctx.leadIdForStatusUpdate && leadsCache[ctx.leadIdForStatusUpdate] && leadsCache[ctx.leadIdForStatusUpdate].status === 'not_contacted') {
+      const confirmed = confirm('Did the WhatsApp message actually send?\n\nClick OK only if you saw it go through in WhatsApp. Click Cancel if not — it will stay as "Not Contacted."');
+      if (confirmed) updateLeadStatus(ctx.leadIdForStatusUpdate, 'contacted');
+    }
+  }
+
+  // Link mode: opens that person's chat with the message (and the material's
+  // link) already typed out.
+  window.sendTemplateMessage = function(templateId){
+    const t = templatesCache[templateId];
+    const ctx = window._tplPickerContext;
+    if (!t || !ctx) return;
+    const message = buildTemplateMessage(t, ctx.name, true);
+    closeTemplatePicker();
+
+    if (window._demoMode) {
+      alert('📲 In the real dashboard, WhatsApp would now open with this message pre-filled for ' + ctx.name + ':\n\n' + message);
+      return;
+    }
+    openWhatsAppWith(ctx.phone, message);
+    confirmLeadContacted(ctx);
+  };
+
+  // File mode: hands the poster/reel itself to the phone's share sheet, so the
+  // partner picks WhatsApp and the contact there. If the file cannot be fetched
+  // (desktop browser, or storage blocking cross-origin reads), it falls back to
+  // link mode rather than failing.
+  window.sendTemplateWithFile = async function(templateId){
+    const t = templatesCache[templateId];
+    const ctx = window._tplPickerContext;
+    if (!t || !ctx || !t.media || !t.media.url) return;
+    const messagePlain = buildTemplateMessage(t, ctx.name, false);
+    closeTemplatePicker();
+
+    if (window._demoMode) {
+      alert('📲 असली डैशबोर्ड में यहाँ फ़ोन का शेयर मेन्यू खुलता है — मैसेज के साथ "' + (t.media.name || 'फ़ाइल') + '" अटैच होकर।');
+      return;
+    }
+
+    const shared = await shareFileOrLink(t.media.url, t.media.fileName || t.media.name, messagePlain);
+    if (!shared) {
+      alert('इस डिवाइस पर फ़ाइल सीधे अटैच नहीं हो सकी — WhatsApp लिंक के साथ खुल रहा है। चाहें तो Marketing Material सेक्शन से फ़ाइल डाउनलोड करके भेज सकते हैं।');
+      openWhatsAppWith(ctx.phone, buildTemplateMessage(t, ctx.name, true));
+    }
+    confirmLeadContacted(ctx);
+  };
+
+  async function loadLeads(){
+    if (window._demoMode) return; // enterDemoMode seeds leadsCache directly — don't overwrite it
+    const code = window._currentPartnerCode;
+    const listEl = document.getElementById('leadListEl');
+    try {
+      const snap = await window._pget(window._pref(window._pdb, 'partnerLeads/' + code));
+      leadsCache = snap.exists() ? snap.val() : {};
+      renderLeads();
+      renderClients();
+    } catch (e) {
+      listEl.innerHTML = '<div class="empty">Could not load leads: ' + e.message + '</div>';
+    }
+  }
+
+  function normLeadPhone(p){ return (p || '').replace(/\D/g, '').replace(/^91/, ''); } // last-10-digit compare, ignores +91 prefix
+  // WhatsApp only works on mobiles: an Indian mobile is 10 digits starting 6-9.
+  // Landlines like "0141 402 8447" (STD code) fail at Meta, so skip them up front.
+  function isMobileNumber(p){
+    const d = (p || '').replace(/\D/g, '').slice(-10);
+    return /^[6-9]\d{9}$/.test(d);
+  }
+  function extractPincode(area){ const m = (area || '').match(/\b(\d{6})\b/); return m ? m[1] : ''; }
+
+  function findDuplicateLeadPhones(ids){
+    const byPhone = {};
+    ids.forEach(id => {
+      const key = normLeadPhone(leadsCache[id].phone);
+      if (!key) return;
+      (byPhone[key] = byPhone[key] || []).push(id);
+    });
+    const dupIds = new Set();
+    Object.values(byPhone).forEach(g => { if (g.length > 1) g.forEach(id => dupIds.add(id)); });
+    return { byPhone, dupIds };
+  }
+
+  function renderLeads(){
+    const listEl = document.getElementById('leadListEl');
+    // Registered leads graduate to "My Clients" below and no longer show here.
+    const activeIds = Object.keys(leadsCache).filter(id => leadsCache[id].status !== 'registered');
+    updateCountPill('leads', activeIds.length);
+
+    // First visit with a big list: start the section folded, so the rest of the
+    // dashboard is reachable without scrolling through hundreds of rows. Once
+    // the partner opens or closes it themselves, that choice wins from then on.
+    if (!leadsAutoCollapsed) {
+      leadsAutoCollapsed = true;
+      if (activeIds.length > 30 && lsGet('sc_collapse_leads') === null) {
+        const card = document.getElementById('leadsCard');
+        if (card) card.classList.add('collapsed');
+      }
+    }
+
+    const { byPhone, dupIds } = findDuplicateLeadPhones(activeIds);
+    const dupCount = Object.values(byPhone).filter(g => g.length > 1).length;
+    const dupSummaryEl = document.getElementById('leadDupSummary');
+    if (dupSummaryEl) {
+      dupSummaryEl.textContent = dupCount > 0
+        ? `⚠️ ${dupCount} mobile number${dupCount > 1 ? 's' : ''} appear in more than one lead`
+        : '';
+    }
+
+    const showDupOnly = document.getElementById('leadDupOnlyCheck') && document.getElementById('leadDupOnlyCheck').checked;
+    let ids = showDupOnly ? activeIds.filter(id => dupIds.has(id)) : activeIds;
+
+    const sortMode = document.getElementById('leadSortSelect') ? document.getElementById('leadSortSelect').value : 'date_desc';
+    ids = ids.sort((a, b) => {
+      const A = leadsCache[a], B = leadsCache[b];
+      switch (sortMode) {
+        case 'date_asc':  return (A.addedAt||'').localeCompare(B.addedAt||'');
+        case 'mobile':    return normLeadPhone(A.phone).localeCompare(normLeadPhone(B.phone));
+        case 'pincode':   return extractPincode(A.area).localeCompare(extractPincode(B.area));
+        case 'name':      return (A.businessName||'').localeCompare(B.businessName||'');
+        case 'date_desc':
+        default:          return (B.addedAt||'').localeCompare(A.addedAt||'');
+      }
+    });
+
+    let filtered = leadFilter === 'all' ? ids : ids.filter(id => leadsCache[id].status === leadFilter);
+    filtered = filtered.filter(id => matchesSearch(leadSearchTerm, leadsCache[id].businessName, leadsCache[id].phone));
+
+    if (filtered.length === 0) {
+      listEl.innerHTML = '<div class="empty">' + (activeIds.length === 0 ? 'No leads added yet — use the form above to add your first one.' : (showDupOnly ? 'No duplicate mobile numbers found.' : 'No leads match this filter or search.')) + '</div>';
+      return;
+    }
+
+    const visible = filtered.slice(0, leadsShown);
+    const info = document.getElementById('leadCountInfo');
+    if (info) info.textContent = visible.length + ' / ' + filtered.length + ' लीड्स दिख रही हैं';
+
+    // Each row starts folded: one line per lead, tap to open the details and the
+    // action buttons. That keeps a 700-lead list scannable.
+    listEl.innerHTML = visible.map(id => {
+      const l = leadsCache[id];
+      const statusOptions = Object.keys(LEAD_STATUS_LABEL).map(st =>
+        `<option value="${st}" ${st === l.status ? 'selected' : ''}>${LEAD_STATUS_LABEL[st]}</option>`
+      ).join('');
+      const typeLabel = l.type === 'seeker' ? '🔍 Seeker' : '🛠 Provider';
+      const dupBadge = dupIds.has(id)
+        ? `<div style="margin-top:6px; padding:6px 10px; background:#FFEBEE; border-radius:8px; font-size:11px; color:#C62828; font-weight:700;">⚠️ Same mobile appears in ${byPhone[normLeadPhone(l.phone)].length} leads</div>`
+        : '';
+      const dupDot = dupIds.has(id) ? ' <span title="duplicate mobile" style="color:#C62828;">⚠️</span>' : '';
+      return `
+        <div class="lead-item collapsed" id="leadRow_${id}">
+          <div class="lead-head" onclick="toggleLeadRow('${id}')">
+            <span class="row-chev">▸</span>
+            <div class="lead-line">
+              <div class="lead-name">${escapeHtml(l.businessName || 'Unnamed')}${dupDot} <span style="font-weight:400; font-size:11px; color:var(--dim);">(${typeLabel})</span></div>
+              <div class="lead-meta">${l.phone ? '📱 ' + escapeHtml(l.phone) : ''}${l.phone && l.area ? ' · ' : ''}${escapeHtml(l.area || '')}</div>
+            </div>
+            <span class="badge status-${l.status}" style="font-size:11px; padding:4px 10px; border-radius:20px; white-space:nowrap;">${LEAD_STATUS_LABEL[l.status] || ''}</span>
+          </div>
+          <div class="lead-body">
+            <div class="lead-meta">${escapeHtml(l.category || '')}${l.category && l.area ? ' · ' : ''}${escapeHtml(l.area || '')}</div>
+            ${l.notes ? `<div class="lead-meta" style="margin-top:4px;">${escapeHtml(l.notes)}</div>` : ''}
+            ${dupBadge}
+            <div style="margin-top:8px;">
+              <select class="lead-status-select status-${l.status}" onchange="updateLeadStatus('${id}', this.value)">
+                ${statusOptions}
+              </select>
+            </div>
+            <div class="lead-actions">
+              <button onclick="sendLeadWhatsApp('${id}')" style="background:#25D366; color:#fff;">📲 WhatsApp</button>
+              <button onclick="openTemplatePicker('${(l.businessName||'').replace(/'/g,"\\'")}','${l.phone||''}','${id}')">✉️ Templates</button>
+              ${window._saarthiAdminUnlocked ? `<button onclick="sendSaarthiInvite('${id}', this)" style="background:#8B1E3F; color:#fff;">🔱 API से भेजें${l.lastApiSend ? ' (फिर)' : ''}</button>` : ''}
+              <button onclick="removeLead('${id}')">🗑 Remove</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('') + (filtered.length > visible.length
+      ? `<button class="btn ghost" style="width:100%; margin-top:10px;" onclick="loadMoreLeads()">⬇️ और ${Math.min(LEAD_PAGE, filtered.length - visible.length)} लीड्स दिखाएँ</button>`
+      : '');
+  }
+
+  // ── Marketing & Client Materials ─────────────────────────────────────────
+  // A material is anything a partner can hand to a lead: a poster, a flyer, a
+  // reel/video, or a document. Three sources feed one gallery —
+  //   built-in   : files shipped with the site (list below)
+  //   central    : uploaded by the team in partner-admin.html → Materials tab
+  //   mine       : uploaded by this partner, visible only to them
+  // Everything carries a "type" so it can be previewed, filtered, shared on
+  // WhatsApp, and attached to a message template.
+  const MARKETING_MATERIALS = [
+    {
+      name: 'Client Quick Start & Success Guide (English)',
+      desc: 'Give this to every provider or seeker you onboard — explains how SAARTHI works and how to get the most out of it.',
+      file: 'Client_Quick_Start_Success_Guide.pdf',
+      type: 'document'
+    },
+    {
+      name: 'क्विक स्टार्ट और सक्सेस गाइड (हिंदी)',
+      desc: 'वही गाइड, हिंदी में — जिन क्लाइंट्स को हिंदी ज़्यादा सहज लगे, उन्हें यह भेजें।',
+      file: 'Client_Quick_Start_Success_Guide_Hindi.pdf',
+      type: 'document'
+    },
+    {
+      name: 'SAARTHI Promo Poster (generic)',
+      desc: 'हर जगह चलने वाला प्रोमो पोस्टर — WhatsApp स्टेटस, ग्रुप या प्रिंट के लिए।',
+      file: 'saarthi_promo_poster.png',
+      type: 'poster'
+    },
+    {
+      name: 'Community Flyer (generic)',
+      desc: 'गली-मोहल्ले में बाँटने या दुकानों पर लगाने वाला फ्लायर, QR सहित।',
+      file: 'flyer_020426_updated_qr.jpg',
+      type: 'flyer'
+    },
+    {
+      name: 'Promo Reel',
+      desc: 'छोटा प्रोमो रील — WhatsApp स्टेटस और Instagram के लिए।',
+      file: 'sudarshan_chakra_reel.html',
+      type: 'reel'
+    }
+  ];
+
+  const MAT_TYPE_META = {
+    poster:   { label: 'Poster',   icon: '🖼️' },
+    flyer:    { label: 'Flyer',    icon: '📋' },
+    reel:     { label: 'Reel',     icon: '🎬' },
+    video:    { label: 'Video',    icon: '📹' },
+    document: { label: 'Document', icon: '📄' },
+    link:     { label: 'Link',     icon: '🔗' }
+  };
+
+  function matPath(u){ return (u || '').toString().toLowerCase().split('?')[0]; }
+  function isImageUrl(url, name){ return /\.(png|jpe?g|webp|gif|svg)$/.test(matPath(name)) || /\.(png|jpe?g|webp|gif|svg)$/.test(matPath(url)); }
+  function isVideoUrl(url, name){ return /\.(mp4|webm|mov|m4v)$/.test(matPath(name)) || /\.(mp4|webm|mov|m4v)$/.test(matPath(url)); }
+
+  // Older records were saved before materials had a type, so their kind is read
+  // back off the file name instead.
+  function guessMaterialType(url, fileName){
+    const p = matPath(fileName) + ' ' + matPath(url);
+    if (/\.(mp4|webm|mov|m4v|avi)/.test(p)) return 'reel';
+    if (/(youtube\.com|youtu\.be|instagram\.com|fb\.watch)/.test(p)) return 'reel';
+    if (/\.(png|jpe?g|webp|gif|svg)/.test(p)) return 'poster';
+    if (/\.(pdf|docx?|pptx?|xlsx?)/.test(p)) return 'document';
+    if (/\.html?/.test(p)) return 'reel';
+    return 'link';
+  }
+
+  let materialsCache = [];        // [{ id, name, desc, url, type, fileName, scope }]
+  let materialFilter = 'all';
+
+  window.setMaterialFilter = function(f){
+    materialFilter = f;
+    document.querySelectorAll('#matFilterRow button').forEach(b => b.classList.toggle('active', b.dataset.mat === f));
+    paintMaterials();
+  };
+
+  function matCardHtml(m, idx){
+    const meta = MAT_TYPE_META[m.type] || MAT_TYPE_META.link;
+    // A thumbnail that fails to load (expired link, blocked file) falls back to
+    // the type icon rather than showing a broken image.
+    const fallback = 'this.outerHTML=\'<span>' + meta.icon + '</span>\'';
+    let thumb = '<span>' + meta.icon + '</span>';
+    if (m.url && isImageUrl(m.url, m.fileName)) {
+      thumb = '<img src="' + escapeHtml(m.url) + '" alt="" loading="lazy" onerror="' + fallback + '">';
+    } else if (m.url && isVideoUrl(m.url, m.fileName)) {
+      thumb = '<video src="' + escapeHtml(m.url) + '" muted playsinline preload="metadata" onerror="' + fallback + '"></video>';
+    }
+    const mine = m.scope === 'mine';
+    return `
+      <div class="mat-card">
+        <div class="mat-thumb" onclick="openMaterial(${idx})">${thumb}</div>
+        <div class="mat-info">
+          <span class="mat-type">${meta.icon} ${meta.label}${mine ? ' · मेरा' : ''}</span>
+          <div class="mat-name">${escapeHtml(m.name)}</div>
+          ${m.desc ? `<div class="mat-desc">${escapeHtml(m.desc)}</div>` : ''}
+        </div>
+        <div class="mat-actions">
+          <a class="mat-open" href="${escapeHtml(m.url || '#')}" target="_blank" rel="noopener">Open</a>
+          <button class="mat-share" onclick="shareMaterial(${idx}, this)">📲 WhatsApp</button>
+          <button class="mat-share" title="डाउनलोड करके खुद अटैच करें" onclick="downloadMaterial(${idx})">⬇</button>
+          ${mine ? `<button class="mat-del" onclick="deleteMyMaterial('${m.id}')">🗑</button>` : ''}
+        </div>
+      </div>`;
+  }
+
+  function paintMaterials(){
+    const listEl = document.getElementById('materialsList');
+    if (!listEl) return;
+    updateCountPill('materials', materialsCache.length);
+
+    const wanted = materialFilter === 'reel' ? ['reel', 'video'] : [materialFilter];
+    const rows = materialsCache
+      .map((m, i) => ({ m, i }))
+      .filter(x => materialFilter === 'all' || wanted.indexOf(x.m.type) !== -1);
+
+    listEl.innerHTML = rows.length
+      ? '<div class="mat-grid">' + rows.map(x => matCardHtml(x.m, x.i)).join('') + '</div>'
+      : '<div class="empty">इस तरह का कोई मटेरियल अभी नहीं है।</div>';
+  }
+
+  window.openMaterial = function(idx){
+    const m = materialsCache[idx];
+    if (m && m.url) window.open(m.url, '_blank', 'noopener');
+  };
+
+  // Sharing the actual file is what partners want — WhatsApp then attaches the
+  // poster or reel itself instead of a long storage link that most recipients
+  // never tap. The file has to be fetched first, and a cross-origin fetch of a
+  // Firebase Storage object only succeeds once CORS is enabled on the bucket
+  // (cors.json in the repo). Everything below degrades in order:
+  //   file share  →  text share  →  wa.me link
+  function materialFileName(m){
+    if (m && m.fileName) return m.fileName;
+    const raw = String((m && m.url) || '').split('?')[0].split('/').pop() || '';
+    try { return decodeURIComponent(raw) || 'material'; } catch (e) { return raw || 'material'; }
+  }
+
+  // The promo text that travels with the poster. A partner's own referral link
+  // is worth far more to the recipient than the storage URL of the image.
+  function materialShareText(m){
+    const ref = window._currentRefLink;
+    const out = [m.name || 'Sudarshan Chakra India'];
+    if (m.desc) out.push(m.desc);
+    out.push(ref ? 'रजिस्टर करें / Register: ' + ref : (m.url || ''));
+    return out.filter(Boolean).join('\n');
+  }
+
+  async function fetchFileFromUrl(url, fileName){
+    if (!url || !/^https?:/i.test(url)) return null;
+    if (/\.html?$/.test(matPath(url))) return null;   // a reel page, not a file
+    try {
+      const res = await fetch(url, { mode: 'cors', cache: 'no-store' });
+      if (!res.ok) return null;
+      const blob = await res.blob();
+      return new File([blob], fileName || 'material', { type: blob.type || 'application/octet-stream' });
+    } catch (e) {
+      // Nearly always a missing CORS rule on the storage bucket — logged, not
+      // shown, because the link fallback still gets the job done.
+      console.warn('File share unavailable (CORS?), falling back to link:', e && e.message);
+      return null;
+    }
+  }
+
+  async function shareFileOrLink(url, fileName, text){
+    if (!navigator.share) return false;
+    const file = await fetchFileFromUrl(url, fileName);
+    if (!file) return false;
+    if (navigator.canShare && !navigator.canShare({ files: [file] })) return false;
+    try {
+      await navigator.share({ files: [file], text: text || '' });
+      return true;
+    } catch (e) {
+      if (e && e.name === 'AbortError') return true;   // partner closed the sheet
+      return false;
+    }
+  }
+
+  window.shareMaterial = async function(idx, btn){
+    const m = materialsCache[idx];
+    if (!m || !m.url) return;
+    const text  = materialShareText(m);
+    const label = btn ? btn.innerHTML : '';
+    if (btn) { btn.disabled = true; btn.innerHTML = '…'; }
+    try {
+      if (await shareFileOrLink(m.url, materialFileName(m), text)) return;
+      if (navigator.share) {
+        try { await navigator.share({ text: text }); return; }
+        catch (e) { if (e && e.name === 'AbortError') return; }
+      }
+      window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + m.url), '_blank', 'noopener');
+    } finally {
+      if (btn) { btn.disabled = false; btn.innerHTML = label; }
+    }
+  };
+
+  // Downloading lets a partner attach the poster by hand — the dependable route
+  // on WhatsApp Web and on any phone whose browser has no share sheet.
+  window.downloadMaterial = async function(idx){
+    const m = materialsCache[idx];
+    if (!m || !m.url) return;
+    const file = await fetchFileFromUrl(m.url, materialFileName(m));
+    if (!file) { window.open(m.url, '_blank', 'noopener'); return; }
+    const href = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = materialFileName(m);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(href), 10000);
+  };
+
+  async function buildMaterialsCache(){
+    const base = location.origin + location.pathname.replace('partner-dashboard.html', '');
+    const out = MARKETING_MATERIALS.map((m, i) => ({
+      id: 'builtin_' + i, name: m.name, desc: m.desc, url: base + m.file,
+      fileName: m.file, type: m.type || guessMaterialType(m.file, m.file), scope: 'builtin'
+    }));
+
+    // Central team uploads (partner-admin.html → Materials tab)
+    try {
+      const snap = await window._pget(window._pref(window._pdb, 'marketingMaterials'));
+      if (snap.exists()) {
+        Object.entries(snap.val() || {})
+          .filter(([, m]) => m && m.url)
+          // ascending here: each record is unshifted, so the newest ends up on top
+          .sort((a, b) => new Date(a[1].uploadedAt || 0) - new Date(b[1].uploadedAt || 0))
+          .forEach(([key, m]) => out.unshift({
+            id: key, name: m.name || m.fileName || 'Material', desc: m.desc || '', url: m.url,
+            fileName: m.fileName || '', type: m.type || guessMaterialType(m.url, m.fileName), scope: 'central'
+          }));
+      }
+    } catch (e) {
+      // The built-in materials are still worth showing, so a failed fetch is
+      // logged rather than blanking the section.
+      console.warn('Could not load central materials:', e.code || e.message);
+    }
+
+    // This partner's own uploads
+    const code = window._currentPartnerCode;
+    if (code && !window._demoMode) {
+      try {
+        const mine = await window._pget(window._pref(window._pdb, 'partnerMaterials/' + code));
+        if (mine.exists()) {
+          Object.entries(mine.val() || {})
+            .filter(([, m]) => m && m.url)
+            .sort((a, b) => new Date(a[1].addedAt || 0) - new Date(b[1].addedAt || 0))
+            .forEach(([key, m]) => out.unshift({
+              id: key, name: m.name || m.fileName || 'My material', desc: m.desc || '', url: m.url,
+              fileName: m.fileName || '', storagePath: m.storagePath || '',
+              type: m.type || guessMaterialType(m.url, m.fileName), scope: 'mine'
+            }));
+        }
+      } catch (e) {
+        console.warn('Could not load my materials:', e.code || e.message);
+      }
+    }
+    materialsCache = out;
+  }
+
+  async function renderMaterials(){
+    await buildMaterialsCache();
+    paintMaterials();
+  }
+
+  // ── The partner's own material uploads ───────────────────────────────────
+  const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
+  const MAX_VIDEO_BYTES = 30 * 1024 * 1024;
+
+  window.toggleMyMaterialPanel = function(force){
+    const panel = document.getElementById('myMaterialPanel');
+    const open = typeof force === 'boolean' ? force : panel.style.display === 'none';
+    panel.style.display = open ? 'block' : 'none';
+    document.getElementById('matAddToggle').textContent = open ? '✖ बंद करें' : '➕ अपना पोस्टर / फ्लायर / रील जोड़ें';
+  };
+
+  window.addMyMaterial = async function(btn){
+    const name   = document.getElementById('myMatName').value.trim();
+    const desc   = document.getElementById('myMatDesc').value.trim();
+    const type   = document.getElementById('myMatType').value;
+    const link   = document.getElementById('myMatLink').value.trim();
+    const file   = document.getElementById('myMatFile').files[0];
+    const errEl  = document.getElementById('myMatErr');
+    const statEl = document.getElementById('myMatStatus');
+    errEl.textContent = ''; statEl.textContent = '';
+
+    if (!name) { errEl.textContent = 'मटेरियल का नाम लिखें।'; return; }
+    if (!file && !link) { errEl.textContent = 'फ़ाइल चुनें या लिंक पेस्ट करें।'; return; }
+    if (link && !/^https?:\/\//i.test(link)) { errEl.textContent = 'लिंक https:// से शुरू होना चाहिए।'; return; }
+    if (file) {
+      const cap = file.type.indexOf('video') === 0 ? MAX_VIDEO_BYTES : MAX_IMAGE_BYTES;
+      if (file.size > cap) {
+        errEl.textContent = 'फ़ाइल ' + (file.size / 1048576).toFixed(1) + ' MB की है — ' + (cap / 1048576) + ' MB से छोटी रखें।';
+        return;
+      }
+    }
+
+    const clearForm = () => {
+      document.getElementById('myMatName').value = '';
+      document.getElementById('myMatDesc').value = '';
+      document.getElementById('myMatLink').value = '';
+      document.getElementById('myMatFile').value = '';
+    };
+
+    if (window._demoMode) {
+      materialsCache.unshift({ id: 'demo_' + Date.now(), name, desc, type,
+        url: link || 'saarthi_promo_poster.png', fileName: file ? file.name : '', scope: 'mine' });
+      clearForm(); paintMaterials();
+      statEl.textContent = '✅ डेमो में जुड़ गया (असली डैशबोर्ड में यह सेव होता है)।';
+      return;
+    }
+
+    const code = window._currentPartnerCode;
+    if (!code) { errEl.textContent = 'पहले अपना पार्टनर कोड डालकर डैशबोर्ड खोलें।'; return; }
+
+    if (btn) { btn.disabled = true; }
+    try {
+      const id = 'pm_' + Date.now();
+      const rec = { name, desc, type, addedAt: new Date().toISOString() };
+
+      if (file) {
+        statEl.textContent = 'अपलोड हो रहा है…';
+        const path = 'partnerMaterials/' + code + '/' + id + '_' + file.name;
+        const storageRef = window._psref(window._pstorage, path);
+        await window._puploadBytes(storageRef, file);
+        rec.url = await window._pgetDownloadURL(storageRef);
+        rec.fileName = file.name;
+        rec.storagePath = path;
+        rec.sizeBytes = file.size;
+      } else {
+        rec.url = link;
+        rec.fileName = '';
+      }
+
+      await window._pset(window._pref(window._pdb, 'partnerMaterials/' + code + '/' + id), rec);
+      clearForm();
+      statEl.textContent = '✅ जुड़ गया — अब इसे शेयर या टेम्पलेट में अटैच कर सकते हैं।';
+      await renderMaterials();
+      setTimeout(() => { statEl.textContent = ''; }, 5000);
+    } catch (e) {
+      statEl.textContent = '';
+      errEl.textContent = '❌ सेव नहीं हो पाया: ' + (e.code || '') + ' ' + e.message;
+      console.error('addMyMaterial error:', e);
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  };
+
+  window.deleteMyMaterial = async function(id){
+    const m = materialsCache.find(x => x.id === id);
+    if (!m) return;
+    if (!confirm('"' + m.name + '" हटाना है?')) return;
+    if (window._demoMode) {
+      materialsCache = materialsCache.filter(x => x.id !== id);
+      paintMaterials();
+      return;
+    }
+    const code = window._currentPartnerCode;
+    try {
+      await window._pset(window._pref(window._pdb, 'partnerMaterials/' + code + '/' + id), null);
+      // The database record is what the gallery reads, so it goes first. A file
+      // that refuses to delete is logged, not shown as an error.
+      if (m.storagePath) {
+        try { await window._pdeleteObject(window._psref(window._pstorage, m.storagePath)); }
+        catch (e) { console.warn('Storage file not deleted:', e.code || e.message); }
+      }
+      await renderMaterials();
+    } catch (e) {
+      document.getElementById('myMatErr').textContent = '❌ हट नहीं पाया: ' + (e.code || e.message);
+    }
+  };
+
+  // ── Lead category dropdown — pulled from the app's real category list ──
+  // ── CSV / Excel Lead Import ──
+  let importParsed = null; // { headers: [...], rows: [ {header: value, ...} ] }
+
+  window.toggleImportPanel = function(forceShow){
+    const panel = document.getElementById('importPanel');
+    const show = forceShow === undefined ? panel.style.display === 'none' : forceShow;
+    panel.style.display = show ? 'block' : 'none';
+    if (!show) {
+      document.getElementById('importFileInput').value = '';
+      document.getElementById('importMapArea').style.display = 'none';
+      document.getElementById('importErr').textContent = '';
+      importParsed = null;
+    }
+  };
+
+  const IMPORT_FIELD_GUESSES = {
+    name: ['name', 'business', 'title', 'company'],
+    phone: ['phone', 'mobile', 'contact number', 'whatsapp', 'contact'],
+    category: ['categor', 'industry', 'business type', 'trade'],
+    area: ['area', 'address', 'location', 'city', 'locality'],
+    notes: ['note', 'description', 'about', 'remark']
+  };
+
+  function guessColumnFor(field, headers){
+    const keywords = IMPORT_FIELD_GUESSES[field] || [];
+    for (const kw of keywords) {
+      const match = headers.find(h => h.toLowerCase().includes(kw));
+      if (match) return match;
+    }
+    return '';
+  }
+
+  window.handleImportFile = function(input){
+    const file = input.files[0];
+    const errEl = document.getElementById('importErr');
+    errEl.textContent = '';
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e){
+      try {
+        const data = new Uint8Array(e.target.result);
+        const wb = XLSX.read(data, { type: 'array' });
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+        if (!rows.length) {
+          errEl.textContent = 'This file appears to be empty, or has no data rows.';
+          return;
+        }
+        const headers = Object.keys(rows[0]);
+        importParsed = { headers, rows };
+        showImportMapping(headers, rows);
+      } catch (err) {
+        errEl.textContent = 'Could not read this file. Make sure it is a valid CSV or Excel file. (' + err.message + ')';
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
+  function showImportMapping(headers, rows){
+    const mapArea = document.getElementById('importMapArea');
+    const fieldsEl = document.getElementById('importMapFields');
+    mapArea.style.display = 'block';
+
+    const fieldDefs = [
+      { key: 'name', label: 'Business / Person Name *', required: true },
+      { key: 'phone', label: 'Phone Number', required: false },
+      { key: 'category', label: 'Category', required: false },
+      { key: 'area', label: 'Area / Locality', required: false },
+      { key: 'notes', label: 'Notes', required: false }
+    ];
+
+    const headerOptions = (selected) => '<option value="">— don\u2019t import —</option>' +
+      headers.map(h => `<option value="${h}" ${h === selected ? 'selected' : ''}>${h}</option>`).join('');
+
+    fieldsEl.innerHTML = fieldDefs.map(f => `
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+        <label style="flex:0 0 170px; font-size:12px; font-weight:700; color:var(--soft);">${f.label}</label>
+        <select id="importMap_${f.key}" style="flex:1; padding:7px; border:1px solid #ddd; border-radius:6px; font-size:13px;">
+          ${headerOptions(guessColumnFor(f.key, headers))}
+        </select>
+      </div>
+    `).join('') + `
+      <div style="display:flex; align-items:center; gap:10px; margin-top:12px; padding-top:12px; border-top:1px solid #eee;">
+        <label style="flex:0 0 170px; font-size:12px; font-weight:700; color:var(--soft);">Default Lead Type</label>
+        <select id="importMap_defaultType" style="flex:1; padding:7px; border:1px solid #ddd; border-radius:6px; font-size:13px;">
+          <option value="provider">Provider</option>
+          <option value="seeker">Seeker</option>
+        </select>
+      </div>
+      <p style="font-size:11px; color:var(--dim); margin-top:6px;">Applied to every imported row (leads can be individually corrected afterward).</p>
+    `;
+
+    // Preview: first 5 rows, raw columns
+    const previewRows = rows.slice(0, 5);
+    document.getElementById('importPreviewHead').innerHTML = headers.map(h => `<th style="text-align:left; padding:6px; background:#f5f0e8; border-bottom:1px solid #ddd;">${h}</th>`).join('');
+    document.getElementById('importPreviewBody').innerHTML = previewRows.map(r =>
+      '<tr>' + headers.map(h => `<td style="padding:6px; border-bottom:1px solid #eee;">${(r[h] ?? '').toString().slice(0,40)}</td>`).join('') + '</tr>'
+    ).join('');
+
+    document.getElementById('importRowCount').textContent =
+      `${rows.length} row(s) found. Rows with no name will be skipped.` + (rows.length > 5 ? ' Showing first 5 for preview.' : '');
+  }
+
+  window.commitImport = async function(btn){
+    const errEl = document.getElementById('importErr');
+    errEl.textContent = '';
+    if (!importParsed) return;
+
+    const nameCol = document.getElementById('importMap_name').value;
+    if (!nameCol) { errEl.textContent = 'Please map a column to "Business / Person Name" — this is required.'; return; }
+
+    const phoneCol = document.getElementById('importMap_phone').value;
+    const categoryCol = document.getElementById('importMap_category').value;
+    const areaCol = document.getElementById('importMap_area').value;
+    const notesCol = document.getElementById('importMap_notes').value;
+    const defaultType = document.getElementById('importMap_defaultType').value;
+
+    const code = window._currentPartnerCode;
+    const toImport = importParsed.rows
+      .map(r => ({
+        businessName: (r[nameCol] ?? '').toString().trim(),
+        phone: phoneCol ? (r[phoneCol] ?? '').toString().trim() : '',
+        category: categoryCol ? (r[categoryCol] ?? '').toString().trim() : '',
+        area: areaCol ? (r[areaCol] ?? '').toString().trim() : '',
+        notes: notesCol ? (r[notesCol] ?? '').toString().trim() : '',
+        type: defaultType
+      }))
+      .filter(r => r.businessName);
+
+    if (toImport.length === 0) { errEl.textContent = 'No rows with a name were found to import.'; return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Importing…';
+
+    if (window._demoMode) {
+      toImport.forEach((lead, i) => {
+        leadsCache['demo_import_' + Date.now() + '_' + i] = { ...lead, status: 'not_contacted', addedAt: new Date().toISOString() };
+      });
+      toggleImportPanel(false);
+      renderLeads();
+      renderClients();
+      alert('✅ Imported ' + toImport.length + ' lead(s) into this demo. Find them in your Leads list below, all marked "Not Contacted." (In the real dashboard, these would be saved to your account.)');
+      btn.disabled = false;
+      btn.textContent = '✅ Import Leads';
+      return;
+    }
+
+    try {
+      let done = 0;
+      const results = await Promise.allSettled(toImport.map(lead => {
+        const writePromise = (async () => {
+          const leadRef = window._ppush(window._pref(window._pdb, 'partnerLeads/' + code));
+          await window._pset(leadRef, {
+            ...lead,
+            status: 'not_contacted',
+            addedAt: new Date().toISOString()
+          });
+        })();
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error('Timed out — check your connection')), 15000)
+        );
+        return Promise.race([writePromise, timeoutPromise]).finally(() => {
+          done++;
+          btn.textContent = 'Importing ' + done + ' of ' + toImport.length + '…';
+        });
+      }));
+
+      const failed = results.filter(r => r.status === 'rejected').length;
+      const succeeded = results.length - failed;
+
+      toggleImportPanel(false);
+      loadLeads();
+
+      if (failed === 0) {
+        alert('✅ Imported ' + succeeded + ' lead(s). Find them in your Leads list below, all marked "Not Contacted."');
+      } else {
+        alert('⚠️ Imported ' + succeeded + ' of ' + toImport.length + ' lead(s). ' + failed + ' row(s) failed — likely a connection issue. You can re-import the same file; already-imported rows will just appear as duplicates you can remove.');
+      }
+    } catch (e) {
+      errEl.textContent = 'Import failed: ' + e.message;
+      btn.disabled = false;
+      btn.textContent = '✅ Import Leads';
+    }
+  };
+
+  async function loadPartnerActivity(){
+    const listEl = document.getElementById('activityListEl');
+    if (!listEl) return;
+    if (window._demoMode) {
+      const sample = [
+        { date: new Date(Date.now()-2*86400000).toLocaleDateString('en-IN'), type: 'hire_fee', amount: 51, fee: 51, role: 'provider', counterpartName: 'Sunita (Seeker)', service: 'Electrical Repair' },
+        { date: new Date(Date.now()-6*86400000).toLocaleDateString('en-IN'), type: 'hire_fee', amount: 51, fee: 51, role: 'seeker', counterpartName: 'Sharma Electricals', service: 'Fan Installation' }
+      ];
+      listEl.innerHTML = sample.map(renderActivityRow).join('');
+      return;
+    }
+    try {
+      const code = window._currentPartnerCode;
+      const snap = await window._pget(window._pref(window._pdb, 'partnerActivity/' + code));
+      if (!snap.exists()) {
+        listEl.innerHTML = '<div class="empty">No activity yet — this fills in automatically once someone you referred completes a paid hire.</div>';
+        return;
+      }
+      const entries = Object.values(snap.val()).sort((a,b) => (b.approvedAt||'').localeCompare(a.approvedAt||''));
+      listEl.innerHTML = entries.map(renderActivityRow).join('');
+    } catch (e) {
+      listEl.innerHTML = '<div class="empty">Could not load activity: ' + e.message + '</div>';
+    }
+  }
+
+  function renderActivityRow(a){
+    const typeLabel = { hire_fee: '💳 Convenience Fee', tip: '🎁 Tip', charity: '🤝 Charity Donation' }[a.type] || a.type;
+    const roleLabel = a.role === 'territory' ? 'Provider in your territory hired:' : a.role === 'provider' ? 'Your provider was hired by' : 'Your seeker hired';
+    return `
+      <div class="lead-item">
+        <div class="lead-top">
+          <div>
+            <div class="lead-name">${typeLabel} — ₹${a.amount}${a.share ? ` · your share ₹${a.share}` : ''}</div>
+            <div class="lead-meta">${roleLabel} ${a.counterpartName || 'someone'}${a.service ? ' · ' + a.service : ''}</div>
+            <div class="lead-meta" style="margin-top:2px;">${a.date || ''}</div>
+          </div>
+          <span class="badge status-registered" style="align-self:flex-start;">✅ Verified</span>
+        </div>
+      </div>
+    `;
+  }
+
+  async function loadCategoryOptions(){
+    const listEl = document.getElementById('categoryOptions');
+    if (!listEl) return;
+    try {
+      const snap = await window._pget(window._pref(window._pdb, 'categories'));
+      if (!snap.exists()) return;
+      const cats = snap.val();
+      const options = cats
+        .map(c => ({ icon: c.icon || '', name: (c.name && c.name.en) || '' }))
+        .filter(c => c.name)
+        .sort((a, b) => a.name.localeCompare(b.name));
+      listEl.innerHTML = options.map(c => `<option value="${c.icon} ${c.name}"></option>`).join('');
+    } catch (e) {
+      console.warn('Could not load categories for lead autocomplete:', e);
+    }
+  }
+
+  // ── Collapsible cards ───────────────────────────────────────────────────
+  // A partner with 500-700 leads should not have to scroll past all of them to
+  // reach the next section. Every long section becomes a card that folds shut,
+  // and the open/shut choice is remembered on that device.
+  function lsGet(k){ try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function lsSet(k, v){ try { localStorage.setItem(k, v); } catch (e) {} }
+
+  const COLLAPSIBLE_CARDS = [
+    { id: 'templatesCard', key: 'templates' },
+    { id: 'leadsCard',     key: 'leads'     },
+    { id: 'crmCard',       key: 'crm'       },
+    { id: 'clientsCard',   key: 'clients'   },
+    { id: 'materialsCard', key: 'materials' },
+    { id: 'trainingCard',  key: 'training'  },
+    { id: 'activityCard',  key: 'activity'  },
+    { id: 'payoutCard',    key: 'payout'    }
+  ];
+
+  function makeCardCollapsible(cardId, key){
+    const card = document.getElementById(cardId);
+    if (!card || card.dataset.collapsible === '1') return;
+    const h2 = card.querySelector('h2');
+    if (!h2) return;
+
+    // Everything below the heading moves into one wrapper that can be hidden.
+    const body = document.createElement('div');
+    body.className = 'card-body';
+    let n = h2.nextSibling;
+    while (n) { const next = n.nextSibling; body.appendChild(n); n = next; }
+    card.appendChild(body);
+
+    const right = document.createElement('span');
+    right.className = 'card-toggle-right';
+    right.innerHTML = '<span class="count-pill" id="pill_' + key + '" style="display:none;"></span><span class="chev">\u25BE</span>';
+    h2.classList.add('card-toggle');
+    h2.appendChild(right);
+    h2.addEventListener('click', function(){ toggleCard(cardId, key); });
+
+    if (lsGet('sc_collapse_' + key) === '1') card.classList.add('collapsed');
+    card.dataset.collapsible = '1';
+  }
+
+  window.toggleCard = function(cardId, key){
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    card.classList.toggle('collapsed');
+    lsSet('sc_collapse_' + key, card.classList.contains('collapsed') ? '1' : '0');
+  };
+
+  function updateCountPill(key, count){
+    const pill = document.getElementById('pill_' + key);
+    if (!pill) return;
+    pill.textContent = count;
+    pill.style.display = count ? 'inline-block' : 'none';
+  }
+
+  window.initCollapsibleCards = function(){
+    COLLAPSIBLE_CARDS.forEach(c => makeCardCollapsible(c.id, c.key));
+    const btn = document.getElementById('backToTop');
+    if (btn && !btn.dataset.wired) {
+      window.addEventListener('scroll', function(){
+        btn.style.display = window.scrollY > 600 ? 'block' : 'none';
+      });
+      btn.dataset.wired = '1';
+    }
+  };
+
+  // ── Lead list paging ────────────────────────────────────────────────────
+  // Painting 700 rows at once is slow on a cheap phone, so the list grows in
+  // batches instead.
+  const LEAD_PAGE = 50;
+  let leadsShown = LEAD_PAGE;
+  let leadsAutoCollapsed = false;
+  window.resetLeadPaging = function(){ leadsShown = LEAD_PAGE; renderLeads(); };
+  window.loadMoreLeads   = function(){ leadsShown += LEAD_PAGE; renderLeads(); };
+
+  window.toggleLeadRow = function(id){
+    const row = document.getElementById('leadRow_' + id);
+    if (row) row.classList.toggle('collapsed');
+  };
+
+  window.expandAllLeads = function(open){
+    document.querySelectorAll('#leadListEl .lead-item').forEach(el => {
+      el.classList.toggle('collapsed', !open);
+    });
+  };
+
+  function escapeHtml(str){
+    return String(str == null ? '' : str).replace(/[&<>"']/g, c =>
+      ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+  }
+
+  function buildClientCheckinMessage(client){
+    const partnerName = window._currentPartnerName || 'your City Channel Partner';
+    const clientName = client.businessName || '';
+    return `Namaste ${clientName} 🙏 Just checking in — hope things are going well on SAARTHI! Let me know if you ever need any help or have questions.\n\n— ${partnerName}`;
+  }
+
+  window.sendClientWhatsApp = function(clientId){
+    const client = leadsCache[clientId];
+    if (!client) return;
+    const message = buildClientCheckinMessage(client);
+
+    if (window._demoMode) {
+      alert('📲 In the real dashboard, WhatsApp would now open with this check-in message pre-filled for ' + (client.businessName || 'this client') + ':\n\n' + message);
+      return;
+    }
+
+    const waNumber = cleanPhoneForWhatsApp(client.phone);
+    const url = waNumber
+      ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(message)
+      : 'https://wa.me/?text=' + encodeURIComponent(message);
+    window.open(url, '_blank');
+  };
+
+  window.moveClientBackToLeads = async function(clientId){
+    if (!confirm('Move this back to your Leads list? Use this if it was marked Registered by mistake.')) return;
+    if (window._demoMode) {
+      leadsCache[clientId].status = 'interested';
+      renderLeads();
+      renderClients();
+      return;
+    }
+    const code = window._currentPartnerCode;
+    try {
+      await window._pset(window._pref(window._pdb, 'partnerLeads/' + code + '/' + clientId + '/status'), 'interested');
+      leadsCache[clientId].status = 'interested';
+      renderLeads();
+      renderClients();
+    } catch (e) {
+      alert('Could not update: ' + e.message);
+    }
+  };
+
+  function normalizePhone(p){
+    if (!p) return '';
+    const digits = p.toString().replace(/\D/g, '');
+    return digits.length > 10 ? digits.slice(-10) : digits;
+  }
+
+  window.sendRealClientWhatsApp = function(type, phone, name){
+    const partnerName = window._currentPartnerName || 'your City Channel Partner';
+    const message = 'Namaste ' + name + ' \uD83D\uDE4F Just checking in \u2014 hope things are going well on SAARTHI! Let me know if you ever need any help or have questions.\n\n\u2014 ' + partnerName;
+    if (window._demoMode) {
+      alert('\uD83D\uDCF2 In the real dashboard, WhatsApp would now open with this check-in message pre-filled for ' + name + ':\n\n' + message);
+      return;
+    }
+    const waNumber = cleanPhoneForWhatsApp(phone);
+    const url = waNumber
+      ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(message)
+      : 'https://wa.me/?text=' + encodeURIComponent(message);
+    window.open(url, '_blank');
+  };
+
+  function renderClients(){
+    const listEl = document.getElementById('clientListEl');
+    if (!listEl) return;
+
+    const real = window._realConversions || { providers: [], seekers: [] };
+    const realEntries = [
+      ...real.providers.map(p => ({
+        source: 'real', type: 'provider', name: p.name, phone: p.mobile,
+        category: p.service || '', area: p.location || '',
+        verified: !!p.verified, date: p.registered || ''
+      })),
+      ...real.seekers.map(s => ({
+        source: 'real', type: 'seeker', name: s.name, phone: s.mobile,
+        category: '', area: s.location || '',
+        verified: false, date: s.registeredAt || s.registered || ''
+      }))
+    ];
+    const realPhones = new Set(realEntries.map(e => normalizePhone(e.phone)).filter(Boolean));
+
+    const manualIds = Object.keys(leadsCache).filter(id => leadsCache[id].status === 'registered');
+    const manualEntries = manualIds
+      .filter(id => !realPhones.has(normalizePhone(leadsCache[id].phone))) // don't double-list the same person
+      .map(id => ({
+        source: 'manual', id, type: leadsCache[id].type, name: leadsCache[id].businessName,
+        phone: leadsCache[id].phone, category: leadsCache[id].category || '', area: leadsCache[id].area || '',
+        verified: false, date: leadsCache[id].addedAt || ''
+      }));
+
+    let all = [...realEntries, ...manualEntries]
+      .filter(e => matchesSearch(clientSearchTerm, e.name, e.phone))
+      .sort((a,b) => (b.date||'').localeCompare(a.date||''));
+
+    updateCountPill('clients', all.length);
+
+    if (all.length === 0) {
+      const nothingAtAll = realEntries.length === 0 && manualEntries.length === 0;
+      listEl.innerHTML = '<div class="empty">' + (nothingAtAll ? 'No clients yet \u2014 once someone registers through your link, they\u2019ll show up here automatically.' : 'No clients match your search.') + '</div>';
+      return;
+    }
+
+    listEl.innerHTML = all.map(e => {
+      const typeLabel = e.type === 'seeker' ? '\uD83D\uDD0D Seeker' : '\uD83D\uDEE0 Provider';
+      const badge = e.source === 'real'
+        ? (e.verified ? '<span class="badge status-registered" style="align-self:flex-start;">\u2705 Verified & ID-Checked</span>' : '<span class="badge status-registered" style="align-self:flex-start;">\u2705 Verified Registration</span>')
+        : '<span class="badge" style="align-self:flex-start; background:#FFF3E0; color:#B8600A;">\uD83D\uDCDD Marked Registered</span>';
+      const safeName = (e.name || '').replace(/'/g, "\\'");
+      const tplBtn = '<button onclick="openTemplatePicker(\'' + safeName + '\',\'' + (e.phone||'') + '\')">\u2709\uFE0F Templates</button>';
+      const actionButtons = e.source === 'real'
+        ? '<button onclick="sendRealClientWhatsApp(\'' + e.type + '\',\'' + (e.phone||'') + '\',\'' + safeName + '\')" style="background:#25D366; color:#fff;">\uD83D\uDCF2 Chat on WhatsApp</button>' + tplBtn
+        : '<button onclick="sendClientWhatsApp(\'' + e.id + '\')" style="background:#25D366; color:#fff;">\uD83D\uDCF2 Chat on WhatsApp</button>' + tplBtn +
+          '<button onclick="moveClientBackToLeads(\'' + e.id + '\')">\u21A9 Move back to Leads</button>';
+      return `
+        <div class="lead-item">
+          <div class="lead-top">
+            <div>
+              <div class="lead-name">${e.name || 'Unnamed'} <span style="font-weight:400; font-size:11px; color:var(--dim);">(${typeLabel})</span></div>
+              <div class="lead-meta">${e.category || ''}${e.category && e.area ? ' · ' : ''}${e.area || ''}${e.phone ? ' · \uD83D\uDCF1 ' + e.phone : ''}</div>
+            </div>
+            ${badge}
+          </div>
+          <div class="lead-actions">${actionButtons}</div>
+        </div>
+      `;
+    }).join('');
+  }
+  // ══════════════════════════════════════════════════════════════════════════
+  // ── WhatsApp API sender: choose what to send, then send to one or many ──
+  // ══════════════════════════════════════════════════════════════════════════
+  // WhatsApp only lets a business start a chat with a Meta-approved template.
+  // So there are two ways to send here:
+  //   1. template : an approved template, optionally with a poster/flyer as its
+  //                 image header (the template itself must have an IMAGE header)
+  //   2. session  : a dashboard message template (+ its attachment) sent as a
+  //                 normal message — WhatsApp delivers this ONLY to people who
+  //                 messaged our number in the last 24 hours.
+  const WA_API_URL = 'https://disabled-in-test.invalid'; // TEST: WhatsApp sending switched off
+
+  // Add new templates here once Meta approves them. `nameParam` must match the
+  // approved template's variable name exactly. header:'image' means the template
+  // was created with an IMAGE header, so a poster/flyer must be picked.
+  const WA_API_TEMPLATES = [
+    { name: 'saarthi_invite_hindi', label: '🔱 SAARTHI Invite (हिंदी)', nameParam: 'customer_name', header: 'none' },
+    { name: 'become_exclusive_city_channel_partner', label: '🔱 Exclusive City Channel Partner (English)', nameParam: 'custmer_name', header: 'none' },
+    { name: 'saarthi_poster_invite_hindi', label: '🖼️ पोस्टर/फ्लायर के साथ Invite (हिंदी)', nameParam: 'customer_name', header: 'image', pendingApproval: true }
+  ];
+
+  const WA_GAP_MS = 2000;            // pause between two messages
+  const WA_MAX_CONSECUTIVE_FAILS = 5; // stop the run if this many fail in a row
+
+  const apiState = {
+    mode: 'template',        // 'template' | 'session'
+    tplName: WA_API_TEMPLATES[0].name,
+    mediaId: '',             // materialsCache id, '' = none / template default
+    myTplId: '',             // dashboard template id (session mode)
+    statusFilter: 'not_contacted',
+    limit: 50,
+    resend: false,
+    running: false,
+    stop: false
+  };
+
+  function apiTpl(){ return WA_API_TEMPLATES.find(t => t.name === apiState.tplName) || WA_API_TEMPLATES[0]; }
+
+  // Meta fetches the file itself, so it must be a public jpg/png (image header)
+  function waImageOk(m){ return !!(m && m.url && (/\.(png|jpe?g)$/.test(matPath(m.fileName)) || /\.(png|jpe?g)$/.test(matPath(m.url)))); }
+  function waMediaKind(m){
+    if (!m || !m.url) return '';
+    if (waImageOk(m)) return 'image';
+    if (isVideoUrl(m.url, m.fileName) && /\.mp4/.test(matPath(m.fileName) + matPath(m.url))) return 'video';
+    if (/\.pdf/.test(matPath(m.fileName) + ' ' + matPath(m.url))) return 'document';
+    return '';
+  }
+  function findMaterial(id){ return (materialsCache || []).find(m => m.id === id); }
+
+  function apiMaterialOptions(onlyImages){
+    const list = (materialsCache || []).filter(m => onlyImages ? waImageOk(m) : !!waMediaKind(m));
+    return list.map(m => {
+      const meta = MAT_TYPE_META[m.type] || MAT_TYPE_META.link;
+      return `<option value="${escapeHtml(m.id)}" ${m.id === apiState.mediaId ? 'selected' : ''}>${meta.icon} ${escapeHtml(m.name)}</option>`;
+    }).join('');
+  }
+
+  window.renderApiSendPanel = function(){
+    const el = document.getElementById('apiSendPanel');
+    if (!el) return;
+    if (!window._saarthiAdminUnlocked) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    if (apiState.running) return; // don't rebuild the form mid-run
+
+    const t = apiTpl();
+    const tplOptions = WA_API_TEMPLATES.map(x =>
+      `<option value="${x.name}" ${x.name === apiState.tplName ? 'selected' : ''}>${x.label}${x.pendingApproval ? ' — (Meta approval बाकी)' : ''}</option>`).join('');
+    const myTplOptions = Object.entries(templatesCache || {}).map(([id, x]) =>
+      `<option value="${id}" ${id === apiState.myTplId ? 'selected' : ''}>${escapeHtml(x.title || 'Template')}${x.media ? ' 📎' : ''}</option>`).join('');
+
+    let body = '';
+    if (apiState.mode === 'template') {
+      body = `
+        <label class="api-lbl">Approved template</label>
+        <select onchange="apiSet('tplName', this.value)">${tplOptions}</select>
+        ${t.header === 'image' ? `
+          <label class="api-lbl">पोस्टर / फ्लायर चुनें (सिर्फ़ JPG/PNG)</label>
+          <select onchange="apiSet('mediaId', this.value)">
+            <option value="">— चुनें —</option>${apiMaterialOptions(true)}
+          </select>` : `
+          <div class="api-note">इस template में फोटो नहीं है। पोस्टर भेजना हो तो "पोस्टर/फ्लायर के साथ" वाला template चुनें।</div>`}
+        ${t.pendingApproval ? `<div class="api-warn">⚠️ ये template अभी Meta पर approve होना बाकी है (IMAGE header वाला)। approve होने तक ये भेजा नहीं जा सकेगा।</div>` : ''}
+        <div class="api-note">नाम अपने-आप lead के नाम से भर जाएगा। message का text वही जाएगा जो Meta पर approved है।</div>`;
+    } else {
+      body = `
+        <label class="api-lbl">मेरा Message Template</label>
+        <select onchange="apiSet('myTplId', this.value)">
+          <option value="">— चुनें —</option>${myTplOptions}
+        </select>
+        <label class="api-lbl">अटैचमेंट</label>
+        <select onchange="apiSet('mediaId', this.value)">
+          <option value="">Template वाला अटैचमेंट (अगर हो)</option>
+          <option value="__none" ${apiState.mediaId === '__none' ? 'selected' : ''}>कोई अटैचमेंट नहीं</option>
+          ${apiMaterialOptions(false)}
+        </select>
+        <div class="api-warn">⚠️ WhatsApp का नियम: ये message सिर्फ़ उन्हीं को पहुँचेगा जिन्होंने पिछले 24 घंटे में हमारे number पर message किया हो। नए leads के लिए ऊपर वाला "Approved template" इस्तेमाल करें।</div>`;
+    }
+
+    el.innerHTML = `
+      <div class="api-head">📤 WhatsApp API से भेजें</div>
+      <div class="api-tabs">
+        <button class="${apiState.mode === 'template' ? 'active' : ''}" onclick="apiSet('mode','template')">🔱 Approved Template</button>
+        <button class="${apiState.mode === 'session' ? 'active' : ''}" onclick="apiSet('mode','session')">✉️ मेरा Template (24 घं. वाले)</button>
+      </div>
+      ${body}
+      <div class="api-row">
+        <div>
+          <label class="api-lbl">किन leads को</label>
+          <select onchange="apiSet('statusFilter', this.value)">
+            ${['not_contacted','contacted','interested','all'].map(s => `<option value="${s}" ${s === apiState.statusFilter ? 'selected' : ''}>${s === 'all' ? 'सभी (Registered छोड़कर)' : LEAD_STATUS_LABEL[s]}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="api-lbl">आज कितने (max)</label>
+          <input type="number" min="1" max="250" value="${apiState.limit}" onchange="apiSet('limit', this.value)">
+        </div>
+      </div>
+      <label class="api-check"><input type="checkbox" ${apiState.resend ? 'checked' : ''} onchange="apiSet('resend', this.checked)"> जिन्हें यही message पहले भेजा जा चुका है, उन्हें फिर भेजें</label>
+      <div class="api-summary" id="apiSummary"></div>
+      <div class="api-row">
+        <button class="btn primary" onclick="startBulkApiSend()">📤 Bulk Send शुरू करें</button>
+        <button class="btn ghost" onclick="refreshApiPanel()">🔄 Refresh</button>
+      </div>
+      <div class="api-note">हर lead के अंदर "🔱 API से भेजें" बटन भी यही चुना हुआ message भेजता है।</div>
+      <div id="apiProgress"></div>`;
+    updateApiSummary();
+  };
+
+  window.apiSet = function(key, val){
+    if (key === 'limit') val = Math.max(1, Math.min(250, parseInt(val, 10) || 1));
+    if (key === 'mode' || key === 'tplName') apiState.mediaId = '';
+    apiState[key] = val;
+    renderApiSendPanel();
+  };
+
+  window.refreshApiPanel = async function(){
+    try { await buildMaterialsCache(); } catch (e) {}
+    renderApiSendPanel();
+  };
+
+  // What gets sent, as a short key — used to avoid sending the same thing twice
+  function apiCampaignKey(){
+    if (apiState.mode === 'template') return 'tpl:' + apiState.tplName + (apiState.mediaId ? ':' + apiState.mediaId : '');
+    return 'my:' + apiState.myTplId + ':' + (apiState.mediaId || 'default');
+  }
+
+  // Returns an error text if the current choice can't be sent, else ''
+  function apiChoiceProblem(){
+    if (apiState.mode === 'template') {
+      const t = apiTpl();
+      if (t.header === 'image' && !findMaterial(apiState.mediaId)) return 'पहले पोस्टर/फ्लायर चुनें।';
+    } else {
+      if (!templatesCache[apiState.myTplId]) return 'पहले अपना Message Template चुनें।';
+    }
+    return '';
+  }
+
+  let apiSkippedLandline = 0;
+  function apiRecipients(){
+    apiSkippedLandline = 0;
+    const key = apiCampaignKey();
+    const seen = new Set();
+    return Object.keys(leadsCache)
+      .filter(id => {
+        const l = leadsCache[id];
+        if (!l || l.status === 'registered') return false;
+        if (apiState.statusFilter !== 'all' && l.status !== apiState.statusFilter) return false;
+        const ph = normLeadPhone(l.phone);
+        if (ph.length < 10 || seen.has(ph)) return false;   // no phone / duplicate number
+        if (!isMobileNumber(l.phone)) { apiSkippedLandline++; return false; } // landline — WhatsApp can't deliver
+        if (!apiState.resend && l.lastApiSend && l.lastApiSend.key === key) return false;
+        seen.add(ph);
+        return true;
+      })
+      .sort((a, b) => (leadsCache[a].addedAt || '').localeCompare(leadsCache[b].addedAt || ''));
+  }
+
+  function updateApiSummary(){
+    const el = document.getElementById('apiSummary');
+    if (!el) return;
+    const all = apiRecipients();
+    const n = Math.min(all.length, apiState.limit);
+    const problem = apiChoiceProblem();
+    el.innerHTML = problem
+      ? `<span style="color:#c0392b;">${problem}</span>`
+      : `<b>${n}</b> leads को भेजा जाएगा (कुल ${all.length} योग्य) · लगभग ${Math.ceil(n * WA_GAP_MS / 60000)} मिनट`
+        + (apiSkippedLandline ? `<br><span style="color:#888;font-size:12px;">${apiSkippedLandline} landline numbers छोड़ दिए (WhatsApp सिर्फ mobile पर जाता है)</span>` : '');
+  }
+
+  function leadDisplayName(l){ return String(l.businessName || l.name || 'ji').trim() || 'ji'; }
+
+  // Meta rejects long template variables ("Translated text too long"). Google Maps
+  // names are often SEO-stuffed ("X - Best Agency in Agra | SEO | ..."), so keep
+  // only the first part before | / ( - : , and cap it at 40 characters.
+  function waParamName(l){
+    let n = leadDisplayName(l).split(/\s*[|/(\[–—:,]\s*|\s+-\s+/)[0].replace(/\s+/g, ' ').trim();
+    if (n.length > 40) { n = n.slice(0, 41); n = /\s/.test(n) ? n.replace(/\s+\S*$/, '').trim() : n.slice(0, 40); }
+    return n || 'ji';
+  }
+
+  // Har batch ko ek campaignId milta hai. Server ise waMessages aur campaigns
+  // me likhta hai, aur CRM ka funnel usi se banta hai. Tareekh IST ki hai.
+  function apiCampaignId(){
+    const istDay = new Date(Date.now() + 19800000).toISOString().slice(0, 10);
+    const base = apiState.mode === 'template'
+      ? apiState.tplName
+      : ('my_' + (apiState.myTplId || 'tpl'));
+    return base + '_' + istDay;
+  }
+
+  function buildApiPayload(lead, leadId){
+    const payload = buildApiPayloadBase(lead);
+    payload.campaignId = apiCampaignId();
+    if (leadId) payload.leadId = leadId;
+    return payload;
+  }
+
+  function buildApiPayloadBase(lead){
+    const to = cleanPhoneForWhatsApp(lead.phone) || lead.phone;
+    const name = apiState.mode === 'template' ? waParamName(lead) : leadDisplayName(lead);
+    if (apiState.mode === 'template') {
+      const t = apiTpl();
+      const payload = { to, template: t.name, params: { [t.nameParam]: name } };
+      if (t.header === 'image') payload.headerImage = findMaterial(apiState.mediaId).url;
+      return payload;
+    }
+    const tpl = templatesCache[apiState.myTplId];
+    const text = buildTemplateMessage(tpl, name, false);
+    let media = null;
+    if (apiState.mediaId === '__none') media = null;
+    else if (apiState.mediaId) media = findMaterial(apiState.mediaId);
+    else if (tpl.media && tpl.media.url) media = { url: tpl.media.url, fileName: tpl.media.name || '', name: tpl.media.name || '' };
+    const kind = waMediaKind(media);
+    if (kind === 'image') return { to, type: 'image', link: media.url, caption: text };
+    if (kind === 'video') return { to, type: 'video', link: media.url, caption: text };
+    if (kind === 'document') return { to, type: 'document', link: media.url, caption: text, filename: (media.fileName || media.name || 'SAARTHI.pdf').split('/').pop() };
+    if (media && media.url) return { to, type: 'text', text: text + '\n\n' + media.url };
+    return { to, type: 'text', text };
+  }
+
+  function friendlyApiError(status, data){
+    const raw = JSON.stringify(data || {});
+    const err = data && data.error;
+    if (err === 'no_opt_in_on_record') return { msg: 'opt-in नहीं है या इन्होंने STOP/BAND लिखा था', fatal: false };
+    if (err === 'outside_24h_window') return { msg: '24 घंटे की window बंद — इसे Approved Template से भेजें', fatal: false };
+    if (err === 'invalid_mobile_number') return { msg: 'mobile number सही नहीं है', fatal: false };
+    if (err === 'wrong_gateway') return { msg: 'आपके account को इस gateway से भेजने की अनुमति नहीं है', fatal: true };
+    if (err === 'server_misconfigured') return { msg: 'Server पर WhatsApp token सेट नहीं है', fatal: true };
+    if (/header_image|media_link/.test(err || '')) return { msg: 'पोस्टर/फाइल का link मान्य नहीं (सिर्फ़ Firebase Storage या GitHub Pages की JPG/PNG)', fatal: true };
+    if (status === 401 || (status === 403 && /claim|auth|token|permission/i.test(raw))) return { msg: 'Login/permission नहीं है — logout करके फिर login करें।', fatal: true };
+    if (/131047|re-engagement|24 ?hour/i.test(raw)) return { msg: '24 घंटे की window बंद — इसे Approved Template से भेजें', fatal: false };
+    if (/131026|undeliverable|not a valid whatsapp|not on whatsapp/i.test(raw)) return { msg: 'ये number WhatsApp पर नहीं है', fatal: false };
+    if (/template_not_allowed|unknown template|132001|does not exist/i.test(raw)) return { msg: 'Template approved/allowed नहीं है', fatal: true };
+    if (/130429|131056|131048|rate|limit|spam/i.test(raw) || status === 429) return { msg: 'Meta limit/spam रोक — आज के लिए रोक दिया', fatal: true };
+    if (/131042|payment/i.test(raw)) return { msg: 'Meta billing/payment की समस्या', fatal: true };
+    return { msg: (data && (data.metaMessage || data.detail || data.error)) || ('Error ' + status), fatal: false };
+  }
+
+  async function sendApiOne(leadId, user){
+    const lead = leadsCache[leadId];
+    if (window._demoMode) {
+      await new Promise(r => setTimeout(r, 300));
+      return { ok: true };
+    }
+    const idToken = await user.getIdToken();
+    const res = await fetch(WA_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + idToken },
+      body: JSON.stringify(buildApiPayload(lead, leadId))
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) return Object.assign({ ok: false }, friendlyApiError(res.status, data));
+    return { ok: true, data };
+  }
+
+  async function markApiSent(leadId){
+    const lead = leadsCache[leadId];
+    if (!lead) return;
+    const rec = { key: apiCampaignKey(), at: new Date().toISOString() };
+    lead.lastApiSend = rec;
+    const promote = lead.status === 'not_contacted';
+    if (promote) lead.status = 'contacted';
+    if (window._demoMode) return;
+    const base = 'partnerLeads/' + window._currentPartnerCode + '/' + leadId;
+    try {
+      await window._pset(window._pref(window._pdb, base + '/lastApiSend'), rec);
+      if (promote) await window._pset(window._pref(window._pdb, base + '/status'), 'contacted');
+    } catch (e) { console.warn('could not save send status', e); }
+  }
+
+  async function apiGetUser(){
+    if (window._demoMode) return null;
+    try { return await window._pRequireUser(); }
+    catch (e) {
+      if (e.message !== 'cancelled') alert('Sign-in needed: ' + (e.code || e.message));
+      return undefined;
+    }
+  }
+
+  // Single lead — uses whatever is chosen in the panel
+  window.sendSaarthiInvite = async function(leadId, btn){
+    const lead = leadsCache[leadId];
+    if (!lead || !window._saarthiAdminUnlocked) return;
+    if (!lead.phone) { alert('This lead has no phone number.'); return; }
+    const problem = apiChoiceProblem();
+    if (problem) { alert(problem + '\n\n(My Leads के ऊपर "📤 WhatsApp API से भेजें" में चुनें)'); return; }
+    const user = await apiGetUser();
+    if (user === undefined) return;
+    const original = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const r = await sendApiOne(leadId, user);
+      if (!r.ok) throw new Error(r.msg);
+      await markApiSent(leadId);
+      btn.textContent = 'Sent ✓';
+      setTimeout(() => { renderLeads(); updateApiSummary(); }, 800);
+    } catch (e) {
+      alert('नहीं भेज सके: ' + e.message);
+      btn.textContent = original; btn.disabled = false;
+    }
+  };
+
+  window.startBulkApiSend = async function(){
+    if (apiState.running) return;
+    const problem = apiChoiceProblem();
+    if (problem) { alert(problem); return; }
+    const ids = apiRecipients().slice(0, apiState.limit);
+    if (!ids.length) { alert('भेजने के लिए कोई योग्य lead नहीं मिली।'); return; }
+
+    const what = apiState.mode === 'template'
+      ? apiTpl().label + (apiTpl().header === 'image' ? ' + ' + (findMaterial(apiState.mediaId) || {}).name : '')
+      : (templatesCache[apiState.myTplId].title || 'My template');
+    if (!confirm(`${ids.length} leads को भेजना है:\n\n${what}\n\nलगभग ${Math.ceil(ids.length * WA_GAP_MS / 60000)} मिनट लगेंगे। इस दौरान ये tab खुला रखें।\n\nशुरू करें?`)) return;
+
+    const user = await apiGetUser();
+    if (user === undefined) return;
+
+    apiState.running = true; apiState.stop = false;
+    const prog = document.getElementById('apiProgress');
+    let sent = 0, failed = 0, streak = 0;
+    const failures = [];
+    const paint = (done, note) => {
+      const pct = Math.round(done / ids.length * 100);
+      prog.innerHTML = `
+        <div class="api-bar"><div style="width:${pct}%"></div></div>
+        <div class="api-stats">✅ ${sent} भेजे · ❌ ${failed} fail · ${done}/${ids.length}${note ? ' · ' + note : ''}</div>
+        ${apiState.running ? '<button class="btn ghost" onclick="stopBulkApiSend()">⏹ रोकें</button>' : ''}
+        ${failures.length ? `<details class="api-fails" ${apiState.running ? '' : 'open'}><summary>Fail हुए (${failures.length})</summary>${failures.map(f => `<div>• ${escapeHtml(f.name)} (${escapeHtml(f.phone)}) — ${escapeHtml(f.msg)}</div>`).join('')}</details>` : ''}`;
+    };
+    paint(0, 'शुरू…');
+
+    let i = 0, stopNote = '';
+    for (; i < ids.length; i++) {
+      if (apiState.stop) { stopNote = 'आपने रोका'; break; }
+      const id = ids[i], lead = leadsCache[id];
+      if (!lead || !lead.phone) { paint(i + 1); continue; }   // removed during the run
+      let r;
+      try { r = await sendApiOne(id, user); }
+      catch (e) { r = { ok: false, msg: 'Network: ' + e.message, fatal: false }; }
+      if (r.ok) { sent++; streak = 0; try { await markApiSent(id); } catch (e) {} }
+      else {
+        failed++; streak++;
+        failures.push({ name: leadDisplayName(lead), phone: lead.phone || '', msg: r.msg });
+        if (r.fatal) { stopNote = 'रुका: ' + r.msg; i++; break; }
+        if (streak >= WA_MAX_CONSECUTIVE_FAILS) { stopNote = `लगातार ${streak} fail — रोक दिया, कारण देखें`; i++; break; }
+      }
+      paint(i + 1);
+      if (i < ids.length - 1) await new Promise(res => setTimeout(res, WA_GAP_MS));
+    }
+    apiState.running = false;
+    paint(Math.min(i, ids.length), stopNote || 'पूरा हुआ ✓');
+    renderLeads();
+    updateApiSummary();
+  };
+
+  window.stopBulkApiSend = function(){ apiState.stop = true; };
+
+  // Keep the panel in step with leads/templates/materials as they load
+  (function hookApiPanel(){
+    const _renderLeads = renderLeads;
+    renderLeads = function(){ _renderLeads.apply(this, arguments); if (!apiState.running) updateApiSummary(); };
+    const _renderTemplates = renderTemplates;
+    renderTemplates = function(){ _renderTemplates.apply(this, arguments); renderApiSendPanel(); };
+    const _paintMaterials = paintMaterials;
+    paintMaterials = function(){ _paintMaterials.apply(this, arguments); renderApiSendPanel(); };
+  })();
+
+  /* ══════════════════════════════════════════════════════════════════════
+     Campaign CRM — bheje hue WhatsApp messages ka nateeja
+     ----------------------------------------------------------------------
+     Data khud se nahi banta: Cloud Functions bharti hain.
+       recordSent()          -> waContacts/{phone}  (bhejte hi)
+       webhook ke statuses   -> delivered / read / failed
+       webhook ke messages   -> reply, aur STOP par optOut
+     Ye page sirf padhta hai - kuch likhta nahi.
+     ══════════════════════════════════════════════════════════════════════ */
+
+  const CRM_STAGE_META = {
+    joined:    { label: 'जुड़ गए',       bg:'#DCF7DC', fg:'#1E7D1E' },
+    replied_human: { label: 'असली जवाब',  bg:'#DCF7DC', fg:'#1E7D1E' },
+    replied_auto:  { label: 'Auto-reply',  bg:'#EFEAF7', fg:'#5B3F8C' },
+    read:      { label: 'पढ़ा',          bg:'#DBEFFB', fg:'#0B5F80' },
+    delivered: { label: 'पहुँचा',        bg:'#FFF3CD', fg:'#8A6D1A' },
+    sent:      { label: 'भेजा',          bg:'#F0F0F0', fg:'#555555' },
+    failed:    { label: 'नहीं पहुँचा',    bg:'#FFEBEE', fg:'#C62828' },
+    opted_out: { label: 'मना किया',      bg:'#FFEBEE', fg:'#C62828' }
+  };
+  // Upar se neeche = sabse zyada kaam ka pehle. Yahi list funnel ka order bhi hai.
+  const CRM_ORDER = ['joined', 'replied_human', 'replied_auto', 'read', 'delivered', 'sent', 'failed', 'opted_out'];
+
+  const CRM_PAGE = 100;
+  let crmCache    = {};
+  let crmLeadIdx  = {};
+  let crmFilter   = 'all';
+  let crmCampaign = 'all';
+  let crmSearch   = '';
+  let crmShown    = CRM_PAGE;
+
+  function crmLast10(p){ const d = String(p || '').replace(/\D/g, ''); return d.slice(-10); }
+
+  // leadsCache me lead ka apna pipeline status hai (interested / registered).
+  // Wahi hamara bharosemand "jud gaye" signal hai - WhatsApp ye nahi batata.
+  function buildCrmLeadIndex(){
+    crmLeadIdx = {};
+    Object.keys(leadsCache || {}).forEach(id => {
+      const l = leadsCache[id];
+      const ph = crmLast10(l && l.phone);
+      if (ph.length === 10) crmLeadIdx[ph] = Object.assign({ _id: id }, l);
+    });
+  }
+
+  function crmStageOf(c){
+    if (c.optOut || c.stage === 'opted_out') return 'opted_out';
+    const lead = crmLeadIdx[crmLast10(c.phone)];
+    // "Jud gaye" ka matlab: lead ab client ban chuki hai (My Clients me hai).
+    // Sirf "interested" par nishaan lagana kaafi nahi - wo manual marker hai.
+    if (lead && lead.status === 'registered') return 'joined';
+    if (c.replyCount > 0 || c.stage === 'replied') return crmReplyKind(c, lead) === 'auto' ? 'replied_auto' : 'replied_human';
+    if (c.stage === 'failed') return 'failed';
+    if (c.lastReadAt) return 'read';
+    if (c.lastDeliveredAt) return 'delivered';
+    return 'sent';
+  }
+
+  /* ── Auto-reply pehchaan ─────────────────────────────────────────────
+     Bahut se businesses ka WhatsApp khud "Thank you for contacting..." bhej
+     deta hai. Isse 24 ghante ki khidki to khulti hai, par kisi insaan ne
+     ruchi nahi dikhayi. Pehchaan ke teen sanket:
+       1. text me aam auto-reply wale shabd
+       2. jawab bhejne ke 90 second ke andar aaya (insaan itna tez kam hi likhta hai)
+       3. haath se lagaya nishaan (partner "ये असली जवाब है" / "ये auto है" dabaye)
+     Haath wala nishaan sabse upar maana jaata hai. */
+  const CRM_AUTO_PATTERNS = [
+    /thank(s| you)[^.!?]{0,40}(contact|reach|messag|writing|connect|getting in touch|choosing|interest)/i,
+    /(we|our team)[^.!?]{0,40}(get back|respond|reply|revert|contact you|reach you)/i,
+    /(let us know|tell us) how (we|can we)[^.!?]{0,20}help/i,
+    /how (can|may) (we|i) (help|assist)/i,
+    /(welcome to|greetings from|official (whatsapp|account))/i,
+    /(business|office|working) hours|currently (away|unavailable|closed)|out of (the )?office/i,
+    /(this is an? )?(automated|auto[- ]?generated|auto[- ]?reply)/i,
+    /my ?self [^.!?]{0,60}(owner|founder|ceo|director)/i,
+    /we (provide|offer|specialize|are a)[^.!?]{0,80}(services|solutions|agency|company)/i,
+    /(visit|check out) (our|us)[^.!?]{0,30}(website|site|page)|https?:\/\/\S+\s*$/i,
+    /(धन्यवाद|शुक्रिया)[^।!?]{0,40}(संपर्क|मैसेज|message)/,
+    /हम (जल्द|शीघ्र)[^।!?]{0,30}(संपर्क|जवाब)/
+  ];
+  // Chhote, insaani jawab — ye mile to auto nahi maante
+  const CRM_HUMAN_PATTERNS = [
+    /^(yes|yess|yeah|ok|okay|haan|han|ha|ji|hmm|interested|details?|send|call me|price|rate|kitna|kaise|kaun|who)\b/i,
+    /^(हाँ|हां|हा|जी|ठीक|भेजो|भेजिए|बताइए|बताओ|कितना|कैसे|कौन|रुचि)/,
+    /\b(interested|more details|call me|what is|how much|charges?|fees?|joining|kya hai|batao|bataiye)\b/i,
+    /(क्या है|कितने|कितना|बताइए|जानकारी|रुचि है|कॉल करें|कॉल कीजिए)/
+  ];
+  const CRM_KIND_LS = 'crmReplyKindOverride_v1';
+  function crmKindOverrides(){ try { return JSON.parse(localStorage.getItem(CRM_KIND_LS) || '{}') || {}; } catch (e) { return {}; } }
+
+  function crmReplyKind(c, lead){
+    const ph = crmLast10(c.phone);
+    if (lead && (lead.replyKind === 'auto' || lead.replyKind === 'human')) return lead.replyKind;
+    const ov = crmKindOverrides()[ph];
+    if (ov === 'auto' || ov === 'human') return ov;
+    const t = String(c.lastInboundText || '').trim();
+    if (!t) return 'human';                              // photo/voice — insaan ne bheja hoga
+    const auto = CRM_AUTO_PATTERNS.some(r => r.test(t));
+    const human = t.length <= 120 && CRM_HUMAN_PATTERNS.some(r => r.test(t));
+    if (human && !auto) return 'human';
+    if (auto) return 'auto';
+    // text se pata nahi chala — to samay dekho
+    const sent = Number(c.lastSentAt || 0), inb = Number(c.lastInboundAt || 0);
+    if (sent && inb && inb >= sent && inb - sent < 90000 && (c.replyCount || 1) <= 2) return 'auto';
+    return 'human';
+  }
+
+  window.crmSetReplyKind = async function(key, kind){
+    const c = crmCache[key] || {};
+    const ph = crmLast10(c.phone || key);
+    const lead = crmLeadIdx[ph];
+    const ov = crmKindOverrides(); ov[ph] = kind;
+    try { localStorage.setItem(CRM_KIND_LS, JSON.stringify(ov)); } catch (e) {}
+    if (lead && lead._id && leadsCache[lead._id]) {
+      leadsCache[lead._id].replyKind = kind;
+      if (!window._demoMode) {
+        try {
+          await window._pset(window._pref(window._pdb, 'partnerLeads/' + window._currentPartnerCode + '/' + lead._id + '/replyKind'), kind);
+        } catch (e) { console.warn('replyKind save failed', e); }
+      }
+    }
+    renderCrm();
+  };
+
+  /* ── API se flyer bhejna (sirf khuli 24 ghante ki khidki me) ─────────
+     Ye message hamare API number se jaata hai, na ki partner ke phone se.
+     Ek contact ko ek hi baar flyer — dobara bhejne par poochha jaata hai. */
+  const CRM_FLYER_LS = 'crmFlyerSent_v1';
+  function crmFlyerLog(){ try { return JSON.parse(localStorage.getItem(CRM_FLYER_LS) || '{}') || {}; } catch (e) { return {}; } }
+  function crmFlyerSentAt(c){
+    const ph = crmLast10(c.phone);
+    const lead = crmLeadIdx[ph];
+    if (lead && lead.lastFlyerSend && lead.lastFlyerSend.at) return lead.lastFlyerSend.at;
+    return crmFlyerLog()[ph] || '';
+  }
+
+  window.crmOpenFlyer = async function(key){
+    const c = Object.assign({}, crmCache[key] || {});
+    if (!c.phone) c.phone = key;
+    if (!window._saarthiAdminUnlocked) { alert('API से भेजना सिर्फ़ admin gateway से खुलता है।'); return; }
+    if (!crmWindowOpen(c)) { alert('24 घंटे की खिड़की बंद हो चुकी है। अब सिर्फ़ Approved Template भेजा जा सकता है।'); return; }
+    if (c.optOut) { alert('इन्होंने मना किया है — मैसेज न भेजें।'); return; }
+    if (!(materialsCache || []).length) { try { await buildMaterialsCache(); } catch (e) {} }
+    const imgs = (materialsCache || []).filter(m => waImageOk(m));
+    if (!imgs.length) { alert('कोई JPG/PNG पोस्टर/फ्लायर नहीं मिला। पहले partner-admin → Materials में अपलोड करें।'); return; }
+
+    const lead = crmLeadIdx[crmLast10(c.phone)];
+    const nm = lead ? waParamName(lead) : (String(c.name || '').split(/\s*[|/(\[–—:,]\s*|\s+-\s+/)[0].trim() || 'ji');
+    const prev = crmFlyerSentAt(c);
+    const kind = crmReplyKind(c, lead);
+    const defCaption = 'नमस्ते ' + nm + ' जी 🙏\nजवाब देने के लिए धन्यवाद। ये रहा SAARTHI offer का पूरा विवरण।\n\nरुचि हो तो "हाँ" लिखिए — हम आपको कॉल करेंगे।\nआगे मैसेज नहीं चाहिए तो STOP लिखिए।';
+
+    let box = document.getElementById('crmFlyerModal');
+    if (box) box.remove();
+    box = document.createElement('div');
+    box.id = 'crmFlyerModal';
+    box.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;';
+    box.innerHTML =
+      '<div style="background:#fff;border-radius:12px;max-width:440px;width:100%;max-height:90vh;overflow:auto;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25);">' +
+        '<div style="font-weight:800;font-size:16px;margin-bottom:4px;">📤 API से flyer भेजें</div>' +
+        '<div style="font-size:12.5px;color:#555;margin-bottom:10px;">' + escapeHtml(String(c.name || c.phone)) + ' · ' + escapeHtml(String(c.phone)) + '<br>ये हमारे WhatsApp API नंबर से जाएगा (आपके फ़ोन से नहीं)।</div>' +
+        (kind === 'auto' ? '<div style="background:#EFEAF7;color:#5B3F8C;font-size:12px;padding:8px;border-radius:6px;margin-bottom:8px;">ℹ️ इनका जवाब auto-reply लगता है — किसी इंसान ने अभी रुचि नहीं दिखाई। एक flyer ठीक है, इससे ज़्यादा न भेजें।</div>' : '') +
+        (prev ? '<div style="background:#FFF3CD;color:#8A6D1A;font-size:12px;padding:8px;border-radius:6px;margin-bottom:8px;">⚠️ इन्हें पहले ही flyer भेजा जा चुका है (' + escapeHtml(crmAgo(Date.parse(prev))) + ')। बार-बार भेजने से block/report का ख़तरा बढ़ता है।</div>' : '') +
+        '<label style="font-size:12px;font-weight:700;">पोस्टर / फ्लायर</label>' +
+        '<select id="crmFlyerSel" style="width:100%;padding:8px;margin:4px 0 10px;border:1px solid #ddd;border-radius:6px;">' +
+          imgs.map(m => '<option value="' + escapeHtml(m.id) + '">' + escapeHtml(m.name || m.fileName || 'Poster') + '</option>').join('') +
+        '</select>' +
+        '<label style="font-size:12px;font-weight:700;">साथ का message (caption)</label>' +
+        '<textarea id="crmFlyerCap" rows="6" maxlength="1000" style="width:100%;padding:8px;margin:4px 0 12px;border:1px solid #ddd;border-radius:6px;font-size:13px;">' + escapeHtml(defCaption) + '</textarea>' +
+        '<div id="crmFlyerMsg" style="font-size:12.5px;margin-bottom:8px;"></div>' +
+        '<div style="display:flex;gap:8px;justify-content:flex-end;">' +
+          '<button class="btn ghost" onclick="document.getElementById(\'crmFlyerModal\').remove()">रद्द करें</button>' +
+          '<button class="btn primary" id="crmFlyerGo">📤 भेजें</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(box);
+    box.addEventListener('click', e => { if (e.target === box) box.remove(); });
+    document.getElementById('crmFlyerGo').onclick = () => crmSendFlyer(key, c, lead);
+  };
+
+  async function crmSendFlyer(key, c, lead){
+    const btn = document.getElementById('crmFlyerGo');
+    const msg = document.getElementById('crmFlyerMsg');
+    const mat = findMaterial(document.getElementById('crmFlyerSel').value);
+    const caption = String(document.getElementById('crmFlyerCap').value || '').trim();
+    if (!mat) { msg.innerHTML = '<span style="color:#c0392b;">फ्लायर चुनें।</span>'; return; }
+    btn.disabled = true; btn.textContent = 'भेज रहे हैं…';
+    try {
+      const user = await apiGetUser();
+      if (user === undefined) { btn.disabled = false; btn.textContent = '📤 भेजें'; return; }
+      const payload = { to: String(c.phone).replace(/\D/g, ''), type: 'image', link: mat.url, caption };
+      if (c.lastCampaignId) payload.campaignId = c.lastCampaignId;
+      if (lead && lead._id) payload.leadId = lead._id;
+      let ok = true, err = null;
+      if (!window._demoMode) {
+        const res = await fetch(WA_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (await user.getIdToken()) },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) { ok = false; err = friendlyApiError(res.status, data); }
+      }
+      if (!ok) {
+        msg.innerHTML = '<span style="color:#c0392b;">❌ ' + escapeHtml(err.msg) + '</span>';
+        btn.disabled = false; btn.textContent = '📤 फिर कोशिश करें';
+        return;
+      }
+      const at = new Date().toISOString();
+      const log = crmFlyerLog(); log[crmLast10(c.phone)] = at;
+      try { localStorage.setItem(CRM_FLYER_LS, JSON.stringify(log)); } catch (e) {}
+      if (lead && lead._id && leadsCache[lead._id]) {
+        const rec = { at, materialId: mat.id };
+        leadsCache[lead._id].lastFlyerSend = rec;
+        if (!window._demoMode) {
+          try { await window._pset(window._pref(window._pdb, 'partnerLeads/' + window._currentPartnerCode + '/' + lead._id + '/lastFlyerSend'), rec); }
+          catch (e) { console.warn('flyer log save failed', e); }
+        }
+      }
+      msg.innerHTML = '<span style="color:#1e7d1e;">✅ भेज दिया</span>';
+      setTimeout(() => { const b = document.getElementById('crmFlyerModal'); if (b) b.remove(); renderCrm(); }, 900);
+    } catch (e) {
+      msg.innerHTML = '<span style="color:#c0392b;">❌ ' + escapeHtml(e.message || String(e)) + '</span>';
+      btn.disabled = false; btn.textContent = '📤 फिर कोशिश करें';
+    }
+  }
+
+  function crmAgo(ts){
+    const n = Number(ts) || 0;
+    if (!n) return '—';
+    const mins = Math.floor((Date.now() - n) / 60000);
+    if (mins < 1)  return 'अभी';
+    if (mins < 60) return mins + ' मिनट पहले';
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return hrs + ' घंटे पहले';
+    const days = Math.floor(hrs / 24);
+    if (days === 1) return 'कल';
+    return days + ' दिन पहले';
+  }
+
+  function crmWindowOpen(c){ return Number(c.windowExpiresAt || 0) > Date.now(); }
+
+  // Partner code do shaklon me milta hai aur dono chal rahi hain:
+  //   dashboard ka code  -> "JODHPUR342001"  (loadPartner space hata deta hai)
+  //   server ka claim    -> "JODHPUR 342001" (GATEWAY = city + ' ' + pincode)
+  // waContacts me server wali shakl likhi hoti hai, isliye dono aazmate hain.
+  function crmCodeCandidates(){
+    const out = [];
+    const add = v => {
+      v = String(v || '').trim();
+      if (!v) return;
+      [v, v.toUpperCase()].forEach(x => { if (out.indexOf(x) === -1) out.push(x); });
+    };
+    const raw = String(window._currentPartnerCode || '');
+    add(raw);
+    const m = raw.match(/^(.*?)\s*(\d{6})$/);          // pincode se pehle space
+    if (m && m[1]) { add(m[1].trim() + ' ' + m[2]); add(m[1].trim() + m[2]); }
+    add(new URLSearchParams(location.search).get('admin'));
+    return out;
+  }
+
+  function crmNormCode(v){ return String(v || '').replace(/\s+/g, '').toUpperCase(); }
+
+  window.loadCrm = async function(force){
+    const el = document.getElementById('crmListEl');
+    const code = window._currentPartnerCode;
+    if (!el) return;
+    if (!code) { el.innerHTML = '<div class="empty">पहले अपना partner code डालिए।</div>'; return; }
+    if (window._demoMode) {
+      el.innerHTML = '<div class="empty">Demo mode में CRM नहीं दिखता — ये असली भेजे हुए मैसेज का हिसाब है।</div>';
+      return;
+    }
+
+    el.innerHTML = '<div class="empty">Loading…</div>';
+    crmCache = {};
+    let how = '';
+    try {
+      await window._pEnsureAuth();
+
+      // 1. Har sambhav code par index-backed query — tez, 100k par bhi
+      for (const cand of crmCodeCandidates()) {
+        const q = window._pquery(
+          window._pref(window._pdb, 'waContacts'),
+          window._porderByChild('partnerCode'),
+          window._pequalTo(cand)
+        );
+        const snap = await window._pget(q);
+        if (snap.exists()) {
+          Object.assign(crmCache, snap.val() || {});
+          how = how ? how + ', ' + cand : cand;
+        }
+      }
+
+      // 2. Kuch nahi mila to poora node padhkar khud milaan — purane record
+      //    jinme partnerCode hai hi nahi, wo yahan pakde jaate hain.
+      if (force || !Object.keys(crmCache).length) {
+        const snap = await window._pget(window._pref(window._pdb, 'waContacts'));
+        const all = snap.exists() ? (snap.val() || {}) : {};
+        const want = crmNormCode(code);
+        const admin = !!window._saarthiAdminUnlocked;
+        buildCrmLeadIndex();
+        let picked = 0;
+        Object.keys(all).forEach(k => {
+          const row = all[k] || {};
+          const pc = crmNormCode(row.partnerCode);
+          // partnerCode sirf bhejte waqt likha jaata hai. Agar koi khud message
+          // kare (ya record dobara bana ho) to wo khaali rehta hai - is liye
+          // apni lead list ke number se bhi milaan karte hain.
+          const mine = !!crmLeadIdx[crmLast10(row.phone || k)];
+          if (pc === want || mine || (!pc && admin)) { crmCache[k] = row; picked++; }
+        });
+        how = 'पूरा scan — ' + picked + '/' + Object.keys(all).length;
+      }
+    } catch (e) {
+      console.warn('CRM load failed', e);
+      el.innerHTML = '<div class="empty">CRM नहीं खुल सका: ' + escapeHtml(e.message || String(e)) + '</div>';
+      return;
+    }
+
+    window._crmHow = how;
+    crmShown = CRM_PAGE;
+    renderCrmCampaigns();
+    renderCrm();
+  };
+
+  function crmRows(){
+    buildCrmLeadIndex();
+    const term = crmSearch;
+    return Object.keys(crmCache).map(k => {
+      const c = Object.assign({}, crmCache[k]);
+      c._key = k;
+      if (!c.phone) c.phone = k;
+      c._stage = crmStageOf(c);
+      return c;
+    }).filter(c => {
+      if (crmCampaign !== 'all' && c.lastCampaignId !== crmCampaign) return false;
+      if (!term) return true;
+      return (String(c.name || '').toLowerCase().indexOf(term) !== -1) ||
+             (String(c.phone || '').indexOf(term) !== -1);
+    });
+  }
+
+  function renderCrmCampaigns(){
+    const sel = document.getElementById('crmCampaignSelect');
+    if (!sel) return;
+    const seen = {};
+    Object.keys(crmCache).forEach(k => {
+      const id = crmCache[k].lastCampaignId;
+      if (id) seen[id] = (seen[id] || 0) + 1;
+    });
+    const ids = Object.keys(seen).sort().reverse();
+    sel.innerHTML = '<option value="all">सभी campaigns (' + Object.keys(crmCache).length + ')</option>' +
+      ids.map(id => '<option value="' + escapeHtml(id) + '"' + (id === crmCampaign ? ' selected' : '') + '>' +
+        escapeHtml(id) + ' — ' + seen[id] + '</option>').join('');
+  }
+
+  window.setCrmCampaign = function(v){ crmCampaign = v; crmShown = CRM_PAGE; renderCrm(); };
+  window.setCrmSearch   = function(v){ crmSearch = String(v || '').trim().toLowerCase(); crmShown = CRM_PAGE; renderCrm(); };
+  window.setCrmFilter   = function(v){ crmFilter = v; crmShown = CRM_PAGE; renderCrm(); };
+  window.showMoreCrm    = function(){ crmShown += CRM_PAGE; renderCrm(); };
+
+  function renderCrm(){
+    const el = document.getElementById('crmListEl');
+    const fun = document.getElementById('crmFunnel');
+    if (!el || !fun) return;
+
+    const all = crmRows();
+    updateCountPill('crm', all.length);
+
+    // Funnel ki ginti campaign ke hisaab se hoti hai, stage filter se pehle
+    const counts = {};
+    CRM_ORDER.forEach(k => counts[k] = 0);
+    all.forEach(c => { counts[c._stage] = (counts[c._stage] || 0) + 1; });
+
+    fun.innerHTML =
+      '<div class="crm-tile' + (crmFilter === 'all' ? ' active' : '') + '" onclick="setCrmFilter(\'all\')">' +
+        '<div class="crm-n">' + all.length + '</div><div class="crm-l">सब</div></div>' +
+      CRM_ORDER.map(k => {
+        const m = CRM_STAGE_META[k];
+        return '<div class="crm-tile' + (crmFilter === k ? ' active' : '') + '" onclick="setCrmFilter(\'' + k + '\')">' +
+          '<div class="crm-n" style="color:' + m.fg + ';">' + (counts[k] || 0) + '</div>' +
+          '<div class="crm-l">' + m.label + '</div></div>';
+      }).join('');
+
+    const note = document.getElementById('crmNote');
+    if (note) {
+      const how = window._crmHow ? ' \u00b7 मिलान: ' + escapeHtml(window._crmHow) : '';
+      note.innerHTML = 'ℹ️ "पढ़ा" वही दिखता है जिनके WhatsApp में blue-tick चालू है। ' +
+        'जिन्होंने बंद रखा है वो पढ़ने के बाद भी "पहुँचा" में ही रहेंगे — इसलिए असली पैमाना ' +
+        '<b>जवाब दिया</b> और <b>जुड़ गए</b> हैं।' + how;
+    }
+
+    let rows = crmFilter === 'all' ? all.slice() : all.filter(c => c._stage === crmFilter);
+
+    // Sabse kaam ka upar: jud gaye / jawab diya, phir naye bheje hue
+    const rank = {}; CRM_ORDER.forEach((k, i) => rank[k] = i);
+    rows.sort((a, b) => {
+      const d = (rank[a._stage] || 9) - (rank[b._stage] || 9);
+      if (d) return d;
+      return (Number(b.lastInboundAt || b.lastSentAt || 0)) - (Number(a.lastInboundAt || a.lastSentAt || 0));
+    });
+
+    if (!rows.length) {
+      el.innerHTML = '<div class="empty">' +
+        (Object.keys(crmCache).length
+          ? 'इस खाने में कोई नहीं है।'
+          : 'अभी कोई रिकॉर्ड नहीं। "📤 WhatsApp API से भेजें" से मैसेज भेजिए — नतीजा यहाँ अपने आप आ जाएगा।') +
+        '</div>';
+      return;
+    }
+
+    const shown = rows.slice(0, crmShown);
+    el.innerHTML = shown.map(crmRowHtml).join('') +
+      (rows.length > crmShown
+        ? '<button class="btn ghost" style="width:100%; margin-top:8px;" onclick="showMoreCrm()">और ' +
+          Math.min(CRM_PAGE, rows.length - crmShown) + ' दिखाएँ (कुल ' + rows.length + ')</button>'
+        : '');
+  }
+
+  function crmRowHtml(c){
+    const m = CRM_STAGE_META[c._stage] || CRM_STAGE_META.sent;
+    const phone = String(c.phone || '');
+    const wa = 'https://wa.me/' + phone.replace(/\D/g, '');
+    const lead = crmLeadIdx[crmLast10(phone)];
+    const name = c.name || (lead && (lead.businessName || lead.name)) || phone;
+
+    let meta = 'भेजा: ' + crmAgo(c.lastSentAt);
+    if (c.lastDeliveredAt) meta += ' · पहुँचा: ' + crmAgo(c.lastDeliveredAt);
+    if (c.lastReadAt)      meta += ' · पढ़ा: ' + crmAgo(c.lastReadAt);
+    if (c.lastCampaignId)  meta += ' · ' + escapeHtml(c.lastCampaignId);
+
+    let reply = '';
+    if (c.lastInboundText) {
+      reply = '<div class="crm-reply">“' + escapeHtml(String(c.lastInboundText).slice(0, 400)) + '”' +
+        '<div style="font-size:11px; color:var(--dim); margin-top:3px;">' + crmAgo(c.lastInboundAt) +
+        (c.replyCount > 1 ? ' · कुल ' + c.replyCount + ' जवाब' : '') + '</div></div>';
+    }
+
+    let acts;
+    if (c._stage === 'opted_out') {
+      acts = '<div class="crm-acts"><span style="font-size:11.5px; color:#C62828; font-weight:700;">' +
+        '⛔ इन्होंने मना किया है — दोबारा मैसेज न भेजें</span></div>';
+    } else {
+      const open = crmWindowOpen(c);
+      const win = open
+        ? '<span class="crm-open">🟢 24 घंटे की खिड़की खुली है</span>'
+        : '<span class="crm-shut">खिड़की बंद — template ही भेजा जा सकता है</span>';
+      const k = escapeHtml(JSON.stringify(String(c._key || phone)));
+      const flyerAt = crmFlyerSentAt(c);
+      const flyer = (open && window._saarthiAdminUnlocked)
+        ? '<button class="crm-flyer" onclick="crmOpenFlyer(' + k + ')">' + (flyerAt ? '🖼️ flyer भेजा ✓' : '🖼️ API से flyer भेजें') + '</button>'
+        : '';
+      let kindBtn = '';
+      if (c._stage === 'replied_auto')  kindBtn = '<button class="crm-ghost" title="ग़लती से auto माना गया हो तो" onclick="crmSetReplyKind(' + k + ',\'human\')">👤 ये असली जवाब है</button>';
+      if (c._stage === 'replied_human') kindBtn = '<button class="crm-ghost" title="ये मशीन का auto-reply हो तो" onclick="crmSetReplyKind(' + k + ',\'auto\')">🤖 ये auto है</button>';
+      acts = '<div class="crm-acts">' +
+        flyer +
+        '<a class="crm-wa" href="' + wa + '" target="_blank" rel="noopener" title="आपके अपने फ़ोन/कंप्यूटर के WhatsApp से खुलेगा — API नंबर से नहीं">💬 WhatsApp खोलें (अपना नंबर)</a>' +
+        (lead ? '<button class="crm-ghost" onclick="crmJumpToLead(\'' + lead._id + '\')">🎯 lead देखें</button>' : '') +
+        kindBtn + win + '</div>';
+    }
+
+    let failNote = '';
+    if (c._stage === 'failed' && (c.lastErrorTitle || c.lastErrorCode)) {
+      failNote = '<div class="crm-meta" style="color:#C62828;">⚠ ' +
+        escapeHtml(String(c.lastErrorTitle || ('Error ' + c.lastErrorCode))) + '</div>';
+    }
+
+    return '<div class="crm-row">' +
+      '<div class="crm-top">' +
+        '<span class="crm-name">' + escapeHtml(String(name)) + '</span>' +
+        '<span class="crm-badge" style="background:' + m.bg + '; color:' + m.fg + ';">' + m.label + '</span>' +
+      '</div>' +
+      '<div class="crm-meta">' + escapeHtml(phone) + ' · ' + meta + '</div>' +
+      failNote + reply + acts +
+    '</div>';
+  }
+
+  // CRM se seedha us lead tak - My Leads khol kar, uski row par le jaata hai
+  window.crmJumpToLead = function(leadId){
+    const card = document.getElementById('leadsCard');
+    if (card) card.classList.remove('collapsed');
+    if (typeof setLeadFilter === 'function') setLeadFilter('all');
+    setTimeout(function(){
+      const row = document.getElementById('leadRow_' + leadId);
+      if (row) {
+        row.classList.remove('collapsed');
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.style.outline = '2px solid var(--saffron)';
+        setTimeout(function(){ row.style.outline = ''; }, 2500);
+      } else if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 120);
+  };
+
+  window.exportCrmCsv = function(){
+    const rows = crmFilter === 'all' ? crmRows() : crmRows().filter(c => c._stage === crmFilter);
+    if (!rows.length) { alert('निर्यात के लिए कुछ नहीं है।'); return; }
+    const head = ['Name', 'Phone', 'Stage', 'Campaign', 'SentAt', 'DeliveredAt', 'ReadAt', 'Replies', 'LastReply', 'OptOut'];
+    const esc = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    const iso = t => (Number(t) ? new Date(Number(t)).toISOString() : '');
+    const csv = [head.map(esc).join(',')].concat(rows.map(c => [
+      c.name || '', c.phone || '', (CRM_STAGE_META[c._stage] || {}).label || c._stage,
+      c.lastCampaignId || '', iso(c.lastSentAt), iso(c.lastDeliveredAt), iso(c.lastReadAt),
+      c.replyCount || 0, c.lastInboundText || '', c.optOut ? 'YES' : ''
+    ].map(esc).join(','))).join('\r\n');
+
+    // BOM lagane se Excel Hindi aur emoji sahi dikhata hai
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'campaign-crm-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  };
+
+  // Bulk send khatam hote hi CRM apne aap taaza ho jaaye. Meta ke delivered/read
+  // events thode secondon baad aate hain, isliye ek chhota intezaar.
+  (function hookCrmRefresh(){
+    if (typeof window.startBulkApiSend !== 'function') return;
+    const _bulk = window.startBulkApiSend;
+    window.startBulkApiSend = async function(){
+      const r = await _bulk.apply(this, arguments);
+      setTimeout(function(){ if (window.loadCrm) window.loadCrm(); }, 8000);
+      return r;
+    };
+  })();
+
+
+  renderApiSendPanel();
+  if (window._currentPartnerCode && window.loadCrm) window.loadCrm();
+
+</script>
+
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="ऊपर जाएँ">↑</button>
+
+<div class="tpl-picker-overlay" id="matChooserOverlay" onclick="if(event.target===this) closeMaterialChooser()">
+  <div class="tpl-picker-box">
+    <h3>📎 कौन सा मटेरियल अटैच करना है?</h3>
+    <div id="matChooserList"></div>
+    <button onclick="closeMaterialChooser()" style="width:100%; margin-top:6px; padding:10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">Cancel</button>
+  </div>
+</div>
+
+<div class="tpl-picker-overlay" id="tplPickerOverlay" onclick="if(event.target===this) closeTemplatePicker()">
+  <div class="tpl-picker-box">
+    <h3>✉️ Choose a message to send</h3>
+    <div id="tplPickerList"></div>
+    <button onclick="closeTemplatePicker()" style="width:100%; margin-top:6px; padding:10px; border-radius:8px; border:1px solid #ccc; background:#fff; cursor:pointer;">Cancel</button>
+  </div>
+</div>
+<script>
+(function () {
+  window._pRequireUser = function () {
+    return new Promise((resolve, reject) => {
+      const auth = window._pauth;
+      if (!auth) return reject(new Error('Auth not loaded — refresh the page.'));
+      // An anonymous session does not carry the partner/admin custom claims the
+      // send endpoint checks, so it must not short-circuit the sign-in prompt.
+      if (auth.currentUser && !auth.currentUser.isAnonymous) return resolve(auth.currentUser);
+
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:99999;padding:16px;';
+      wrap.innerHTML =
+        '<div style="background:#fff;border-radius:12px;padding:20px;max-width:340px;width:100%;font-family:system-ui,sans-serif;">' +
+        '<h3 style="margin:0 0 4px;font-size:17px;">Partner sign-in</h3>' +
+        '<p style="margin:0 0 14px;font-size:13px;color:#555;">WhatsApp invite bhejne ke liye login zaroori hai.</p>' +
+        '<input id="_pEmail" type="email" placeholder="Email" autocomplete="username" style="width:100%;padding:9px;margin-bottom:8px;border:1px solid #ccc;border-radius:7px;font-size:14px;box-sizing:border-box;">' +
+        '<input id="_pPass" type="password" placeholder="Password" autocomplete="current-password" style="width:100%;padding:9px;border:1px solid #ccc;border-radius:7px;font-size:14px;box-sizing:border-box;">' +
+        '<div id="_pErr" style="color:#c00;font-size:12px;min-height:16px;margin:6px 0;"></div>' +
+        '<div style="display:flex;gap:8px;">' +
+        '<button id="_pCancel" style="flex:1;padding:9px;border:1px solid #ccc;background:#f5f5f5;border-radius:7px;cursor:pointer;">Cancel</button>' +
+        '<button id="_pGo" style="flex:2;padding:9px;border:0;background:#8B1E3F;color:#fff;border-radius:7px;cursor:pointer;">Sign in</button>' +
+        '</div></div>';
+      document.body.appendChild(wrap);
+
+      const $ = id => wrap.querySelector('#' + id);
+      $('_pEmail').focus();
+      const close = () => wrap.remove();
+
+      $('_pCancel').onclick = () => { close(); reject(new Error('cancelled')); };
+
+      $('_pGo').onclick = async () => {
+        const em = $('_pEmail').value.trim();
+        const pw = $('_pPass').value;
+        if (!em || !pw) { $('_pErr').textContent = 'Email aur password dono bhariye.'; return; }
+        $('_pGo').disabled = true;
+        $('_pGo').textContent = 'Signing in…';
+        try {
+          const cred = await window._psignIn(em, pw);
+          close();
+          resolve(cred.user);
+        } catch (e) {
+          $('_pErr').textContent = e.code || e.message;
+          $('_pGo').disabled = false;
+          $('_pGo').textContent = 'Sign in';
+        }
+      };
+
+      $('_pPass').addEventListener('keydown', e => { if (e.key === 'Enter') $('_pGo').click(); });
+    });
+  };
+})();
+</script>
+<div id="zt-banner" style="position:fixed;left:0;right:0;bottom:0;z-index:2147483647;background:#C62828;color:#fff;font:600 12px/1.3 sans-serif;text-align:center;padding:4px 8px;pointer-events:none;opacity:.92">🧪 TEST VERSION — असली ऐप नहीं · Test data only</div>
+</body>
+</html>

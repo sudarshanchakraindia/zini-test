@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<script>/* ZINI TEST: keep browser storage separate from the live app on the same domain */
+(function(){var P='zt_',S=Storage.prototype,g=S.getItem,s=S.setItem,r=S.removeItem;
+S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.call(this,P+k,v)};S.removeItem=function(k){return r.call(this,P+k)};})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Replace hire_checkout in history so back button skips it
+if (document.referrer.includes('hire_checkout')) {
+  history.replaceState(null, '', window.location.href);
+  // Push home so back goes there
+  history.pushState(null, '', 'index.html');
+  history.pushState(null, '', window.location.href);
+}
+// Intercept back button — always go home
+window.addEventListener('popstate', function() {
+  window.location.replace('index.html');
+});
+</script>
+<title>[TEST] सुदर्शन चक्र — धन्यवाद! | Sudarshan Chakra</title>
+
+<!-- ── OPEN GRAPH (WhatsApp rich preview) ── -->
+<meta property="og:type"        content="website">
+<meta property="og:site_name"   content="Sudarshan Chakra">
+<meta property="og:url"         content="https://sudarshanchakraindia.github.io/zini-test/gratitude.html">
+<meta property="og:title"       content="🔱 सुदर्शन चक्र — धन्यवाद! | Sudarshan Chakra">
+<meta property="og:description" content="आपका पोर्टल एक्सेस सक्रिय हो गया है। भारत के सबसे विश्वसनीय स्थानीय सेवा समुदाय में आपका स्वागत है। 🙏 Your trusted local service platform — connecting India, one skill at a time.">
+<meta name="description"        content="सुदर्शन चक्र — भारत का विश्वसनीय स्थानीय सेवा पोर्टल। प्लम्बर, इलेक्ट्रीशियन, ट्यूटर और अधिक खोजें।">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600;700&family=Noto+Sans:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&family=Noto+Sans+Malayalam:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&family=Noto+Sans+Gujarati:wght@400;700&family=Noto+Sans+Gurmukhi:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --saffron:#EA580C; --gold:#D97706; --gold-lt:#FDE68A;
+  --cream:#FFFBF0; --brown:#7C2D12; --navy:#1E3A5F;
+  --green:#14532D; --maroon:#881337;
+}
+html,body {
+  min-height:100%; background:linear-gradient(160deg,#1a0a00,#2d1200 40%,#1a0800);
+  font-family:'Poppins',sans-serif;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:flex-start; padding:16px 16px 40px;
+}
+
+/* ── SPARKS ── */
+.spark { position:fixed; border-radius:50%; pointer-events:none; animation:sparkle linear infinite; opacity:0; }
+@keyframes sparkle {
+  0%{opacity:0;transform:translateY(0) scale(0)} 10%{opacity:1;transform:translateY(-20px) scale(1)}
+  90%{opacity:0.5;transform:translateY(-140px) scale(0.6)} 100%{opacity:0;transform:translateY(-180px) scale(0)}
+}
+
+/* ── MANDALA BG ── */
+.mandala-bg { position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;height:520px;opacity:0.045;pointer-events:none;animation:rotateSlow 70s linear infinite; }
+@keyframes rotateSlow { to{transform:translate(-50%,-50%) rotate(360deg)} }
+
+/* ── LANGUAGE SELECTOR ── */
+.lang-wrap { width:100%;max-width:440px;margin-bottom:12px; }
+.lang-label { font-size:9px;color:rgba(253,230,138,0.35);letter-spacing:2px;text-align:center;margin-bottom:8px;text-transform:uppercase; }
+.lang-grid { display:grid;grid-template-columns:repeat(5,1fr);gap:5px; }
+}
+
+/* ── PAYMENT TYPE TABS ── */
+.type-wrap { width:100%;max-width:440px;display:flex;gap:7px;margin-bottom:14px; }
+
+
+/* ── CARD ── */
+.card {
+  width:100%;max-width:440px;
+  background:linear-gradient(160deg,#2d1a00,#1a0d00);
+  border-radius:26px;
+  border:1px solid rgba(253,230,138,0.18);
+  box-shadow:0 0 60px rgba(217,119,6,0.2),0 0 120px rgba(217,119,6,0.07);
+  overflow:hidden;position:relative;
+  animation:cardIn 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+@keyframes cardIn { from{opacity:0;transform:translateY(30px) scale(0.96)} to{opacity:1;transform:translateY(0) scale(1)} }
+.card::before {
+  content:'';position:absolute;inset:0;border-radius:26px;padding:1px;
+  background:linear-gradient(135deg,#FDE68A,#D97706,#EA580C,#D97706,#FDE68A);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;
+}
+
+/* ── HEADER ── */
+.hdr { background:linear-gradient(135deg,#7C2D12,#EA580C,#D97706);padding:20px 20px 14px;text-align:center;position:relative;overflow:hidden; }
+.hdr::after { content:'';position:absolute;bottom:-1px;left:0;right:0;height:18px;background:linear-gradient(160deg,#2d1a00,#1a0d00);clip-path:ellipse(55% 100% at 50% 100%); }
+.diya-row { font-size:26px;letter-spacing:8px;margin-bottom:8px;animation:diyaGlow 1.8s ease-in-out infinite alternate; }
+@keyframes diyaGlow { from{filter:brightness(1)} to{filter:brightness(1.35) drop-shadow(0 0 10px #FDE68A)} }
+.sc-logo { width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#FDE68A,#D97706);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:#7C2D12;margin:0 auto 10px;box-shadow:0 0 24px rgba(253,230,138,0.5); }
+.hdr h1 { font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:rgba(253,230,138,0.9);letter-spacing:3px;text-transform:uppercase; }
+
+/* ── BODY ── */
+.body { padding:24px 22px 8px;text-align:center; }
+.main-icon { font-size:40px;margin-bottom:10px;display:block;transition:all 0.3s; }
+.blessing-title { font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--gold-lt);line-height:1.2;margin-bottom:6px;transition:all 0.3s; }
+.blessing-title span { color:var(--saffron); }
+.badge { display:inline-block;padding:4px 14px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:1px;margin-bottom:18px;border:1px solid rgba(253,230,138,0.25);color:var(--gold-lt);background:rgba(217,119,6,0.12); }
+
+.divider { display:flex;align-items:center;gap:10px;margin-bottom:18px; }
+.div-line { flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(253,230,138,0.25),transparent); }
+
+.msg-box { background:rgba(253,230,138,0.05);border:1px solid rgba(253,230,138,0.1);border-radius:14px;padding:16px 14px;margin-bottom:16px;position:relative; }
+.msg-box::before { content:'"';position:absolute;top:-10px;left:14px;font-size:44px;color:rgba(217,119,6,0.25);font-family:'Playfair Display',serif;line-height:1; }
+.msg-box p { font-size:13px;color:rgba(253,230,138,0.85);line-height:1.85;font-style:italic; }
+
+/* ── LANG SPECIFIC FONT ── */
+.msg-box p.hi  { font-family:'Noto Sans Devanagari',sans-serif;font-size:13px; }
+.msg-box p.en { font-family:'Poppins',sans-serif;font-size:13px;color:rgba(253,230,138,0.88); }
+.msg-box p.ta  { font-family:'Noto Sans Tamil',sans-serif;font-size:13px; }
+.msg-box p.te  { font-family:'Noto Sans Telugu',sans-serif;font-size:13px; }
+.msg-box p.kn  { font-family:'Noto Sans Kannada',sans-serif;font-size:13px; }
+.msg-box p.ml  { font-family:'Noto Sans Malayalam',sans-serif;font-size:12px; }
+.msg-box p.mr  { font-family:'Noto Sans Devanagari',sans-serif;font-size:13px; }
+.msg-box p.bn  { font-family:'Noto Sans Bengali',sans-serif;font-size:13px; }
+.msg-box p.gu  { font-family:'Noto Sans Gujarati',sans-serif;font-size:13px; }
+.msg-box p.pa  { font-family:'Noto Sans Gurmukhi',sans-serif;font-size:13px; }
+
+/* ── IMPACT CHIPS ── */
+.impact-row { display:flex;gap:7px;margin-bottom:18px; }
+.ic-chip { flex:1;background:rgba(217,119,6,0.09);border:1px solid rgba(217,119,6,0.22);border-radius:11px;padding:9px 5px;text-align:center; }
+.ic-chip .ico { font-size:20px;margin-bottom:3px; }
+.ic-chip p { font-size:9px;color:rgba(253,230,138,0.65);font-weight:500;line-height:1.4; }
+
+/* ── BUTTONS ── */
+.wa-btn { display:flex;align-items:center;justify-content:center;gap:9px;width:100%;background:linear-gradient(135deg,#25D366,#128C7E);border:none;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;color:white;cursor:pointer;font-family:'Poppins',sans-serif;box-shadow:0 6px 22px rgba(37,211,102,0.3);transition:all 0.2s;margin-bottom:10px;text-decoration:none; }
+.wa-btn:hover { transform:scale(1.03);box-shadow:0 8px 30px rgba(37,211,102,0.45); }
+.copy-btn { display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:rgba(253,230,138,0.07);border:1px solid rgba(253,230,138,0.18);border-radius:50px;padding:11px 20px;font-size:12px;font-weight:600;color:var(--gold-lt);cursor:pointer;font-family:'Poppins',sans-serif;transition:all 0.2s;margin-bottom:18px; }
+.copy-btn:hover { background:rgba(253,230,138,0.13); }
+
+/* ── FOOTER ── */
+.footer { padding:14px 20px 20px;text-align:center;border-top:1px solid rgba(253,230,138,0.07); }
+.flowers { font-size:18px;letter-spacing:6px;margin-bottom:7px; }
+.footer p { font-size:9px;color:rgba(253,230,138,0.35);line-height:1.6; }
+.footer .url { font-size:9px;color:rgba(217,119,6,0.6);margin-top:3px; }
+
+/* ── TOAST ── */
+#toast { position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--gold);color:#1a0800;padding:9px 22px;border-radius:50px;font-size:12px;font-weight:700;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;white-space:nowrap; }
+#toast.show { opacity:1; }
+</style>
+</head>
+<body>
+
+<!-- Mandala -->
+<svg class="mandala-bg" viewBox="0 0 200 200" fill="none">
+  <circle cx="100" cy="100" r="95" stroke="#FDE68A" stroke-width="0.5"/>
+  <circle cx="100" cy="100" r="78" stroke="#FDE68A" stroke-width="0.5"/>
+  <circle cx="100" cy="100" r="60" stroke="#FDE68A" stroke-width="0.5"/>
+  <circle cx="100" cy="100" r="44" stroke="#FDE68A" stroke-width="0.5"/>
+  <circle cx="100" cy="100" r="28" stroke="#FDE68A" stroke-width="0.5"/>
+  <circle cx="100" cy="100" r="14" stroke="#FDE68A" stroke-width="0.5"/>
+  <line x1="100" y1="5" x2="100" y2="195" stroke="#FDE68A" stroke-width="0.3"/>
+  <line x1="5" y1="100" x2="195" y2="100" stroke="#FDE68A" stroke-width="0.3"/>
+  <line x1="29" y1="29" x2="171" y2="171" stroke="#FDE68A" stroke-width="0.3"/>
+  <line x1="171" y1="29" x2="29" y2="171" stroke="#FDE68A" stroke-width="0.3"/>
+  <line x1="5" y1="65" x2="195" y2="135" stroke="#FDE68A" stroke-width="0.2"/>
+  <line x1="5" y1="135" x2="195" y2="65" stroke="#FDE68A" stroke-width="0.2"/>
+  <line x1="65" y1="5" x2="135" y2="195" stroke="#FDE68A" stroke-width="0.2"/>
+  <line x1="135" y1="5" x2="65" y2="195" stroke="#FDE68A" stroke-width="0.2"/>
+</svg>
+
+<!-- Hidden selectors — set via URL params only, not shown to user -->
+<!-- CARD -->
+<div class="card" id="card">
+  <div class="hdr">
+    <div class="diya-row">🪔 🌸 🪔</div>
+    <div class="sc-logo">SC</div>
+    <h1>Sudarshan Chakra</h1>
+  </div>
+  <div class="body">
+    <span class="main-icon" id="main-icon">🙏</span>
+    <h2 class="blessing-title" id="title">धन्यवाद!<br><span id="subtitle">आपका विश्वास हमारी शक्ति है</span></h2>
+    <div class="badge" id="badge">✨ पोर्टल एक्सेस सक्रिय</div>
+    <div class="divider"><div class="div-line"></div><span style="font-size:14px">🌼</span><div class="div-line"></div></div>
+    <div class="msg-box"><p class="hi" id="msg">आपने अपने समाज के कुशल लोगों से जुड़ने का पहला कदम उठाया है। यह पोर्टल आपके लिए विश्वास, समृद्धि और सही मदद के द्वार खोलेगा। सुदर्शन चक्र परिवार आपकी सेवा में सदा तत्पर है। 🌺</p></div>
+    <div class="impact-row" id="impact-row">
+      <div class="ic-chip"><div class="ico">🤝</div><p id="ic1">समुदाय जुड़ा</p></div>
+      <div class="ic-chip"><div class="ico">⭐</div><p id="ic2">विश्वसनीय नेटवर्क</p></div>
+      <div class="ic-chip"><div class="ico">🇮🇳</div><p id="ic3">भारत के लिए</p></div>
+    </div>
+    <div id="share-actions">
+      <button class="wa-btn" id="wa-share-btn" onclick="shareWithReferral()">💬 &nbsp;<span id="wa-btn-text">WhatsApp पर शेयर करें</span></button>
+      <button class="copy-btn" onclick="copyWithReferral()">📋 &nbsp;<span id="copy-btn-text">संदेश कॉपी करें</span></button>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="flowers">🌸 🌼 🌸</div>
+    <p>सुदर्शन चक्र परिवार की ओर से</p>
+    <p><strong style="color:rgba(253,230,138,0.65)">हार्दिक शुभकामनाएं और आशीर्वाद</strong></p>
+    <p class="url">🌐 sudarshanchakraindia.github.io/zini-test</p>
+  </div>
+</div>
+
+<div id="toast">✅ संदेश कॉपी हो गया!</div>
+
+<!-- Back to Home -->
+<div style="text-align:center;padding:8px 0 28px">
+  <button onclick="window.location.replace('index.html')" style="display:inline-flex;align-items:center;gap:8px;background:rgba(253,230,138,0.08);border:1px solid rgba(253,230,138,0.2);color:rgba(253,230,138,0.7);padding:10px 24px;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;transition:all .2s" onmouseover="this.style.background='rgba(253,230,138,0.15)'" onmouseout="this.style.background='rgba(253,230,138,0.08)'">
+    🏠 &nbsp;Back to Home
+  </button>
+</div>
+
+<script>
+/* ══════════════════════════════════
+   LANGUAGE × PAYMENT TYPE DATA
+══════════════════════════════════ */
+const DATA = {
+
+  hi: { // HINDI
+    portal: {
+      icon:'🙏', title:'धन्यवाद!', sub:'आपका विश्वास हमारी शक्ति है',
+      badge:'✨ पोर्टल एक्सेस सक्रिय', fontClass:'hi',
+      msg:'आपने अपने समाज के कुशल लोगों से जुड़ने का पहला कदम उठाया है। यह पोर्टल आपके लिए विश्वास, समृद्धि और सही मदद के द्वार खोलेगा। सुदर्शन चक्र परिवार आपकी सेवा में सदा तत्पर है। 🌺',
+      chips:['समुदाय जुड़ा','विश्वसनीय नेटवर्क','भारत के लिए'],
+      footer:'सुदर्शन चक्र परिवार की ओर से हार्दिक शुभकामनाएं',
+      waBtn:'WhatsApp पर शेयर करें', copyBtn:'संदेश कॉपी करें',
+      wa:`🪔 *सुदर्शन चक्र — धन्यवाद!* 🪔\n\n🙏 नमस्ते!\n\nआपका पोर्टल एक्सेस *सक्रिय* हो गया है। अब आप भारत के सबसे विश्वसनीय स्थानीय सेवा समुदाय का हिस्सा हैं।\n\n✨ *अब आगे क्या करें?*\n🔍 अपने आस-पास सेवाएं खोजें\n⭐ समीक्षा लिखें और इनाम पाएं\n🤝 दोस्तों को रेफर करें\n\n🌸 आपका विश्वास हमारी सबसे बड़ी पूंजी है। भगवान करे यह पोर्टल आपके जीवन में खुशियां और सही मदद लाए।\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_आपका अपना,_\n*सुदर्शन चक्र परिवार* 🌼`
+    },
+    tip: {
+      icon:'💛', title:'आपका दिल सोना है!', sub:'आपकी उदारता एक जीवन रोशन करती है',
+      badge:'🙏 सेवा प्रदाता को टिप भेजी गई', fontClass:'hi',
+      msg:'आपने आज एक मेहनती सेवा प्रदाता को टिप दी — जो अपने हाथों और दिल से दूसरों की सेवा करता है। आपकी उदारता ने उनके चेहरे पर मुस्कान और घर में खुशी लाई है। यही है सुदर्शन चक्र की भावना। 🌻',
+      chips:['सेवक मुस्कुराया','उदारता जीती','समाज मजबूत'],
+      footer:'आपकी उदारता अमर रहे',
+      waBtn:'WhatsApp पर शेयर करें', copyBtn:'संदेश कॉपी करें',
+      wa:`🪔 *सुदर्शन चक्र — आपका दिल सोना है!* 🪔\n\n💛 आपकी टिप एक मेहनती सेवा प्रदाता तक पहुंच गई!\n\nआपने लेन-देन से आगे बढ़कर एक इंसान की *मेहनत को सम्मान* दिया। यह सच में सुनहरा दिल है।\n\n🌻 *आपकी टिप से:*\n✅ एक सेवक के चेहरे पर मुस्कान आई\n✅ गुणवत्ता सेवा को प्रोत्साहन मिला\n✅ हमारा समाज और मजबूत हुआ\n\n🙏 यही है सुदर्शन चक्र — असली रिश्ते, असली कृतज्ञता, असली भारत।\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_हृदय की गहराइयों से धन्यवाद,_\n*सुदर्शन चक्र परिवार* 🌸`
+    },
+    charity: {
+      icon:'🌱', title:'पुण्य का काम!', sub:'आपने आज एक जीवन बदला',
+      badge:'💚 दान — 100% कल्याण में', fontClass:'hi',
+      msg:'आपका दान पूरी तरह समाज कल्याण में जाएगा — वंचित युवाओं के कौशल प्रशिक्षण, महिला उद्यमियों के समर्थन और सामुदायिक स्वास्थ्य शिविरों में। आपने आज एक पवित्र कार्य किया है। ईश्वर आपकी उदारता पर मुस्कुराता है। 🙏🌸',
+      chips:['युवा सशक्त','महिलाएं आगे','स्वास्थ्य शिविर'],
+      footer:'आपका पुण्य अमर रहे',
+      waBtn:'WhatsApp पर शेयर करें', copyBtn:'संदेश कॉपी करें',
+      wa:`🪔 *सुदर्शन चक्र — पुण्य का काम!* 🪔\n\n🌱 *आपका दान प्राप्त हो गया है!*\n\nआपके दान का 100% इनके लिए जाएगा:\n🎓 वंचित युवाओं को कौशल प्रशिक्षण\n👩‍💼 महिला उद्यमियों का समर्थन\n🏥 सामुदायिक स्वास्थ्य शिविर\n\n🙏 यह एक *पुण्य* है — एक पवित्र कार्य। आपने सिर्फ पैसे नहीं दिए, आपने किसी जरूरतमंद को *उम्मीद* दी।\n\n_"एक दीया जलाओ — अंधेरा दूर हो जाएगा"_ 🪔\n\nसुदर्शन चक्र परिवार आपकी उदारता के सामने नतमस्तक है।\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_प्रेम और आशीर्वाद सहित,_\n*सुदर्शन चक्र परिवार* 🌼`
+    }
+  },
+
+  en: { // ENGLISH
+    portal: {
+      icon:'🙏', title:'Thank You!', sub:'Your Trust Is Our Greatest Strength',
+      badge:'✨ Portal Access Activated', fontClass:'en',
+      msg:'You have taken your first step towards connecting with skilled people in your community. May this portal open doors of trust, growth and prosperity for you. Sudarshan Chakra is honoured to serve you. 🌺',
+      chips:['Community Connected','Trusted Network','Made for India'],
+      footer:'With gratitude from the Sudarshan Chakra Family',
+      waBtn:'Share on WhatsApp', copyBtn:'Copy Message',
+      wa:`🪔 *Sudarshan Chakra — Thank You!* 🪔\n\n🙏 Namaste!\n\nYour portal access is now *activated*. You are part of India's most trusted local service community.\n\n✨ *What's next?*\n🔍 Search for services near you\n⭐ Leave reviews & earn reward points\n🤝 Refer friends and family\n\n🌸 Your trust means everything to us. May this portal bring you the right help at the right time.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_With gratitude,_\n*The Sudarshan Chakra Family* 🌼`
+    },
+    tip: {
+      icon:'💛', title:'Your Heart is Gold!', sub:'Your Generosity Lights a Life',
+      badge:'🙏 Tip Sent to Provider with Love', fontClass:'en',
+      msg:'You tipped a hardworking provider today — a person who uses their hands and heart to serve others. Your generosity put a smile on their face and warmth in their home. This is the spirit of Sudarshan Chakra. 🌻',
+      chips:['Provider Smiling','Generosity Lives','Community Stronger'],
+      footer:'Your kindness is eternal',
+      waBtn:'Share on WhatsApp', copyBtn:'Copy Message',
+      wa:`🪔 *Sudarshan Chakra — Your Heart is Gold!* 🪔\n\n💛 Your tip has reached a hardworking provider!\n\nYou chose to go beyond the transaction — to *acknowledge the effort* of a real person. That is truly golden.\n\n🌻 *Your tip has:*\n✅ Put a smile on a provider's face\n✅ Encouraged quality service\n✅ Strengthened our community\n\n🙏 This is what Sudarshan Chakra is about — real connections, real gratitude, real India.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_With deep gratitude,_\n*The Sudarshan Chakra Family* 🌸`
+    },
+    charity: {
+      icon:'🌱', title:'A Blessed Deed!', sub:'You Have Changed a Life Today',
+      badge:'💚 Charity — 100% to Welfare', fontClass:'en',
+      msg:'Your donation flows entirely to social welfare — skill training for underprivileged youth, support for women entrepreneurs, and community health camps. You have done a divine deed today. The universe smiles upon your generosity. 🙏🌸',
+      chips:['Youth Empowered','Women Supported','Health Camps'],
+      footer:'Your generosity is eternal',
+      waBtn:'Share on WhatsApp', copyBtn:'Copy Message',
+      wa:`🪔 *Sudarshan Chakra — A Blessed Deed!* 🪔\n\n🌱 *Your charity donation has been received!*\n\n100% of your donation goes to:\n🎓 Skill training for underprivileged youth\n👩‍💼 Supporting women entrepreneurs\n🏥 Community health camps\n\n🙏 You have not just donated money — you have donated *hope* to someone who needed it most.\n\n_"Light one lamp — and darkness fades away."_ 🪔\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_With love & blessings,_\n*The Sudarshan Chakra Family* 🌼`
+    }
+  },
+
+  ta: { // TAMIL
+    portal: {
+      icon:'🙏', title:'நன்றி!', sub:'உங்கள் நம்பிக்கை எங்கள் வலிமை',
+      badge:'✨ போர்டல் அணுகல் செயல்படுத்தப்பட்டது', fontClass:'ta',
+      msg:'உங்கள் சமுதாயத்தில் திறமையான நபர்களுடன் இணைய நீங்கள் முதல் அடி எடுத்து வைத்துள்ளீர்கள். இந்த போர்டல் உங்களுக்கு நம்பகமான உதவியின் கதவுகளைத் திறக்கும். சுதர்சன் சக்ர குடும்பம் உங்களுக்கு சேவை செய்ய மகிழ்ச்சியடைகிறது. 🌺',
+      chips:['சமுதாயம் இணைந்தது','நம்பகமான நெட்வொர்க்','இந்தியாவுக்காக'],
+      footer:'சுதர்சன் சக்ர குடும்பத்திடமிருந்து நன்றி',
+      waBtn:'WhatsApp-ல் பகிரவும்', copyBtn:'செய்தியை நகலெடுக்கவும்',
+      wa:`🪔 *சுதர்சன் சக்ர — நன்றி!* 🪔\n\n🙏 வணக்கம்!\n\nஉங்கள் போர்டல் அணுகல் *செயல்படுத்தப்பட்டது*. இந்தியாவின் மிகவும் நம்பகமான உள்ளூர் சேவை சமுதாயத்தின் ஒரு பகுதியாக நீங்கள் உள்ளீர்கள்.\n\n✨ *அடுத்து என்ன?*\n🔍 அருகிலுள்ள சேவைகளை தேடுங்கள்\n⭐ மதிப்புரை எழுதி பரிசு பெறுங்கள்\n🤝 நண்பர்களை பரிந்துரையுங்கள்\n\n🌸 உங்கள் நம்பிக்கை எங்களுக்கு மிக முக்கியம்.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_நன்றியுடன்,_\n*சுதர்சன் சக்ர குடும்பம்* 🌼`
+    },
+    tip: {
+      icon:'💛', title:'உங்கள் இதயம் தங்கம்!', sub:'உங்கள் தாராள மனம் ஒரு வாழ்க்கையை ஒளிரச் செய்கிறது',
+      badge:'🙏 சேவையாளருக்கு டிப் அனுப்பப்பட்டது', fontClass:'ta',
+      msg:'இன்று ஒரு கடின உழைப்பாளி சேவையாளருக்கு டிப் கொடுத்தீர்கள். உங்கள் தாராள மனம் அவர்கள் முகத்தில் புன்னகையையும் வீட்டில் மகிழ்ச்சியையும் கொண்டு வந்தது. இதுவே சுதர்சன் சக்ரின் உணர்வு. 🌻',
+      chips:['சேவையாளர் மகிழ்ச்சி','தாராள மனம்','சமுதாயம் வலிமை'],
+      footer:'உங்கள் கருணை நிரந்தரமானது',
+      waBtn:'WhatsApp-ல் பகிரவும்', copyBtn:'செய்தியை நகலெடுக்கவும்',
+      wa:`🪔 *சுதர்சன் சக்ர — உங்கள் இதயம் தங்கம்!* 🪔\n\n💛 உங்கள் டிப் ஒரு கடின உழைப்பாளியை சென்றடைந்தது!\n\n🌻 *உங்கள் டிப்:*\n✅ சேவையாளரின் முகத்தில் புன்னகை கொண்டு வந்தது\n✅ தரமான சேவையை ஊக்குவித்தது\n✅ நம் சமுதாயத்தை வலுப்படுத்தியது\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ஆழமான நன்றியுடன்,_\n*சுதர்சன் சக்ர குடும்பம்* 🌸`
+    },
+    charity: {
+      icon:'🌱', title:'புண்ணியமான செயல்!', sub:'இன்று நீங்கள் ஒரு வாழ்க்கையை மாற்றினீர்கள்',
+      badge:'💚 தான் — 100% நலனுக்காக', fontClass:'ta',
+      msg:'உங்கள் நன்கொடை முழுவதும் சமூக நலனுக்காக செல்லும் — திறன் பயிற்சி, பெண் தொழில்முனைவோர் ஆதரவு மற்றும் சமுதாய சுகாதார முகாம்களுக்காக. இன்று நீங்கள் ஒரு தெய்வீக செயல் செய்தீர்கள். 🙏🌸',
+      chips:['இளைஞர் சக்தி','பெண்கள் முன்னேற்றம்','சுகாதார முகாம்'],
+      footer:'உங்கள் தான குணம் அழியாதது',
+      waBtn:'WhatsApp-ல் பகிரவும்', copyBtn:'செய்தியை நகலெடுக்கவும்',
+      wa:`🪔 *சுதர்சன் சக்ர — புண்ணியமான செயல்!* 🪔\n\n🌱 *உங்கள் நன்கொடை பெறப்பட்டது!*\n\nநூறு சதவீதம் செல்கிறது:\n🎓 திறன் பயிற்சி\n👩‍💼 பெண் தொழில்முனைவோர்\n🏥 சுகாதார முகாம்கள்\n\n🙏 நீங்கள் பணம் மட்டுமல்ல — *நம்பிக்கையை* கொடுத்தீர்கள்.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_அன்புடன்,_\n*சுதர்சன் சக்ர குடும்பம்* 🌼`
+    }
+  },
+
+  te: { // TELUGU
+    portal: {
+      icon:'🙏', title:'ధన్యవాదాలు!', sub:'మీ నమ్మకం మాకు శక్తి',
+      badge:'✨ పోర్టల్ యాక్సెస్ యాక్టివేట్ అయింది', fontClass:'te',
+      msg:'మీ సమాజంలోని నిపుణులతో అనుసంధానం కావడానికి మీరు మొదటి అడుగు వేశారు. ఈ పోర్టల్ మీకు విశ్వాసం, అభివృద్ధి మరియు సరైన సహాయం యొక్క తలుపులు తెరుస్తుంది. సుదర్శన చక్ర కుటుంబం మీకు సేవ చేయడానికి సంతోషంగా ఉంది. 🌺',
+      chips:['సమాజం కలిసింది','విశ్వసనీయ నెట్‌వర్క్','భారతదేశం కోసం'],
+      footer:'సుదర్శన చక్ర కుటుంబం నుండి కృతజ్ఞతలు',
+      waBtn:'WhatsApp లో షేర్ చేయండి', copyBtn:'మెసేజ్ కాపీ చేయండి',
+      wa:`🪔 *సుదర్శన చక్ర — ధన్యవాదాలు!* 🪔\n\n🙏 నమస్కారం!\n\nమీ పోర్టల్ యాక్సెస్ *యాక్టివేట్* అయింది. భారతదేశంలో అత్యంత విశ్వసనీయమైన స్థానిక సేవా సమాజంలో మీరు భాగమయ్యారు.\n\n✨ *తదుపరి ఏమి చేయాలి?*\n🔍 మీ దగ్గర సేవలను వెతకండి\n⭐ సమీక్షలు రాసి బహుమతులు పొందండి\n🤝 స్నేహితులను రెఫర్ చేయండి\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_కృతజ్ఞతలతో,_\n*సుదర్శన చక్ర కుటుంబం* 🌼`
+    },
+    tip: {
+      icon:'💛', title:'మీ హృదయం బంగారం!', sub:'మీ దానగుణం ఒక జీవితాన్ని వెలిగిస్తుంది',
+      badge:'🙏 సేవా ప్రదాతకు టిప్ పంపబడింది', fontClass:'te',
+      msg:'ఈ రోజు మీరు కష్టపడి పనిచేసే సేవా ప్రదాతకు టిప్ ఇచ్చారు. మీ దానగుణం వారి ముఖంపై చిరునవ్వు మరియు ఇంటిలో వెచ్చదనం తెచ్చింది. ఇదే సుదర్శన చక్ర స్ఫూర్తి. 🌻',
+      chips:['సేవకుడు సంతోషం','దానగుణం జీవించింది','సమాజం బలంగా'],
+      footer:'మీ దయ నిత్యం నిలిచి ఉంటుంది',
+      waBtn:'WhatsApp లో షేర్ చేయండి', copyBtn:'మెసేజ్ కాపీ చేయండి',
+      wa:`🪔 *సుదర్శన చక్ర — మీ హృదయం బంగారం!* 🪔\n\n💛 మీ టిప్ సేవా ప్రదాతకు చేరింది!\n\n🌻 *మీ టిప్ వల్ల:*\n✅ సేవకుడి ముఖంపై చిరునవ్వు వచ్చింది\n✅ నాణ్యమైన సేవకు ప్రోత్సాహం దొరికింది\n✅ మన సమాజం మరింత బలంగా అయింది\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_లోతైన కృతజ్ఞతలతో,_\n*సుదర్శన చక్ర కుటుంబం* 🌸`
+    },
+    charity: {
+      icon:'🌱', title:'పుణ్యకార్యం!', sub:'మీరు ఈ రోజు ఒక జీవితాన్ని మార్చారు',
+      badge:'💚 దానం — 100% సంక్షేమానికి', fontClass:'te',
+      msg:'మీ దానం పూర్తిగా సామాజిక సంక్షేమానికి వెళ్తుంది — నిరుపేద యువత నైపుణ్య శిక్షణ, మహిళా వ్యవస్థాపకుల మద్దతు మరియు సామాజిక ఆరోగ్య శిబిరాల కోసం. మీరు ఈ రోజు ఒక దివ్యమైన పని చేశారు. 🙏🌸',
+      chips:['యువత సాధికారత','మహిళల అభివృద్ధి','ఆరోగ్య శిబిరాలు'],
+      footer:'మీ దానగుణం అమరంగా నిలిచి ఉంటుంది',
+      waBtn:'WhatsApp లో షేర్ చేయండి', copyBtn:'మెసేజ్ కాపీ చేయండి',
+      wa:`🪔 *సుదర్శన చక్ర — పుణ్యకార్యం!* 🪔\n\n🌱 *మీ దానం అందుకున్నాం!*\n\nమీ దానం 100% వెళ్తుంది:\n🎓 నిరుపేద యువత నైపుణ్య శిక్షణకు\n👩‍💼 మహిళా వ్యవస్థాపకుల మద్దతుకు\n🏥 సామాజిక ఆరోగ్య శిబిరాలకు\n\n🙏 మీరు డబ్బు మాత్రమే ఇవ్వలేదు — *ఆశను* ఇచ్చారు.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ప్రేమతో,_\n*సుదర్శన చక్ర కుటుంబం* 🌼`
+    }
+  },
+
+  kn: { // KANNADA
+    portal:{icon:'🙏',title:'ಧನ್ಯವಾದಗಳು!',sub:'ನಿಮ್ಮ ನಂಬಿಕೆ ನಮ್ಮ ಶಕ್ತಿ',badge:'✨ ಪೋರ್ಟಲ್ ಆಕ್ಸೆಸ್ ಸಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ',fontClass:'kn',msg:'ನಿಮ್ಮ ಸಮುದಾಯದ ಕುಶಲ ಜನರೊಂದಿಗೆ ಸಂಪರ್ಕ ಕಲ್ಪಿಸಲು ನೀವು ಮೊದಲ ಹೆಜ್ಜೆ ಇಟ್ಟಿದ್ದೀರಿ. ಈ ಪೋರ್ಟಲ್ ನಿಮಗೆ ವಿಶ್ವಾಸ, ಸಮೃದ್ಧಿ ಮತ್ತು ಸರಿಯಾದ ಸಹಾಯದ ಬಾಗಿಲುಗಳನ್ನು ತೆರೆಯಲಿ. ಸುದರ್ಶನ ಚಕ್ರ ಕುಟುಂಬ ನಿಮ್ಮ ಸೇವೆಯಲ್ಲಿ ಸದಾ ಸಿದ್ಧ. 🌺',chips:['ಸಮುದಾಯ ಒಂದಾಯಿತು','ವಿಶ್ವಾಸಾರ್ಹ ನೆಟ್‌ವರ್ಕ್','ಭಾರತಕ್ಕಾಗಿ'],footer:'ಸುದರ್ಶನ ಚಕ್ರ ಕುಟುಂಬದಿಂದ ಕೃತಜ್ಞತೆ',waBtn:'WhatsApp ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ',copyBtn:'ಸಂದೇಶ ನಕಲಿಸಿ',wa:`🪔 *ಸುದರ್ಶನ ಚಕ್ರ — ಧನ್ಯವಾದಗಳು!* 🪔\n\n🙏 ನಮಸ್ಕಾರ!\n\nನಿಮ್ಮ ಪೋರ್ಟಲ್ ಆಕ್ಸೆಸ್ *ಸಕ್ರಿಯಗೊಂಡಿದೆ*. ಭಾರತದ ಅತ್ಯಂತ ವಿಶ್ವಾಸಾರ್ಹ ಸ್ಥಳೀಯ ಸೇವಾ ಸಮುದಾಯದ ಭಾಗವಾಗಿ ನೀವಿದ್ದೀರಿ.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ಕೃತಜ್ಞತೆಯೊಂದಿಗೆ,_\n*ಸುದರ್ಶನ ಚಕ್ರ ಕುಟುಂಬ* 🌼`},
+    tip:{icon:'💛',title:'ನಿಮ್ಮ ಹೃದಯ ಚಿನ್ನ!',sub:'ನಿಮ್ಮ ಉದಾರತೆ ಒಂದು ಜೀವನ ಬೆಳಗಿಸುತ್ತದೆ',badge:'🙏 ಸೇವೆ ಒದಗಿಸುವವರಿಗೆ ಟಿಪ್ ಕಳುಹಿಸಲಾಗಿದೆ',fontClass:'kn',msg:'ಇಂದು ನೀವು ಶ್ರಮಿಕ ಸೇವೆ ಒದಗಿಸುವವರಿಗೆ ಟಿಪ್ ನೀಡಿದ್ದೀರಿ. ನಿಮ್ಮ ಉದಾರತೆ ಅವರ ಮುಖದಲ್ಲಿ ನಗು ತಂದಿದೆ. ಇದೇ ಸುದರ್ಶನ ಚಕ್ರದ ಭಾವನೆ. 🌻',chips:['ಸೇವಕ ಖುಷಿ','ಉದಾರತೆ ಜಯಿಸಿತು','ಸಮಾಜ ಗಟ್ಟಿ'],footer:'ನಿಮ್ಮ ದಯೆ ಶಾಶ್ವತ',waBtn:'WhatsApp ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ',copyBtn:'ಸಂದೇಶ ನಕಲಿಸಿ',wa:`🪔 *ಸುದರ್ಶನ ಚಕ್ರ — ನಿಮ್ಮ ಹೃದಯ ಚಿನ್ನ!* 🪔\n\n💛 ನಿಮ್ಮ ಟಿಪ್ ಸೇವೆ ಒದಗಿಸುವವರನ್ನು ತಲುಪಿದೆ!\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ಆಳವಾದ ಕೃತಜ್ಞತೆಯೊಂದಿಗೆ,_\n*ಸುದರ್ಶನ ಚಕ್ರ ಕುಟುಂಬ* 🌸`},
+    charity:{icon:'🌱',title:'ಪುಣ್ಯದ ಕೆಲಸ!',sub:'ನೀವು ಇಂದು ಒಂದು ಜೀವನ ಬದಲಿಸಿದ್ದೀರಿ',badge:'💚 ದಾನ — 100% ಕಲ್ಯಾಣಕ್ಕೆ',fontClass:'kn',msg:'ನಿಮ್ಮ ದಾನ ಸಂಪೂರ್ಣವಾಗಿ ಸಮಾಜ ಕಲ್ಯಾಣಕ್ಕೆ ಹೋಗುತ್ತದೆ. ನೀವು ಇಂದು ಪವಿತ್ರ ಕಾರ್ಯ ಮಾಡಿದ್ದೀರಿ. ದೇವರು ನಿಮ್ಮ ಉದಾರತೆಯ ಮೇಲೆ ನಗುತ್ತಾನೆ. 🙏🌸',chips:['ಯುವಕರ ಸಬಲೀಕರಣ','ಮಹಿಳಾ ಬೆಂಬಲ','ಆರೋಗ್ಯ ಶಿಬಿರ'],footer:'ನಿಮ್ಮ ದಾನ ಅಮರ',waBtn:'WhatsApp ನಲ್ಲಿ ಹಂಚಿಕೊಳ್ಳಿ',copyBtn:'ಸಂದೇಶ ನಕಲಿಸಿ',wa:`🪔 *ಸುದರ್ಶನ ಚಕ್ರ — ಪುಣ್ಯದ ಕೆಲಸ!* 🪔\n\n🌱 *ನಿಮ್ಮ ದಾನ ಸ್ವೀಕರಿಸಲಾಗಿದೆ!*\n\nನೀವು ಹಣ ಮಾತ್ರ ಕೊಡಲಿಲ್ಲ — *ಭರವಸೆ* ಕೊಟ್ಟಿದ್ದೀರಿ.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ಪ್ರೀತಿಯೊಂದಿಗೆ,_\n*ಸುದರ್ಶನ ಚಕ್ರ ಕುಟುಂಬ* 🌼`}
+  },
+
+  ml: {
+    portal:{icon:'🙏',title:'നന്ദി!',sub:'നിങ്ങളുടെ വിശ്വാസം ഞങ്ങളുടെ ശക്തി',badge:'✨ പോർടൽ ആക്സസ് സക്രിയമാക്കി',fontClass:'ml',msg:'നിങ്ങളുടെ സമൂഹത്തിലെ വൈദഗ്ധ്യമുള്ള ആളുകളുമായി ബന്ധപ്പെടാൻ നിങ്ങൾ ആദ്യ ചുവടുവെച്ചു. ഈ പോർടൽ നിങ്ങൾക്ക് വിശ്വാസം, അഭിവൃദ്ധി, ശരിയായ സഹായം എന്നിവയുടെ വാതിലുകൾ തുറക്കും. 🌺',chips:['സമൂഹം ഒന്നിച്ചു','വിശ്വസനീയ ശൃംഖല','ഭാരതത്തിനായി'],footer:'സുദർശന ചക്ര കുടുംബത്തിൽ നിന്ന് നന്ദി',waBtn:'WhatsApp-ൽ പങ്കിടുക',copyBtn:'സന്ദേശം പകർത്തുക',wa:`🪔 *സുദർശന ചക്ര — നന്ദി!* 🪔\n\n🙏 നമസ്കാരം!\n\nനിങ്ങളുടെ പോർടൽ ആക്സസ് *സക്രിയമായി*. ഇന്ത്യയിലെ ഏറ്റവും വിശ്വസനീയമായ ലോക്കൽ സർവ്വീസ് കമ്മ്യൂണിറ്റിയുടെ ഭാഗമായി.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_നന്ദിയോടെ,_\n*സുദർശന ചക്ര കുടുംബം* 🌼`},
+    tip:{icon:'💛',title:'നിങ്ങളുടെ ഹൃദയം സ്വർണ്ണം!',sub:'നിങ്ങളുടെ ഔദാര്യം ഒരു ജീവിതം തെളിക്കുന്നു',badge:'🙏 സേവകന് ടിപ്പ് അയച്ചു',fontClass:'ml',msg:'ഇന്ന് നിങ്ങൾ ഒരു കഠിനാധ്വാനിക്ക് ടിപ്പ് നൽകി. നിങ്ങളുടെ ഔദാര്യം അവരുടെ മുഖത്ത് പുഞ്ചിരി കൊണ്ടുവന്നു. ഇതാണ് സുദർശന ചക്രയുടെ ആത്മാവ്. 🌻',chips:['സേവകൻ സന്തോഷം','ഔദാര്യം ജയിച്ചു','സമൂഹം ശക്തം'],footer:'നിങ്ങളുടെ ദയ നിത്യം',waBtn:'WhatsApp-ൽ പങ്കിടുക',copyBtn:'സന്ദേശം പകർത്തുക',wa:`🪔 *സുദർശന ചക്ര — നിങ്ങളുടെ ഹൃദയം സ്വർണ്ണം!* 🪔\n\n💛 ടിപ്പ് സേവകനിൽ എത്തി!\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ആഴമായ നന്ദിയോടെ,_\n*സുദർശന ചക്ര കുടുംബം* 🌸`},
+    charity:{icon:'🌱',title:'പുണ്യ കർമ്മം!',sub:'ഇന്ന് നിങ്ങൾ ഒരു ജീവിതം മാറ്റി',badge:'💚 ദാനം — 100% ക്ഷേമത്തിന്',fontClass:'ml',msg:'നിങ്ങളുടെ സംഭാവന മുഴുവൻ സാമൂഹ്യ ക്ഷേമത്തിന് പോകുന്നു. നിങ്ങൾ ഇന്ന് ഒരു ദൈവിക കർമ്മം ചെയ്തു. 🙏🌸',chips:['യുവ ശക്തി','വനിതാ പ്രോത്സാഹനം','ആരോഗ്യ ക്യാമ്പ്'],footer:'നിങ്ങളുടെ ദാനം അമർ',waBtn:'WhatsApp-ൽ പങ്കിടുക',copyBtn:'സന്ദേശം പകർത്തുക',wa:`🪔 *സുദർശന ചക്ര — പുണ്യ കർമ്മം!* 🪔\n\n🌱 *ദാനം ലഭിച്ചു!*\n\nനിങ്ങൾ പണം മാത്രം നൽകിയില്ല — *പ്രതീക്ഷ* നൽകി.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_സ്നേഹത്തോടെ,_\n*സുദർശന ചക്ര കുടുംബം* 🌼`}
+  },
+
+  mr: {
+    portal:{icon:'🙏',title:'धन्यवाद!',sub:'तुमचा विश्वास आमची ताकद',badge:'✨ पोर्टल ऍक्सेस सक्रिय',fontClass:'mr',msg:'तुम्ही तुमच्या समाजातील कुशल लोकांशी जोडण्याचे पहिले पाऊल उचलले आहे. हे पोर्टल तुमच्यासाठी विश्वास, समृद्धी आणि योग्य मदतीचे दरवाजे उघडेल. सुदर्शन चक्र परिवार तुमच्या सेवेत सदा तत्पर आहे. 🌺',chips:['समाज जोडला','विश्वासार्ह नेटवर्क','भारतासाठी'],footer:'सुदर्शन चक्र परिवाराकडून आभार',waBtn:'WhatsApp वर शेअर करा',copyBtn:'संदेश कॉपी करा',wa:`🪔 *सुदर्शन चक्र — धन्यवाद!* 🪔\n\n🙏 नमस्कार!\n\nतुमचा पोर्टल ऍक्सेस *सक्रिय* झाला आहे. भारतातील सर्वात विश्वासार्ह स्थानिक सेवा समुदायाचा भाग तुम्ही आहात.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_कृतज्ञतेसह,_\n*सुदर्शन चक्र परिवार* 🌼`},
+    tip:{icon:'💛',title:'तुमचे मन सोन्याचे!',sub:'तुमची उदारता एक आयुष्य उजळवते',badge:'🙏 सेवा पुरवठादाराला टिप पाठवली',fontClass:'mr',msg:'आज तुम्ही एका मेहनती सेवा पुरवठादाराला टिप दिली. तुमच्या उदारतेने त्यांच्या चेहऱ्यावर हास्य आणले. हीच सुदर्शन चक्राची भावना. 🌻',chips:['सेवक आनंदित','उदारता जिंकली','समाज मजबूत'],footer:'तुमची दयाळूता अमर',waBtn:'WhatsApp वर शेअर करा',copyBtn:'संदेश कॉपी करा',wa:`🪔 *सुदर्शन चक्र — तुमचे मन सोन्याचे!* 🪔\n\n💛 तुमची टिप सेवा पुरवठादाराला मिळाली!\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_मनःपूर्वक आभार,_\n*सुदर्शन चक्र परिवार* 🌸`},
+    charity:{icon:'🌱',title:'पुण्याचे काम!',sub:'तुम्ही आज एक आयुष्य बदलले',badge:'💚 दान — 100% कल्याणासाठी',fontClass:'mr',msg:'तुमचे दान पूर्णपणे समाज कल्याणासाठी जाईल. तुम्ही आज एक पवित्र कार्य केले आहे. देव तुमच्या उदारतेवर मुस्कान ठेवतो. 🙏🌸',chips:['युवा सक्षम','महिला पुढे','आरोग्य शिबिर'],footer:'तुमचे दान अमर राहो',waBtn:'WhatsApp वर शेअर करा',copyBtn:'संदेश कॉपी करा',wa:`🪔 *सुदर्शन चक्र — पुण्याचे काम!* 🪔\n\n🌱 *तुमचे दान मिळाले!*\n\nतुम्ही फक्त पैसे दिले नाहीत — *आशा* दिली.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_प्रेम आणि आशीर्वादासह,_\n*सुदर्शन चक्र परिवार* 🌼`}
+  },
+
+  bn: {
+    portal:{icon:'🙏',title:'ধন্যবাদ!',sub:'আপনার বিশ্বাস আমাদের শক্তি',badge:'✨ পোর্টাল অ্যাক্সেস সক্রিয়',fontClass:'bn',msg:'আপনি আপনার সমাজের দক্ষ মানুষদের সাথে সংযুক্ত হওয়ার প্রথম পদক্ষেপ নিয়েছেন। এই পোর্টাল আপনার জন্য বিশ্বাস, সমৃদ্ধি এবং সঠিক সাহায্যের দরজা খুলে দেবে। 🌺',chips:['সম্প্রদায় যুক্ত','বিশ্বস্ত নেটওয়ার্ক','ভারতের জন্য'],footer:'সুদর্শন চক্র পরিবারের পক্ষ থেকে কৃতজ্ঞতা',waBtn:'WhatsApp-এ শেয়ার করুন',copyBtn:'বার্তা কপি করুন',wa:`🪔 *সুদর্শন চক্র — ধন্যবাদ!* 🪔\n\n🙏 নমস্কার!\n\nআপনার পোর্টাল অ্যাক্সেস *সক্রিয়* হয়েছে। ভারতের সবচেয়ে বিশ্বস্ত স্থানীয় সেবা সম্প্রদায়ের অংশ হয়েছেন।\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_কৃতজ্ঞতার সাথে,_\n*সুদর্শন চক্র পরিবার* 🌼`},
+    tip:{icon:'💛',title:'আপনার হৃদয় সোনার!',sub:'আপনার উদারতা একটি জীবন আলোকিত করে',badge:'🙏 সেবা প্রদানকারীকে টিপ পাঠানো হয়েছে',fontClass:'bn',msg:'আজ আপনি একজন পরিশ্রমী সেবা প্রদানকারীকে টিপ দিয়েছেন। আপনার উদারতা তার মুখে হাসি এনেছে। এটাই সুদর্শন চক্রের ভাবনা। 🌻',chips:['সেবক খুশি','উদারতা জিতল','সমাজ শক্তিশালী'],footer:'আপনার দয়া চিরন্তন',waBtn:'WhatsApp-এ শেয়ার করুন',copyBtn:'বার্তা কপি করুন',wa:`🪔 *সুদর্শন চক্র — আপনার হৃদয় সোনার!* 🪔\n\n💛 আপনার টিপ পৌঁছে গেছে!\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_গভীর কৃতজ্ঞতায়,_\n*সুদর্শন চক্র পরিবার* 🌸`},
+    charity:{icon:'🌱',title:'পুণ্যের কাজ!',sub:'আজ আপনি একটি জীবন বদলেছেন',badge:'💚 দান — ১০০% কল্যাণে',fontClass:'bn',msg:'আপনার দান সম্পূর্ণরূপে সামাজিক কল্যাণে যাবে। আজ আপনি একটি পবিত্র কাজ করেছেন। ঈশ্বর আপনার উদারতায় মুগ্ধ। 🙏🌸',chips:['যুব শক্তি','নারী সহায়তা','স্বাস্থ্য শিবির'],footer:'আপনার দান অমর',waBtn:'WhatsApp-এ শেয়ার করুন',copyBtn:'বার্তা কপি করুন',wa:`🪔 *সুদর্শন চক্র — পুণ্যের কাজ!* 🪔\n\n🌱 *আপনার দান পেয়েছি!*\n\nআপনি শুধু টাকা দেননি — *আশা* দিয়েছেন।\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ভালোবাসায়,_\n*সুদর্শন চক্র পরিবার* 🌼`}
+  },
+
+  gu: {
+    portal:{icon:'🙏',title:'ધન્યવાદ!',sub:'તમારો વિશ્વાસ અમારી તાકાત',badge:'✨ પોર્ટલ એક્સેસ સક્રિય',fontClass:'gu',msg:'તમે તમારા સમાજના કુશળ લોકો સાથે જોડાવા માટે પ્રથમ પગલું ભર્યું છે. આ પોર્ટલ તમારા માટે વિશ્વાસ, સમૃદ્ધિ અને સાચી મદદના દ્વારો ખોલશે. 🌺',chips:['સમુદાય જોડાયો','વિશ્વસનીય નેટવર્ક','ભારત માટે'],footer:'સુદર્શન ચક્ર પરિવાર તરફથી આભાર',waBtn:'WhatsApp પર શેર કરો',copyBtn:'સંદેશ કૉપિ કરો',wa:`🪔 *સુદર્શન ચક્ર — ધન્યવાદ!* 🪔\n\n🙏 નમસ્કાર!\n\nતમારો પોર્ટલ એક્સેસ *સક્રિય* થઈ ગયો. ભારતના સૌથી વિશ્વસનીય સ્થાનિક સેવા સમૂહનો ભાગ બન્યા.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_કૃતજ્ઞતા સહ,_\n*સુદર્શન ચક્ર પરિવાર* 🌼`},
+    tip:{icon:'💛',title:'તમારું દિલ સોનાનું!',sub:'તમારી ઉદારતા એક જીવ ઉજ્જ્વળ કરે',badge:'🙏 સેવા પ્રદાતાને ટિપ મોકલી',fontClass:'gu',msg:'આજે તમે એક મહેનતી સેવા પ્રદાતાને ટિપ આપી. તમારી ઉદારતાએ તેમના ચહેરા પર સ્મિત લાવ્યું. આ જ છે સુદર્શન ચક્રની ભાવના. 🌻',chips:['સેવક ખુશ','ઉદારતા જીતી','સમાજ મજબૂત'],footer:'તમારી દયા અમર',waBtn:'WhatsApp પર શેર કરો',copyBtn:'સંદેશ કૉપિ કરો',wa:`🪔 *સુદર્શન ચક્ર — તમારું દિલ સોનાનું!* 🪔\n\n💛 ટિપ સેવા પ્રદાતા સુધી પહોંચી!\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ઊંડી કૃતજ્ઞતા સાથે,_\n*સુદર્શન ચક્ર પરિવાર* 🌸`},
+    charity:{icon:'🌱',title:'પુણ્યનું કામ!',sub:'તમે આજે એક જીવ બદલ્યો',badge:'💚 દાન — ૧૦૦% કલ્યાણ',fontClass:'gu',msg:'તમારું દાન સંપૂર્ણ રીતે સામાજિક કલ્યાણ માટે જશે. તમે આજે એક પવિત્ર કાર્ય કર્યું. 🙏🌸',chips:['યુવા સશક્ત','મહિલા આગળ','આરોગ્ય શિબિર'],footer:'તમારું દાન અમર',waBtn:'WhatsApp પર શેર કરો',copyBtn:'સંદેશ કૉપિ કરો',wa:`🪔 *સુદર્શન ચક્ર — પુણ્યનું કામ!* 🪔\n\n🌱 *દાન પ્રાપ્ત!*\n\nતમે ફક્ત પૈસા ન આપ્યા — *આશા* આપી.\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_પ્રેમ સાથે,_\n*સુદર્શન ચક્ર પરિવાર* 🌼`}
+  },
+
+  pa: {
+    portal:{icon:'🙏',title:'ਧੰਨਵਾਦ!',sub:'ਤੁਹਾਡਾ ਭਰੋਸਾ ਸਾਡੀ ਤਾਕਤ',badge:'✨ ਪੋਰਟਲ ਐਕਸੈਸ ਸਰਗਰਮ',fontClass:'pa',msg:'ਤੁਸੀਂ ਆਪਣੇ ਭਾਈਚਾਰੇ ਦੇ ਕੁਸ਼ਲ ਲੋਕਾਂ ਨਾਲ ਜੁੜਨ ਲਈ ਪਹਿਲਾ ਕਦਮ ਚੁੱਕਿਆ ਹੈ। ਇਹ ਪੋਰਟਲ ਤੁਹਾਡੇ ਲਈ ਭਰੋਸੇ ਅਤੇ ਖੁਸ਼ਹਾਲੀ ਦੇ ਦਰਵਾਜ਼ੇ ਖੋਲ੍ਹੇਗਾ। 🌺',chips:['ਭਾਈਚਾਰਾ ਜੁੜਿਆ','ਭਰੋਸੇਯੋਗ ਨੈੱਟਵਰਕ','ਭਾਰਤ ਲਈ'],footer:'ਸੁਦਰਸ਼ਨ ਚੱਕਰ ਪਰਿਵਾਰ ਵੱਲੋਂ ਧੰਨਵਾਦ',waBtn:'WhatsApp ਤੇ ਸ਼ੇਅਰ ਕਰੋ',copyBtn:'ਸੁਨੇਹਾ ਕਾਪੀ ਕਰੋ',wa:`🪔 *ਸੁਦਰਸ਼ਨ ਚੱਕਰ — ਧੰਨਵਾਦ!* 🪔\n\n🙏 ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ!\n\nਤੁਹਾਡਾ ਪੋਰਟਲ ਐਕਸੈਸ *ਸਰਗਰਮ* ਹੋ ਗਿਆ। ਭਾਰਤ ਦੇ ਸਭ ਤੋਂ ਭਰੋਸੇਯੋਗ ਲੋਕਲ ਸੇਵਾ ਭਾਈਚਾਰੇ ਦਾ ਹਿੱਸਾ ਬਣੇ।\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ਧੰਨਵਾਦ ਸਹਿਤ,_\n*ਸੁਦਰਸ਼ਨ ਚੱਕਰ ਪਰਿਵਾਰ* 🌼`},
+    tip:{icon:'💛',title:'ਤੁਹਾਡਾ ਦਿਲ ਸੋਨੇ ਦਾ!',sub:'ਤੁਹਾਡੀ ਉਦਾਰਤਾ ਇੱਕ ਜ਼ਿੰਦਗੀ ਰੁਸ਼ਨਾਉਂਦੀ',badge:'🙏 ਸੇਵਾਦਾਰ ਨੂੰ ਟਿਪ ਭੇਜੀ',fontClass:'pa',msg:'ਅੱਜ ਤੁਸੀਂ ਇੱਕ ਮਿਹਨਤੀ ਸੇਵਾਦਾਰ ਨੂੰ ਟਿਪ ਦਿੱਤੀ। ਤੁਹਾਡੀ ਉਦਾਰਤਾ ਨੇ ਉਨ੍ਹਾਂ ਦੇ ਚਿਹਰੇ ਤੇ ਮੁਸਕਾਨ ਲਿਆਂਦੀ। ਇਹੀ ਹੈ ਸੁਦਰਸ਼ਨ ਚੱਕਰ ਦੀ ਭਾਵਨਾ। 🌻',chips:['ਸੇਵਾਦਾਰ ਖੁਸ਼','ਉਦਾਰਤਾ ਜਿੱਤੀ','ਸਮਾਜ ਮਜ਼ਬੂਤ'],footer:'ਤੁਹਾਡੀ ਦਇਆ ਅਮਰ',waBtn:'WhatsApp ਤੇ ਸ਼ੇਅਰ ਕਰੋ',copyBtn:'ਸੁਨੇਹਾ ਕਾਪੀ ਕਰੋ',wa:`🪔 *ਸੁਦਰਸ਼ਨ ਚੱਕਰ — ਤੁਹਾਡਾ ਦਿਲ ਸੋਨੇ ਦਾ!* 🪔\n\n💛 ਟਿਪ ਸੇਵਾਦਾਰ ਤੱਕ ਪਹੁੰਚ ਗਈ!\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ਡੂੰਘੀ ਕ੍ਰਿਤੱਗਤਾ ਨਾਲ,_\n*ਸੁਦਰਸ਼ਨ ਚੱਕਰ ਪਰਿਵਾਰ* 🌸`},
+    charity:{icon:'🌱',title:'ਪੁੰਨ ਦਾ ਕੰਮ!',sub:'ਤੁਸੀਂ ਅੱਜ ਇੱਕ ਜ਼ਿੰਦਗੀ ਬਦਲੀ',badge:'💚 ਦਾਨ — 100% ਭਲਾਈ ਲਈ',fontClass:'pa',msg:'ਤੁਹਾਡਾ ਦਾਨ ਪੂਰੀ ਤਰ੍ਹਾਂ ਸਮਾਜ ਭਲਾਈ ਲਈ ਜਾਵੇਗਾ। ਤੁਸੀਂ ਅੱਜ ਇੱਕ ਪਵਿੱਤਰ ਕੰਮ ਕੀਤਾ। 🙏🌸',chips:['ਜਵਾਨੀ ਸਸ਼ਕਤ','ਔਰਤਾਂ ਅੱਗੇ','ਸਿਹਤ ਕੈਂਪ'],footer:'ਤੁਹਾਡਾ ਦਾਨ ਅਮਰ',waBtn:'WhatsApp ਤੇ ਸ਼ੇਅਰ ਕਰੋ',copyBtn:'ਸੁਨੇਹਾ ਕਾਪੀ ਕਰੋ',wa:`🪔 *ਸੁਦਰਸ਼ਨ ਚੱਕਰ — ਪੁੰਨ ਦਾ ਕੰਮ!* 🪔\n\n🌱 *ਦਾਨ ਮਿਲਿਆ!*\n\nਤੁਸੀਂ ਸਿਰਫ਼ ਪੈਸੇ ਨਹੀਂ ਦਿੱਤੇ — *ਉਮੀਦ* ਦਿੱਤੀ।\n\n🌐 sudarshanchakraindia.github.io/zini-test\n\n_ਪਿਆਰ ਨਾਲ,_\n*ਸੁਦਰਸ਼ਨ ਚੱਕਰ ਪਰਿਵਾਰ* 🌼`}
+  }
+};
+
+// ── STATE ──
+let lang = 'hi', type = 'portal';
+
+  render();
+}
+
+function render() {
+  const d = DATA[lang]?.[type] || DATA['en'][type];
+
+  document.getElementById('main-icon').textContent = d.icon;
+  document.getElementById('title').innerHTML = d.title + '<br><span id="subtitle">' + d.sub + '</span>';
+  document.getElementById('badge').textContent = d.badge;
+
+  const msgEl = document.getElementById('msg');
+  msgEl.textContent = d.msg;
+  msgEl.className = d.fontClass;
+
+  // Impact chips
+  const icons = ['🤝','😊','🎓'];
+  const overrideIcons = { tip:['😊','💛','🌻'], charity:['🎓','👩‍💼','🏥'] };
+  const chipIcons = overrideIcons[type] || ['🤝','⭐','🇮🇳'];
+  const row = document.getElementById('impact-row');
+  row.innerHTML = d.chips.map((c,i) => `<div class="ic-chip"><div class="ico">${chipIcons[i]}</div><p>${c}</p></div>`).join('');
+
+  // Buttons
+  document.querySelector('.wa-btn').textContent = '💬  ' + d.waBtn;
+  document.querySelector('.copy-btn').textContent = '📋  ' + d.copyBtn;
+
+  // Footer
+  const fp = document.querySelectorAll('.footer p');
+  if (fp[1]) fp[1].innerHTML = `<strong style="color:rgba(253,230,138,0.65)">${d.footer}</strong>`;
+
+  // Toast
+  document.getElementById('toast').textContent = '✅ ' + (lang === 'hi' ? 'संदेश कॉपी हो गया!' : lang === 'mr' ? 'संदेश कॉपी केला!' : 'Message Copied!');
+
+  // Animate card
+  const card = document.getElementById('card');
+  card.style.animation = 'none';
+  void card.offsetHeight;
+  card.style.animation = 'cardIn 0.5s cubic-bezier(0.22,1,0.36,1) forwards';
+  // Update button labels in current language
+  const waBtnTxt = document.getElementById('wa-btn-text');
+  const cpBtnTxt = document.getElementById('copy-btn-text');
+  if (waBtnTxt && d.waBtn) waBtnTxt.textContent = d.waBtn;
+  if (cpBtnTxt && d.copyBtn) cpBtnTxt.textContent = d.copyBtn;
+}
+
+// ── REFERRAL SHARE: sends text message + gratitude page link ──
+function buildReferralMsg(d) {
+  const pageLink = 'https://sudarshanchakraindia.github.io/zini-test/gratitude.html?lang=' + lang + '&type=' + type;
+  // Short teaser message in WhatsApp text + link to the beautiful page
+  const langNames = {hi:'हिंदी',en:'English',ta:'Tamil',te:'Telugu',kn:'Kannada',ml:'Malayalam',mr:'Marathi',bn:'Bengali',gu:'Gujarati',pa:'Punjabi'};
+  const typeNames = {portal:'Portal Fee',tip:'Tip to Provider',charity:'Charity'};
+  const teaser = (lang === 'hi')
+    ? `🔱 *सुदर्शन चक्र* से एक हृदयस्पर्शी संदेश!\n\nमैंने ${typeNames[type] || ''} का भुगतान किया और यह खूबसूरत संदेश मिला। आप भी देखें 👇\n\n🌐 ${pageLink}`
+    : `🔱 A heartfelt message from *Sudarshan Chakra*!\n\nI paid for ${typeNames[type] || ''} and received this beautiful blessing. See it here 👇\n\n🌐 ${pageLink}`;
+  return teaser;
+}
+
+function shareWithReferral() {
+  const d = DATA[lang]?.[type] || DATA['en'][type];
+  const msg = buildReferralMsg(d);
+  window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function copyWithReferral() {
+  const d = DATA[lang]?.[type] || DATA['en'][type];
+  const fullText = buildReferralMsg(d);
+  navigator.clipboard.writeText(fullText).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }).catch(() => {
+    // Fallback for browsers that block clipboard
+    const ta = document.createElement('textarea');
+    ta.value = fullText; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  });
+}
+
+// Keep old names as aliases (in case called from elsewhere)
+function shareWA() { shareWithReferral(); }
+function copyMsg() { copyWithReferral(); }
+
+// ── SPARKS ──
+for (let i = 0; i < 28; i++) {
+  const s = document.createElement('div');
+  s.className = 'spark';
+  const sz = Math.random() * 3 + 1.5;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}vw;top:${55+Math.random()*45}vh;background:${Math.random()>.6?'#FDE68A':'#EA580C'};animation-duration:${4+Math.random()*6}s;animation-delay:${Math.random()*8}s;`;
+  document.body.appendChild(s);
+}
+
+// ── DIYA FLICKER ──
+setInterval(() => {
+  const d = document.querySelector('.diya-row');
+  if (d) d.style.filter = `brightness(${0.88+Math.random()*0.45}) drop-shadow(0 0 ${3+Math.random()*9}px #FDE68A)`;
+}, 180);
+
+// ── URL PARAM AUTO-SELECT ──
+const params = new URLSearchParams(window.location.search);
+if (params.get('lang')) setLang(params.get('lang'));
+if (params.get('type')) setType(params.get('type'));
+</script>
+<div id="zt-banner" style="position:fixed;left:0;right:0;bottom:0;z-index:2147483647;background:#C62828;color:#fff;font:600 12px/1.3 sans-serif;text-align:center;padding:4px 8px;pointer-events:none;opacity:.92">🧪 TEST VERSION — असली ऐप नहीं · Test data only</div>
+</body>
+</html>
