@@ -67,7 +67,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
 <body>
 
   <div id="gate">
-    <h1>🔱 Admin Login</h1>
+    <h1>✨ Admin Login</h1>
     <p style="color:#7C4A1E; font-size:13px;">Sign in with your admin account password
 
 </p>
@@ -77,7 +77,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
   </div>
 
   <div id="app">
-    <header><h1 style="margin:0; font-size:18px;">🔱 City Channel Partners</h1></header>
+    <header><h1 style="margin:0; font-size:18px;">✨ City Channel Partners</h1></header>
     <div class="wrap">
 
       <div class="tabs">
@@ -353,7 +353,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
 
   function dashboardMessageText(name, code){
     const link = dashboardLinkFor(code);
-    return `Namaste ${name || ''}!\n\nCongratulations! 🎉 Aapki application approve ho gayi hai — aap ab Sudarshan Chakra India (SAARTHI) ke City Channel Partner hain.\n\n🔑 Aapka Partner Code: ${code}\n\n📊 Apna Partner Dashboard yahan kholiye:\n${link}\n\n(Agar link se seedha na khule, to dashboard page par apna Partner Code ${code} daal kar "Open" dabaiye.)\n\nDashboard mein aapko milega: aapka referral link & QR code, personalised poster, marketing material, leads aur aapki kamai ki jaankari.\n\nYe code sirf aapke liye hai — kisi aur ke saath share na karein.\n\n- Team Sudarshan Chakra India`;
+    return `Namaste ${name || ''}!\n\nCongratulations! 🎉 Aapki application approve ho gayi hai — aap ab ZiNi (SAARTHI) ke City Channel Partner hain.\n\n🔑 Aapka Partner Code: ${code}\n\n📊 Apna Partner Dashboard yahan kholiye:\n${link}\n\n(Agar link se seedha na khule, to dashboard page par apna Partner Code ${code} daal kar "Open" dabaiye.)\n\nDashboard mein aapko milega: aapka referral link & QR code, personalised poster, marketing material, leads aur aapki kamai ki jaankari.\n\nYe code sirf aapke liye hai — kisi aur ke saath share na karein.\n\n- Team ZiNi`;
   }
 
   async function markDashboardSent(appId, via){
@@ -376,7 +376,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
   window.sendDashboardEmail = function(code, appId){
     const c = partnerContact(code, appId);
     if (!c.email) { alert('⚠️ Is partner ka email address nahi mila. WhatsApp se bhejiye.'); return; }
-    const subject = 'Welcome! Your Sudarshan Chakra India Partner Dashboard & Code (' + code + ')';
+    const subject = 'Welcome! Your ZiNi Partner Dashboard & Code (' + code + ')';
     const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1'
       + '&to=' + encodeURIComponent(c.email)
       + '&su=' + encodeURIComponent(subject)
@@ -1019,7 +1019,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
   }
 
   function agreementMessageText(name, link){
-    return `Namaste ${name || ''}!\n\nThank you for applying to become a Sudarshan Chakra India (SAARTHI) City Channel Partner.\n\nPlease read the agreement, give your consent, and upload your documents here:\n${link}\n\nThis link is unique to your application — please don't share it.\n\n- Team Sudarshan Chakra India`;
+    return `Namaste ${name || ''}!\n\nThank you for applying to become a ZiNi (SAARTHI) City Channel Partner.\n\nPlease read the agreement, give your consent, and upload your documents here:\n${link}\n\nThis link is unique to your application — please don't share it.\n\n- Team ZiNi`;
   }
 
   async function markAgreementSentIfPending(id, via){
@@ -1055,7 +1055,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     if (!a) return;
     if (!a.email) { alert('⚠️ No email address on this application.'); return; }
     const link = agreementLinkFor(id);
-    const subject = 'Sudarshan Chakra India — City Channel Partner Agreement';
+    const subject = 'ZiNi — City Channel Partner Agreement';
     const body = agreementMessageText(a.fullName, link);
     // Opens Gmail's compose window (signed in as the admin) with To, Subject and
     // Body filled in. A mailto: link depended on a desktop mail app being set as

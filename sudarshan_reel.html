@@ -7,7 +7,7 @@
 S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.call(this,P+k,v)};S.removeItem=function(k){return r.call(this,P+k)};})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[TEST] City Channel Partner Dashboard — Sudarshan Chakra India</title>
+<title>[TEST] City Channel Partner Dashboard — ZiNi</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
   :root{
@@ -86,7 +86,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
 <body>
 
   <div id="gate">
-    <h1 style="margin-bottom:4px;">🔱 Partner Login</h1>
+    <h1 style="margin-bottom:4px;">✨ Partner Login</h1>
     <p class="hint">Enter the referral code given to you when you were appointed</p>
     <input type="text" id="codeInput" placeholder="e.g. JODHPUR01">
     <button onclick="loadPartner()">View My Dashboard</button>
@@ -96,7 +96,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
   <div id="app">
     <header>
       <div>
-        <h1 id="hdrName">🔱 Partner Dashboard</h1>
+        <h1 id="hdrName">✨ Partner Dashboard</h1>
         <div class="sub" id="hdrCity">—</div>
       </div>
       <span class="badge" id="hdrStatus">—</span>
@@ -192,7 +192,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             <div class="num"></div>
             <div class="body">
               <b>Share your referral link</b>
-              <p>Send your link (above) via WhatsApp, or show the QR code in person. It takes people straight into the Sudarshan Chakra India app.</p>
+              <p>Send your link (above) via WhatsApp, or show the QR code in person. It takes people straight into the ZiNi app.</p>
             </div>
           </div>
           <div class="step">
@@ -244,7 +244,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
           </div>
           <div class="accordion-item">
             <div class="accordion-head" onclick="toggleAcc(this)">What is the activity requirement? <span>+</span></div>
-            <div class="accordion-body">To keep your city exclusivity, you need to onboard at least 33 verified providers and 66 seekers within your first 30 days, and maintain similar monthly activity after that. This target applies for your first year as a partner — Sudarshan Chakra India already lists 525+ services with room to keep growing, so this is set to match real market scale, not an arbitrary minimum. It may be revised in future years as the platform and each city's market mature. This dashboard's progress bar tracks it live.</div>
+            <div class="accordion-body">To keep your city exclusivity, you need to onboard at least 33 verified providers and 66 seekers within your first 30 days, and maintain similar monthly activity after that. This target applies for your first year as a partner — ZiNi already lists 525+ services with room to keep growing, so this is set to match real market scale, not an arbitrary minimum. It may be revised in future years as the platform and each city's market mature. This dashboard's progress bar tracks it live.</div>
           </div>
           <div class="accordion-item">
             <div class="accordion-head" onclick="toggleAcc(this)">Where do I get marketing materials? <span>+</span></div>
@@ -381,7 +381,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     document.getElementById('gate').style.display = 'none';
     document.getElementById('app').style.display = 'block';
 
-    document.getElementById('hdrName').textContent = '🔱 ' + (partner.name || 'Partner') + "'s Dashboard";
+    document.getElementById('hdrName').textContent = '✨ ' + (partner.name || 'Partner') + "'s Dashboard";
     document.getElementById('hdrCity').textContent = (partner.city || '—') + ' · Code: ' + code;
     const statusEl = document.getElementById('hdrStatus');
     statusEl.textContent = (partner.status || 'active').toUpperCase();

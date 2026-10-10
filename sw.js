@@ -1,6 +1,6 @@
-// Sudarshan Chakra — Service Worker
+// ZiNi — Service Worker
 // Version bump forces cache refresh on every deploy
-const CACHE_NAME = 'zini-test-v1';
+const CACHE_NAME = 'zini-test-v2';
 const URLS_TO_CACHE = [
   './',
   './index.html',

@@ -7,7 +7,7 @@
 S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.call(this,P+k,v)};S.removeItem=function(k){return r.call(this,P+k)};})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[TEST] City Channel Partner Dashboard — Sudarshan Chakra India</title>
+<title>[TEST] City Channel Partner Dashboard — ZiNi</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
 <style>
@@ -216,7 +216,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
 <body>
 
   <div id="gate">
-    <h1 style="margin-bottom:4px;">🔱 Partner Login</h1>
+    <h1 style="margin-bottom:4px;">✨ Partner Login</h1>
     <p class="hint">Enter the referral code given to you when you were appointed</p>
     <input type="text" id="codeInput" placeholder="e.g. JODHPUR01">
     <button onclick="loadPartner()">View My Dashboard</button>
@@ -230,7 +230,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     </div>
     <header>
       <div>
-        <h1 id="hdrName">🔱 Partner Dashboard</h1>
+        <h1 id="hdrName">✨ Partner Dashboard</h1>
         <div class="sub" id="hdrCity">—</div>
       </div>
       <span class="badge" id="hdrStatus">—</span>
@@ -326,7 +326,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             <div class="num"></div>
             <div class="body">
               <b>Share your referral link</b>
-              <p>Send your link (above) via WhatsApp, or show the QR code in person. It takes people straight into the Sudarshan Chakra India app.</p>
+              <p>Send your link (above) via WhatsApp, or show the QR code in person. It takes people straight into the ZiNi app.</p>
             </div>
           </div>
           <div class="step">
@@ -546,7 +546,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
           </div>
           <div class="accordion-item">
             <div class="accordion-head" onclick="toggleAcc(this)">What is the activity requirement? <span>+</span></div>
-            <div class="accordion-body">To keep your city exclusivity, you need to onboard at least 33 verified providers and 66 seekers within your first 30 days, and maintain similar monthly activity after that. This target applies for your first year as a partner — Sudarshan Chakra India already lists 525+ services with room to keep growing, so this is set to match real market scale, not an arbitrary minimum. It may be revised in future years as the platform and each city's market mature. This dashboard's progress bar tracks it live.</div>
+            <div class="accordion-body">To keep your city exclusivity, you need to onboard at least 33 verified providers and 66 seekers within your first 30 days, and maintain similar monthly activity after that. This target applies for your first year as a partner — ZiNi already lists 525+ services with room to keep growing, so this is set to match real market scale, not an arbitrary minimum. It may be revised in future years as the platform and each city's market mature. This dashboard's progress bar tracks it live.</div>
           </div>
           <div class="accordion-item">
             <div class="accordion-head" onclick="toggleAcc(this)">Where do I get marketing materials? <span>+</span></div>
@@ -809,8 +809,8 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         try {
           await navigator.share({
             files: [file],
-            title: 'Sudarshan Chakra India',
-            text: 'Join Sudarshan Chakra India — register as a service provider or seeker today!'
+            title: 'ZiNi',
+            text: 'Join ZiNi — register as a service provider or seeker today!'
           });
         } catch (e) {
           console.warn('Share cancelled or failed:', e);
@@ -913,7 +913,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     document.getElementById('gate').style.display = 'none';
     document.getElementById('app').style.display = 'block';
 
-    document.getElementById('hdrName').textContent = '🔱 ' + (partner.name || 'Partner') + "'s Dashboard";
+    document.getElementById('hdrName').textContent = '✨ ' + (partner.name || 'Partner') + "'s Dashboard";
     document.getElementById('hdrCity').textContent = (partner.city || '—') + ' · Code: ' + code;
     const statusEl = document.getElementById('hdrStatus');
     statusEl.textContent = (partner.status || 'active').toUpperCase();
@@ -939,7 +939,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
 
     // Personalized poster + share buttons
     renderPersonalizedPoster(partner.name, partner.phone, refLink).catch(e => console.warn('Poster render failed:', e));
-    const shareText = 'Join Sudarshan Chakra India — register as a service provider or seeker today! ' + refLink;
+    const shareText = 'Join ZiNi — register as a service provider or seeker today! ' + refLink;
     document.getElementById('waShareBtn').href = 'https://wa.me/?text=' + encodeURIComponent(shareText);
     document.getElementById('fbShareBtn').href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(refLink);
 
@@ -1674,7 +1674,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             <div class="lead-actions">
               <button onclick="sendLeadWhatsApp('${id}')" style="background:#25D366; color:#fff;">📲 WhatsApp</button>
               <button onclick="openTemplatePicker('${(l.businessName||'').replace(/'/g,"\\'")}','${l.phone||''}','${id}')">✉️ Templates</button>
-              ${window._saarthiAdminUnlocked ? `<button onclick="sendSaarthiInvite('${id}', this)" style="background:#8B1E3F; color:#fff;">🔱 API से भेजें${l.lastApiSend ? ' (फिर)' : ''}</button>` : ''}
+              ${window._saarthiAdminUnlocked ? `<button onclick="sendSaarthiInvite('${id}', this)" style="background:#8B1E3F; color:#fff;">✨ API से भेजें${l.lastApiSend ? ' (फिर)' : ''}</button>` : ''}
               <button onclick="removeLead('${id}')">🗑 Remove</button>
             </div>
           </div>
@@ -1825,7 +1825,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
   // is worth far more to the recipient than the storage URL of the image.
   function materialShareText(m){
     const ref = window._currentRefLink;
-    const out = [m.name || 'Sudarshan Chakra India'];
+    const out = [m.name || 'ZiNi'];
     if (m.desc) out.push(m.desc);
     out.push(ref ? 'रजिस्टर करें / Register: ' + ref : (m.url || ''));
     return out.filter(Boolean).join('\n');
@@ -2537,8 +2537,8 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
   // approved template's variable name exactly. header:'image' means the template
   // was created with an IMAGE header, so a poster/flyer must be picked.
   const WA_API_TEMPLATES = [
-    { name: 'saarthi_invite_hindi', label: '🔱 SAARTHI Invite (हिंदी)', nameParam: 'customer_name', header: 'none' },
-    { name: 'become_exclusive_city_channel_partner', label: '🔱 Exclusive City Channel Partner (English)', nameParam: 'custmer_name', header: 'none' },
+    { name: 'saarthi_invite_hindi', label: '✨ SAARTHI Invite (हिंदी)', nameParam: 'customer_name', header: 'none' },
+    { name: 'become_exclusive_city_channel_partner', label: '✨ Exclusive City Channel Partner (English)', nameParam: 'custmer_name', header: 'none' },
     { name: 'saarthi_poster_invite_hindi', label: '🖼️ पोस्टर/फ्लायर के साथ Invite (हिंदी)', nameParam: 'customer_name', header: 'image', pendingApproval: true }
   ];
 
@@ -2622,7 +2622,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     el.innerHTML = `
       <div class="api-head">📤 WhatsApp API से भेजें</div>
       <div class="api-tabs">
-        <button class="${apiState.mode === 'template' ? 'active' : ''}" onclick="apiSet('mode','template')">🔱 Approved Template</button>
+        <button class="${apiState.mode === 'template' ? 'active' : ''}" onclick="apiSet('mode','template')">✨ Approved Template</button>
         <button class="${apiState.mode === 'session' ? 'active' : ''}" onclick="apiSet('mode','session')">✉️ मेरा Template (24 घं. वाले)</button>
       </div>
       ${body}
@@ -2644,7 +2644,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         <button class="btn primary" onclick="startBulkApiSend()">📤 Bulk Send शुरू करें</button>
         <button class="btn ghost" onclick="refreshApiPanel()">🔄 Refresh</button>
       </div>
-      <div class="api-note">हर lead के अंदर "🔱 API से भेजें" बटन भी यही चुना हुआ message भेजता है।</div>
+      <div class="api-note">हर lead के अंदर "✨ API से भेजें" बटन भी यही चुना हुआ message भेजता है।</div>
       <div id="apiProgress"></div>`;
     updateApiSummary();
   };

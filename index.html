@@ -7,16 +7,16 @@
 S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.call(this,P+k,v)};S.removeItem=function(k){return r.call(this,P+k)};})();</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>[TEST] Sudarshan Chakra - Find Service Providers Near You</title>
+    <title>[TEST] ZiNi — बोलो, काम हो गया! | Find Service Providers Near You</title>
 
     <!-- ===== PWA META TAGS ===== -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#ea580c">
+    <meta name="theme-color" content="#5B21B6">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Sudarshan Chakra">
-    <meta name="application-name" content="Sudarshan Chakra">
+    <meta name="apple-mobile-web-app-title" content="ZiNi">
+    <meta name="application-name" content="ZiNi">
     <meta name="description" content="Find verified service providers near you — plumbers, electricians, beauticians, caterers and more.">
 
     <!-- PWA Icons — Real PNG files required by iOS Safari -->
@@ -37,7 +37,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 
     <!-- Open Graph (for sharing) -->
-    <meta property="og:title" content="Sudarshan Chakra">
+    <meta property="og:title" content="ZiNi">
     <meta property="og:description" content="Find verified service providers near you">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sudarshanchakraindia.github.io/zini-test/">
@@ -66,6 +66,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>/* ZiNi brand: purple replaces orange */ tailwind.config={theme:{extend:{colors:{orange:{50:'#F5F3FF',100:'#EDE9FE',200:'#DDD6FE',300:'#C4B5FD',400:'#A78BFA',500:'#7C3AED',600:'#5B21B6',700:'#4C1D95',800:'#3B1580',900:'#2E1065'}}}}};</script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
@@ -187,10 +188,10 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         .category-card { cursor: pointer; transition: all 0.3s; }
         .browse-step { animation: stepFadeIn 0.35s ease forwards; }
         @keyframes stepFadeIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-        .bc-item { cursor:pointer; color:#ea580c; font-weight:600; }
+        .bc-item { cursor:pointer; color:#5B21B6; font-weight:600; }
         .bc-item:hover { text-decoration:underline; }
         .category-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .category-card.selected { border: 3px solid #ea580c; background: #fff7ed; }
+        .category-card.selected { border: 3px solid #5B21B6; background: #F5F3FF; }
         .star-rating { color: #fbbf24; }
 
         /* Multi-select chips for language & service type */
@@ -201,11 +202,11 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             transition: all 0.2s; font-size: 13px; font-weight: 500;
             background: #fff; user-select: none;
         }
-        .lang-chip:hover, .service-chip:hover { border-color: #fb923c; background: #fff7ed; }
+        .lang-chip:hover, .service-chip:hover { border-color: #A78BFA; background: #F5F3FF; }
         .lang-chip input, .service-chip input { display: none; }
         .lang-chip.checked, .service-chip.checked {
-            border-color: #ea580c; background: #fff7ed; color: #c2410c; font-weight: 700;
-            box-shadow: 0 0 0 2px #fed7aa;
+            border-color: #5B21B6; background: #F5F3FF; color: #4C1D95; font-weight: 700;
+            box-shadow: 0 0 0 2px #DDD6FE;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -215,9 +216,9 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     <!-- ===== PWA INSTALL BANNER ===== -->
     <div id="pwaInstallBanner" class="hidden fixed bottom-0 left-0 right-0 z-50 p-3 bg-white border-t-2 border-orange-500 shadow-2xl" style="padding-bottom: env(safe-area-inset-bottom, 12px);">
         <div class="max-w-lg mx-auto flex items-center gap-3">
-            <div class="w-12 h-12 rounded-xl overflow-hidden shadow flex-shrink-0"><img src="icon-192.png" alt="Sudarshan Chakra" class="w-full h-full object-cover"></div>
+            <div class="w-12 h-12 rounded-xl overflow-hidden shadow flex-shrink-0"><img src="icon-192.png" alt="ZiNi" class="w-full h-full object-cover"></div>
             <div class="flex-1 min-w-0">
-                <div class="font-bold text-gray-800 text-sm">Install Sudarshan Chakra</div>
+                <div class="font-bold text-gray-800 text-sm">Install ZiNi</div>
                 <div class="text-xs text-gray-500 truncate">Add to home screen for the full app experience</div>
             </div>
             <button id="pwaInstallBtn" class="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-orange-700 flex-shrink-0">
@@ -232,7 +233,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         <div class="p-4 max-w-lg mx-auto">
             <div class="flex justify-between items-start mb-3">
                 <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 rounded-xl overflow-hidden shadow flex-shrink-0"><img src="icon-192.png" alt="Sudarshan Chakra" class="w-full h-full object-cover"></div>
+                    <div class="w-10 h-10 rounded-xl overflow-hidden shadow flex-shrink-0"><img src="icon-192.png" alt="ZiNi" class="w-full h-full object-cover"></div>
                     <div>
                         <div class="font-bold text-gray-800 text-sm">Install on iPhone / iPad</div>
                         <div class="text-xs text-gray-500">Works like a real app — no App Store needed!</div>
@@ -334,8 +335,8 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
     <nav class="bg-white shadow-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-3">
             <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
-                <div class="w-12 h-12 rounded-full overflow-hidden shadow-lg"><img src="icon-192.png" alt="Sudarshan Chakra" class="w-full h-full object-cover"></div>
-                <span class="text-2xl font-bold text-orange-600">Sudarshan Chakra</span>
+                <div class="w-12 h-12 rounded-xl overflow-hidden shadow-lg"><img src="icon-192.png" alt="ZiNi" class="w-full h-full object-cover"></div>
+                <div class="leading-tight"><span class="text-2xl font-extrabold" style="color:#2E1065;letter-spacing:-0.5px">Z<span style="color:#F59E0B">i</span>N<span style="color:#F59E0B">i</span></span><span class="block text-xs font-semibold" style="color:#5B21B6">बोलो, काम हो गया!</span></div>
             </div>
             <div class="flex gap-2 flex-wrap items-center">
                 <button data-i18n="home" onclick="showPage('home')" class="px-3 py-2 text-gray-700 hover:text-orange-600 font-medium text-sm">Home</button>
@@ -397,7 +398,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
                 </div>
             </div>
             
-            <!-- 🔱 Live Stats Banner -->
+            <!-- ✨ Live Stats Banner -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
                 <div id="statCardProviders" class="bg-gradient-to-br from-orange-500 to-orange-600 text-white rounded-2xl p-5 text-center shadow-lg transform hover:scale-105 transition">
                     <div class="text-4xl font-black" id="homeStatProviders">...</div>
@@ -423,7 +424,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
 
             <!-- Motivational Join Strip -->
             <div class="bg-gradient-to-r from-orange-600 to-orange-500 rounded-2xl p-5 mb-10 text-white text-center shadow-lg">
-                <div class="text-lg font-bold mb-1" data-i18n="joinTitle">🔱 Join Sudarshan Chakra Today!</div>
+                <div class="text-lg font-bold mb-1" data-i18n="joinTitle">✨ Join ZiNi Today!</div>
                 <div class="text-sm opacity-90 mb-3" data-i18n="joinSubtitle">Be part of India's growing skilled workforce network — get work, earn money, build reputation</div>
                 <div class="flex gap-3 justify-center flex-wrap">
                     <button onclick="showPage('register')" class="bg-white text-orange-600 font-bold px-5 py-2 rounded-xl text-sm hover:bg-orange-50 transition">👷 Register as Provider</button>
@@ -592,8 +593,8 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         <div class="max-w-4xl mx-auto px-4 py-8">
             <!-- Not logged in state -->
             <div id="profileNotLoggedIn" class="text-center py-16">
-                <div class="text-7xl mb-4">🔱</div>
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">Your Sudarshan Chakra Account</h2>
+                <div class="text-7xl mb-4">✨</div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Your ZiNi Account</h2>
                 <p class="text-gray-500 mb-6">Login to manage your profile, save favourites and write reviews</p>
                 <button onclick="openLoginModal()" class="bg-orange-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-orange-700 text-lg transition">
                     🔑 Login with Mobile OTP
@@ -1691,8 +1692,8 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         <div class="bg-white rounded-2xl max-w-sm w-full shadow-2xl overflow-hidden">
             <!-- Header -->
             <div class="bg-gradient-to-br from-orange-500 to-orange-600 p-6 text-white text-center">
-                <div class="text-4xl mb-2">🔱</div>
-                <h2 class="text-xl font-bold">Sudarshan Chakra</h2>
+                <div class="text-4xl mb-2">✨</div>
+                <h2 class="text-xl font-bold">ZiNi</h2>
                 <p class="text-orange-100 text-sm mt-1">Login with your mobile number</p>
             </div>
 
@@ -1905,10 +1906,10 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         <!-- ABOUT -->
         <div class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100 shadow-sm">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-12 h-12 rounded-full overflow-hidden shadow"><img src="icon-192.png" alt="Sudarshan Chakra" class="w-full h-full object-cover"></div>
-            <div><h2 class="text-xl font-bold text-orange-700">🔱 Sudarshan Chakra India</h2><p class="text-xs text-gray-500">Connecting India's Skilled Hands with Every Home</p></div>
+            <div class="w-12 h-12 rounded-xl overflow-hidden shadow"><img src="icon-192.png" alt="ZiNi" class="w-full h-full object-cover"></div>
+            <div><h2 class="text-xl font-bold text-orange-700">✨ ZiNi</h2><p class="text-xs text-gray-500">Connecting India's Skilled Hands with Every Home</p></div>
           </div>
-          <p class="text-sm text-gray-700 leading-relaxed mb-3"><strong>Sudarshan Chakra India</strong> is a hyperlocal service marketplace built for the heart of India — its skilled, hardworking people. Named after the sacred spinning disc of Lord Vishnu, our platform embodies perpetual motion, protection and prosperity for every community it serves.</p>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3"><strong>ZiNi</strong> is a hyperlocal service marketplace built for the heart of India — its skilled, hardworking people. Like a genie — just say it, and the work gets done. Our platform stands for speed, trust and prosperity for every community it serves.</p>
           <p class="text-sm text-gray-700 leading-relaxed mb-3">We bridge the gap between <strong>service seekers</strong> — families who need reliable, trusted help at home — and <strong>service providers</strong> — the plumbers, electricians, teachers, beauticians, cooks and countless other skilled workers who form the backbone of India's economy.</p>
           <p class="text-sm text-gray-700 leading-relaxed mb-4">Built ground-up for India: <strong>12 regional languages</strong>, voice search, verified profiles, genuine reviews, Wallet rewards, in-app chat, Charity program and community referrals — all in one platform that works beautifully even on slow connections.</p>
           <div class="flex flex-wrap gap-2">
@@ -2020,7 +2021,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
           <h3 class="text-base font-bold text-gray-800 mb-4">👥 About Us</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
             <div class="text-center bg-white rounded-xl p-4 shadow-sm">
-              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-2 flex items-center justify-center text-xl">🔱</div>
+              <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-2 flex items-center justify-center text-xl">✨</div>
               <h4 class="font-bold text-xs mb-1">Founder & Vision</h4>
               <p class="text-xs text-gray-500">Driven by the belief that every skilled worker deserves a digital platform that respects their craft, language and dignity.</p>
             </div>
@@ -2036,7 +2037,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             </div>
           </div>
           <div class="bg-white rounded-xl p-4 text-center border border-orange-100">
-            <div class="text-xl mb-1">🔱</div>
+            <div class="text-xl mb-1">✨</div>
             <p class="text-xs text-gray-700 leading-relaxed"><strong>Our Promise:</strong> We will always put the community before profit. We will always protect your data and privacy. We will always build for India's diverse needs — in every language, every region, every community. <strong>Jai Hind 🇮🇳</strong></p>
           </div>
         </div>
@@ -2048,7 +2049,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
               <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">🏢 Corporate Office</h4>
               <div class="space-y-2 text-xs">
-                <div class="flex gap-2 items-start"><span class="flex-shrink-0">🔱</span><div><strong class="text-sm">Sudarshan Chakra India Pvt. Ltd.</strong><div class="text-gray-400">Registered in India under the Companies Act</div></div></div>
+                <div class="flex gap-2 items-start"><span class="flex-shrink-0">✨</span><div><strong class="text-sm">Sudarshan Chakra India Pvt. Ltd.</strong><div class="text-gray-400">Registered in India under the Companies Act</div></div></div>
                 <div class="flex gap-2 items-start"><span class="flex-shrink-0">📍</span><div class="text-gray-600">B-62/C-1, Vinayak Vihar<div class="text-gray-400">Jodhpur, Rajasthan, India</div></div></div>
                 <div class="flex gap-2 items-start"><span class="flex-shrink-0">⏰</span><span class="text-gray-600">Mon–Sat · 9:00 AM – 6:00 PM IST</span></div>
                 <div class="flex gap-2 items-start"><span class="flex-shrink-0">🌐</span><a href="https://sudarshanchakraindia.github.io/zini-test/" class="text-orange-600 break-all" target="_blank">sudarshanchakraindia.github.io</a></div>
@@ -2090,7 +2091,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             <p class="text-orange-200 text-xs mb-1">Your 24x7 AI assistant powered by Claude. Ask anything about the app in any language.</p>
           </div>
           <div id="infoChatMessages" class="mx-5 bg-black/20 rounded-xl h-52 overflow-y-auto p-3 space-y-2 mb-3 text-xs">
-            <div class="flex gap-2"><div class="bg-white/15 text-white rounded-2xl rounded-tl-sm px-3 py-2 max-w-xs leading-relaxed">Namaste! 🙏 I am your Sudarshan Guide. Ask me anything about the app — registration, Wallet points, bookings, verification, Charity, referrals, or anything else!</div></div>
+            <div class="flex gap-2"><div class="bg-white/15 text-white rounded-2xl rounded-tl-sm px-3 py-2 max-w-xs leading-relaxed">Namaste! 🙏 I am your ZiNi Guide. Ask me anything about the app — registration, Wallet points, bookings, verification, Charity, referrals, or anything else!</div></div>
           </div>
           <div class="mx-5 flex gap-2 flex-wrap mb-3">
             <button onclick="infoQuick('How do I register as a provider?')" class="bg-white/10 hover:bg-orange-500 text-white text-xs px-3 py-1.5 rounded-full border border-white/20 transition-colors">Register as provider</button>
@@ -2745,7 +2746,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             const iv = p.idVerification || {};
             const langs = Array.isArray(p.language) ? p.language.join(', ') : (p.language || 'N/A');
             const services = Array.isArray(p.services) ? p.services.join(', ') : (p.service || 'N/A');
-            const text = `🌟 *Sudarshan Chakra - Provider Details*
+            const text = `🌟 *ZiNi - Provider Details*
 
 ` +
                 `👤 *Name:* ${p.name}
@@ -2891,18 +2892,18 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
             'managePlan':       { en:'Manage Membership Plan', hi:'सदस्यता योजना प्रबंधित करें', bn:'সদস্যতা পরিকল্পনা পরিচালনা করুন', gu:'સભ્યપદ યોજના', mr:'सदस्यता योजना व्यवस्थापित करा', kn:'ಸದಸ್ಯತ್ವ ಯೋಜನೆ', te:'సభ్యత్వ ప్రణాళిక', ml:'അംഗത്വ പദ്ധതി', ta:'உறுப்பினர் திட்டம்', pa:'ਮੈਂਬਰਸ਼ਿਪ ਯੋਜਨਾ', or:'ସଦସ୍ୟ ଯୋଜନା', as:'সদস্যতা পৰিকল্পনা' },
             'aboutNav':         { en:'ℹ️ About', hi:'ℹ️ जानकारी', bn:'ℹ️ সম্পর্কে', gu:'ℹ️ માહિતી', mr:'ℹ️ माहिती', kn:'ℹ️ ಮಾಹಿತಿ', te:'ℹ️ గురించి', ml:'ℹ️ കുറിച്ച്', ta:'ℹ️ பற்றி', pa:'ℹ️ ਜਾਣਕਾਰੀ', or:'ℹ️ ବିଷୟରେ', as:'ℹ️ বিষয়ে' },
             // ─── Join Banner ───────────────────────────────────────────
-            'joinTitle':     { en:'🔱 Join Sudarshan Chakra Today!',
-                               hi:'🔱 आज ही सुदर्शन चक्र से जुड़ें!',
-                               bn:'🔱 আজই সুদর্শন চক্রে যোগ দিন!',
-                               gu:'🔱 આজ સુદર્શન ચક્ર સાથે જોડાઓ!',
-                               mr:'🔱 आज सुदर्शन चक्रात सामील व्हा!',
-                               kn:'🔱 ಇಂದೇ ಸುದರ್ಶನ ಚಕ್ರಕ್ಕೆ ಸೇರಿ!',
-                               te:'🔱 నేడే సుదర్శన చక్రలో చేరండి!',
-                               ml:'🔱 ഇന്ന് സുദർശൻ ചക്രയിൽ ചേരൂ!',
-                               ta:'🔱 இன்றே சுதர்சன சக்ரத்தில் சேருங்கள்!',
-                               pa:'🔱 ਅੱਜ ਹੀ ਸੁਦਰਸ਼ਨ ਚੱਕਰ ਨਾਲ ਜੁੜੋ!',
-                               or:'🔱 ଆଜି ସୁଦର୍ଶନ ଚକ୍ରକୁ ଯୋଗ ଦିଅ!',
-                               as:'🔱 আজিয়েই সুদৰ্শন চক্ৰত যোগ দিয়ক!' },
+            'joinTitle':     { en:'✨ Join ZiNi Today!',
+                               hi:'✨ आज ही ZiNi से जुड़ें!',
+                               bn:'✨ আজই ZiNi-তে যোগ দিন!',
+                               gu:'✨ આজ ZiNi સાથે જોડાઓ!',
+                               mr:'✨ आज ZiNi मध्ये सामील व्हा!',
+                               kn:'✨ ಇಂದೇ ZiNi-ಗೆ ಸೇರಿ!',
+                               te:'✨ నేడే ZiNi-లో చేరండి!',
+                               ml:'✨ ഇന്ന് ZiNi-യിൽ ചേരൂ!',
+                               ta:'✨ இன்றே ZiNi-யில் சேருங்கள்!',
+                               pa:'✨ ਅੱਜ ਹੀ ZiNi ਨਾਲ ਜੁੜੋ!',
+                               or:'✨ ଆଜି ସୁଦର୍ଶନ ଚକ୍ରକୁ ଯୋଗ ଦିଅ!',
+                               as:'✨ আজিয়েই সুদৰ্শন চক্ৰত যোগ দিয়ক!' },
             'joinSubtitle':  { en:"Be part of India's growing skilled workforce — get work, earn money, build reputation",
                                hi:'भारत के बढ़ते कुशल कार्यबल का हिस्सा बनें — काम पाएं, पैसा कमाएं, प्रतिष्ठा बनाएं',
                                bn:'ভারতের ক্রমবর্ধমান দক্ষ কর্মী নেটওয়ার্কের অংশ হন',
@@ -4570,16 +4571,16 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         function buildWAMsg(providerName, serviceName) {
             const lang = currentLanguage || 'en';
             const msgs = {
-                hi: `नमस्ते ${providerName} जी 🙏\nमैंने आपको *सुदर्शन चक्र* पर देखा।\nमुझे आपकी *${serviceName}* सेवा चाहिए।\nक्या हम बात कर सकते हैं?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                bn: `নমস্কার ${providerName} 🙏\nআমি *সুদর্শন চক্র*-এ আপনাকে খুঁজে পেয়েছি।\nআমার *${serviceName}* সেবা দরকার।\nআলোচনা করতে পারি?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                gu: `નમસ્તે ${providerName} 🙏\nમેં *સુદર્શન ચક્ર* પર તમને શોધ્યા।\nમને *${serviceName}* સેવા જોઈએ છે।\nવાત કરી શકીએ?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                mr: `नमस्ते ${providerName} 🙏\nमला *सुदर्शन चक्र* वर तुम्ही दिसलात।\nमला *${serviceName}* सेवा हवी आहे।\nआपण बोलू शकतो का?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                ta: `வணக்கம் ${providerName} 🙏\n*சுதர்ஷன் சக்ர*-ல் உங்களை கண்டேன்।\n*${serviceName}* சேவை தேவை।\nபேசலாமா?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                te: `నమస్కారం ${providerName} 🙏\n*సుదర్శన చక్ర*లో మీరు కనిపించారు।\n*${serviceName}* సేవ కావాలి।\nమాట్లాడగలమా?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                kn: `ನಮಸ್ಕಾರ ${providerName} 🙏\n*ಸುದರ್ಶನ ಚಕ್ರ*ದಲ್ಲಿ ನಿಮ್ಮನ್ನು ಕಂಡೆ।\n*${serviceName}* ಸೇವೆ ಬೇಕಾಗಿದೆ।\nಮಾತನಾಡಬಹುದೇ?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                ml: `നമസ്കാരം ${providerName} 🙏\n*സുദർശന ചക്ര*-ൽ നിങ്ങളെ കണ്ടു।\n*${serviceName}* സേവനം വേണം।\nസംസാരിക്കാമോ?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                pa: `ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ${providerName} 🙏\n*ਸੁਦਰਸ਼ਨ ਚੱਕਰ* ਤੇ ਤੁਹਾਨੂੰ ਲੱਭਿਆ।\n*${serviceName}* ਸੇਵਾ ਚਾਹੀਦੀ ਹੈ।\nਗੱਲ ਕਰ ਸਕਦੇ ਹਾਂ?\n\nHi ${providerName}, I found you on *Sudarshan Chakra*. I need your *${serviceName}* service. Can we discuss?`,
-                en: `Hi ${providerName} 🙏\nI found you on *Sudarshan Chakra*.\nI need your *${serviceName}* service.\nCan we discuss?`,
+                hi: `नमस्ते ${providerName} जी 🙏\nमैंने आपको *ZiNi* पर देखा।\nमुझे आपकी *${serviceName}* सेवा चाहिए।\nक्या हम बात कर सकते हैं?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                bn: `নমস্কার ${providerName} 🙏\nআমি *ZiNi*-এ আপনাকে খুঁজে পেয়েছি।\nআমার *${serviceName}* সেবা দরকার।\nআলোচনা করতে পারি?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                gu: `નમસ્તે ${providerName} 🙏\nમેં *ZiNi* પર તમને શોધ્યા।\nમને *${serviceName}* સેવા જોઈએ છે।\nવાત કરી શકીએ?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                mr: `नमस्ते ${providerName} 🙏\nमला *ZiNi* वर तुम्ही दिसलात।\nमला *${serviceName}* सेवा हवी आहे।\nआपण बोलू शकतो का?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                ta: `வணக்கம் ${providerName} 🙏\n*ZiNi*-ல் உங்களை கண்டேன்।\n*${serviceName}* சேவை தேவை।\nபேசலாமா?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                te: `నమస్కారం ${providerName} 🙏\n*ZiNi*లో మీరు కనిపించారు।\n*${serviceName}* సేవ కావాలి।\nమాట్లాడగలమా?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                kn: `ನಮಸ್ಕಾರ ${providerName} 🙏\n*ZiNi*ದಲ್ಲಿ ನಿಮ್ಮನ್ನು ಕಂಡೆ।\n*${serviceName}* ಸೇವೆ ಬೇಕಾಗಿದೆ।\nಮಾತನಾಡಬಹುದೇ?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                ml: `നമസ്കാരം ${providerName} 🙏\n*ZiNi*-ൽ നിങ്ങളെ കണ്ടു।\n*${serviceName}* സേവനം വേണം।\nസംസാരിക്കാമോ?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                pa: `ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ${providerName} 🙏\n*ZiNi* ਤੇ ਤੁਹਾਨੂੰ ਲੱਭਿਆ।\n*${serviceName}* ਸੇਵਾ ਚਾਹੀਦੀ ਹੈ।\nਗੱਲ ਕਰ ਸਕਦੇ ਹਾਂ?\n\nHi ${providerName}, I found you on *ZiNi*. I need your *${serviceName}* service. Can we discuss?`,
+                en: `Hi ${providerName} 🙏\nI found you on *ZiNi*.\nI need your *${serviceName}* service.\nCan we discuss?`,
             };
             return msgs[lang] || msgs['en'];
         }
@@ -4715,7 +4716,7 @@ S.getItem=function(k){return g.call(this,P+k)};S.setItem=function(k,v){return s.
         function getProviderAvatar(p) {
             if (p.photo) return `<img src="${p.photo}" alt="${p.name}" class="w-full h-full object-cover">`;
             const initials = (p.name||'Provider').split(' ').map(n => n[0]).join('').substring(0,2).toUpperCase();
-            const colors = ['#ea580c','#2563eb','#16a34a','#9333ea','#dc2626','#0891b2'];
+            const colors = ['#5B21B6','#2563eb','#16a34a','#9333ea','#dc2626','#0891b2'];
             const color = colors[(p.name||'Provider').charCodeAt(0) % colors.length];
             return `<div class="w-full h-full flex items-center justify-center text-white text-xl font-bold" style="background:${color}">${initials}</div>`;
         }
@@ -6878,12 +6879,12 @@ function toggleAdminCat(id, headerEl) {
                     // +5 reward points (redeemed points are already deducted at payment time by fixes.js)
                     await _firebase.set(credRef, (cs.exists()?(cs.val()||0):0) + 5);
                     await addNotification(req.seekerUid, { type:'hire_confirmed', title:'🎉 Payment Confirmed — Hire Successful!',
-                        message: `Your payment of ₹${req.amount} (UTR: ${req.utr}) for hiring ${req.providerName} has been verified by Sudarshan Chakra Portal. Your provider has been informed and will contact you shortly. You also earned 5 wallet points! Thank you for trusting us. 🙏🔱`,
+                        message: `Your payment of ₹${req.amount} (UTR: ${req.utr}) for hiring ${req.providerName} has been verified by ZiNi Portal. Your provider has been informed and will contact you shortly. You also earned 5 wallet points! Thank you for trusting us. 🙏✨`,
                         timestamp: Date.now() });
                 }
                 if (req.ownerUid) {
                     await addNotification(req.ownerUid, { type:'hire_payment_received', title:'✅ Portal Convenience Fee Confirmed — New Job!',
-                        message: `Dear ${req.providerName||'Provider'}, the service seeker ${req.seekerName} (${req.seekerPhone}) has successfully paid the Sudarshan Chakra portal convenience fee of ₹${req.fee||req.amount}. You have a confirmed new job for "${req.service||'your service'}". Please contact the seeker at your earliest convenience. Sudarshan Chakra Portal wishes you success! 🔱`,
+                        message: `Dear ${req.providerName||'Provider'}, the service seeker ${req.seekerName} (${req.seekerPhone}) has successfully paid the ZiNi portal convenience fee of ₹${req.fee||req.amount}. You have a confirmed new job for "${req.service||'your service'}". Please contact the seeker at your earliest convenience. ZiNi Portal wishes you success! ✨`,
                         timestamp: Date.now() });
                 }
                 showFirebaseStatus('✅ Hire approved! Seeker & provider notified.', 'success');
@@ -6907,7 +6908,7 @@ function toggleAdminCat(id, headerEl) {
                 await _firebase.update(_firebase.ref(_firebase.db, `admin/hireRequests/${requestId}`), { status:'rejected', rejectedAt: new Date().toISOString(), rejectReason: reason });
                 if (req.seekerUid) {
                     await addNotification(req.seekerUid, { type:'payment_rejected', title:'❌ Payment Not Verified',
-                        message: `Your hire request (UTR: ${req.utr}) could not be verified. Reason: ${reason}. Please retry or contact support. 🔱`,
+                        message: `Your hire request (UTR: ${req.utr}) could not be verified. Reason: ${reason}. Please retry or contact support. ✨`,
                         timestamp: Date.now() });
                 }
                 showFirebaseStatus('❌ Hire request rejected. Seeker notified.', 'error');
@@ -7261,7 +7262,7 @@ function toggleAdminCat(id, headerEl) {
             await _firebase.set(_firebase.ref(_firebase.db, `users/${firebaseUser.uid}`), profile);
             userProfile = profile;
             closeLoginModal();
-            showFirebaseStatus('🎉 Welcome to Sudarshan Chakra, ' + name + '!', 'success');
+            showFirebaseStatus('🎉 Welcome to ZiNi, ' + name + '!', 'success');
             updateNavForLoggedIn();
             showPage('myProfile');
         }
@@ -7434,7 +7435,7 @@ function toggleAdminCat(id, headerEl) {
                 }
 
                 const txns = txnSnap.val();
-                const typeIcons = { portal: '🔱', tip: '🙏', charity: '🌱', daily_login: '🌟', write_review: '⭐', share_referral: '📤', refer_provider: '🤝', booking: '📅' };
+                const typeIcons = { portal: '✨', tip: '🙏', charity: '🌱', daily_login: '🌟', write_review: '⭐', share_referral: '📤', refer_provider: '🤝', booking: '📅' };
                 const typeLabels = { portal: 'Portal Fee', tip: 'Tip to Provider', charity: 'Charity Donation', daily_login: 'Daily Login Bonus', write_review: 'Review Written', share_referral: 'App Share Bonus', refer_provider: 'Provider Referral', booking: 'Service Booked' };
 
                 const rows = Object.entries(txns)
@@ -7911,14 +7912,14 @@ function toggleAdminCat(id, headerEl) {
 
                 // ── NOTIFICATION TO REPORTER (Regret message) ──
                 const regretMsg = isProvider
-                    ? `🙏 Dear ${name || 'User'}, we sincerely regret the inconvenience caused. Your report against provider "${targetName}" has been received by Sudarshan Chakra Portal. We have taken cognizance and have immediately initiated communication with the concerned party to resolve this issue at the earliest — with full consent and satisfaction of both parties. We assure you of a fair and transparent resolution. Thank you for trusting us. 🔱`
-                    : `🙏 Dear ${name || 'User'}, we sincerely regret the inconvenience caused. Your report against seeker "${targetName}" has been received by Sudarshan Chakra Portal. We have taken cognizance and have immediately initiated communication with the concerned party to resolve this issue at the earliest — with full consent and satisfaction of both parties. We assure you of a fair and transparent resolution. Thank you for trusting us. 🔱`;
+                    ? `🙏 Dear ${name || 'User'}, we sincerely regret the inconvenience caused. Your report against provider "${targetName}" has been received by ZiNi Portal. We have taken cognizance and have immediately initiated communication with the concerned party to resolve this issue at the earliest — with full consent and satisfaction of both parties. We assure you of a fair and transparent resolution. Thank you for trusting us. ✨`
+                    : `🙏 Dear ${name || 'User'}, we sincerely regret the inconvenience caused. Your report against seeker "${targetName}" has been received by ZiNi Portal. We have taken cognizance and have immediately initiated communication with the concerned party to resolve this issue at the earliest — with full consent and satisfaction of both parties. We assure you of a fair and transparent resolution. Thank you for trusting us. ✨`;
 
                 await _firebase.set(
                     _firebase.ref(_firebase.db, `users/${firebaseUser.uid}/notifications/${now}_regret`),
                     {
                         type: 'portal_regret',
-                        title: '🔱 Sudarshan Chakra Portal',
+                        title: '✨ ZiNi Portal',
                         message: regretMsg,
                         timestamp: now,
                         date: dateStr,
@@ -7933,15 +7934,15 @@ function toggleAdminCat(id, headerEl) {
                     : reportTargetId;
 
                 const infoMsg = isProvider
-                    ? `ℹ️ Dear Provider, a concern has been raised by a customer regarding your service on Sudarshan Chakra Portal on ${dateStr}. Please be assured that our team has taken cognizance of this matter and is initiating a fair communication process. We will reach out to you to understand your perspective and work toward a mutually satisfactory resolution with the full consent of both parties. We appreciate your cooperation. 🔱`
-                    : `ℹ️ Dear User, a concern has been raised by a service provider regarding an interaction on Sudarshan Chakra Portal on ${dateStr}. Our team has taken note of this matter and is initiating a fair communication process with both parties. We will work toward a resolution that is agreeable to everyone involved. We appreciate your understanding. 🔱`;
+                    ? `ℹ️ Dear Provider, a concern has been raised by a customer regarding your service on ZiNi Portal on ${dateStr}. Please be assured that our team has taken cognizance of this matter and is initiating a fair communication process. We will reach out to you to understand your perspective and work toward a mutually satisfactory resolution with the full consent of both parties. We appreciate your cooperation. ✨`
+                    : `ℹ️ Dear User, a concern has been raised by a service provider regarding an interaction on ZiNi Portal on ${dateStr}. Our team has taken note of this matter and is initiating a fair communication process with both parties. We will work toward a resolution that is agreeable to everyone involved. We appreciate your understanding. ✨`;
 
                 if (reportedUid && reportedUid !== firebaseUser.uid) {
                     await _firebase.set(
                         _firebase.ref(_firebase.db, `users/${reportedUid}/notifications/${now}_info`),
                         {
                             type: 'portal_info',
-                            title: '🔱 Sudarshan Chakra Portal — Notice',
+                            title: '✨ ZiNi Portal — Notice',
                             message: infoMsg,
                             timestamp: now,
                             date: dateStr,
@@ -8485,11 +8486,11 @@ function toggleAdminCat(id, headerEl) {
     #hireModal .hm-page{max-width:480px;margin:0 auto;padding:20px 16px 40px;font-family:'Poppins',sans-serif}
     #hireModal .slbl{font-size:11px;font-weight:700;color:#64748B;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;margin-top:6px;padding-left:4px}
     #hireModal .pcard{background:white;border-radius:20px;padding:20px;margin-bottom:16px;box-shadow:0 2px 16px rgba(0,0,0,.07);border:1px solid #E2E8F0;display:flex;align-items:center;gap:16px}
-    #hireModal .pavatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#EA580C,#D97706);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+    #hireModal .pavatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#5B21B6,#D97706);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
     #hireModal .scard{background:white;border-radius:16px;padding:16px 18px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid #E2E8F0}
     #hireModal .srow{display:flex;align-items:center;gap:12px;margin-bottom:12px}
     #hireModal .sinput{width:100%;border:1.5px solid #E2E8F0;border-radius:10px;padding:10px 14px;font-size:13px;font-family:'Poppins',sans-serif;color:#1E293B;outline:none;background:#FAFBFC}
-    #hireModal .sinput:focus{border-color:#EA580C;background:white}
+    #hireModal .sinput:focus{border-color:#5B21B6;background:white}
     #hireModal .ocard{background:white;border-radius:16px;padding:16px 18px;margin-bottom:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1px solid #E2E8F0}
     #hireModal .orow{display:flex;align-items:center;gap:12px;margin-bottom:10px}
     #hireModal .amtctrl{display:flex;align-items:center;gap:8px}
@@ -8503,7 +8504,7 @@ function toggleAdminCat(id, headerEl) {
     #hireModal .bdiv{height:1px;background:rgba(255,255,255,.1);margin:12px 0}
     #hireModal .crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;background:rgba(234,88,12,.12);border-radius:10px;padding:8px 12px;border:1px solid rgba(234,88,12,.25)}
     #hireModal .cl{font-size:13px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:7px}
-    #hireModal .cr{font-size:14px;font-weight:700;color:#FED7AA}
+    #hireModal .cr{font-size:14px;font-weight:700;color:#DDD6FE}
     #hireModal .trow{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
     #hireModal .tl{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:white}
     #hireModal .tr{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#FDE68A}
@@ -8520,7 +8521,7 @@ function toggleAdminCat(id, headerEl) {
   <div class="hm-nav">
     <button class="hm-back" onclick="closeHireModal()">✕</button>
     <div class="hm-title">Hire Provider</div>
-    <span style="font-size:10px;font-weight:700;color:#FED7AA;background:rgba(234,88,12,.2);padding:4px 10px;border-radius:20px;border:1px solid rgba(234,88,12,.3)">🔱 SC</span>
+    <span style="font-size:10px;font-weight:700;color:#DDD6FE;background:rgba(234,88,12,.2);padding:4px 10px;border-radius:20px;border:1px solid rgba(234,88,12,.3)">✨ SC</span>
   </div>
 
   <div class="hm-page">
@@ -8580,12 +8581,12 @@ function toggleAdminCat(id, headerEl) {
     <p class="slbl">Bill Summary</p>
     <div class="bcard">
       <div style="font-size:11px;font-weight:700;color:rgba(253,230,138,.6);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px">💰 Payment Breakdown</div>
-      <div class="brow"><span class="bl">🔱 Provider Contact Fee</span><span class="br bfree">FREE ✓</span></div>
+      <div class="brow"><span class="bl">✨ Provider Contact Fee</span><span class="br bfree">FREE ✓</span></div>
       <div class="brow"><span class="bl">🙏 Tip to Provider</span><span class="br" id="hm-bill-tip">₹0</span></div>
       <div class="brow"><span class="bl">🌱 Charity Donation</span><span class="br" id="hm-bill-charity">₹0</span></div>
       <div class="bdiv"></div>
       <div class="crow">
-        <div class="cl"><span>⚡</span><div>Platform Convenience Fee<span style="font-size:9px;color:rgba(253,230,138,.45);margin-top:3px;display:block">Keeps Sudarshan Chakra running</span></div></div>
+        <div class="cl"><span>⚡</span><div>Platform Convenience Fee<span style="font-size:9px;color:rgba(253,230,138,.45);margin-top:3px;display:block">Keeps ZiNi running</span></div></div>
         <span class="cr">₹51</span>
       </div>
       <div class="bdiv"></div>
@@ -8616,7 +8617,7 @@ function toggleAdminCat(id, headerEl) {
     <button class="paybtn" onclick="hmOpenQR()">
       <span style="font-size:22px">💜</span> Pay with PhonePe / UPI
     </button>
-    <p style="text-align:center;font-size:11px;color:#64748B;margin-bottom:16px">🔱 Provider registration is <span style="color:#059669;font-weight:700">always FREE</span> · No commission</p>
+    <p style="text-align:center;font-size:11px;color:#64748B;margin-bottom:16px">✨ Provider registration is <span style="color:#059669;font-weight:700">always FREE</span> · No commission</p>
     <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
       <span style="padding:5px 12px;background:white;border:1px solid #E2E8F0;border-radius:20px;font-size:10px;color:#64748B">🔒 Secure Payment</span>
       <span style="padding:5px 12px;background:white;border:1px solid #E2E8F0;border-radius:20px;font-size:10px;color:#64748B">✅ Verified Provider</span>
@@ -8632,14 +8633,14 @@ function toggleAdminCat(id, headerEl) {
       <p style="font-size:12px;color:#64748B;text-align:center;margin-bottom:20px" id="hm-sheet-sub">Pay ₹51 via PhonePe / any UPI app</p>
       <div style="background:linear-gradient(135deg,#F8FAFC,#EFF6FF);border-radius:20px;padding:20px;text-align:center;margin-bottom:16px;border:2px solid #E2E8F0;overflow:visible;">
         <div id="hm-qr-real" style="width:160px;margin:0 auto 10px;background:white;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.1);min-height:160px;overflow:visible;"></div>
-        <div style="background:linear-gradient(135deg,#EA580C,#D97706);color:white;border-radius:50px;padding:8px 20px;font-size:20px;font-weight:900;font-family:'Playfair Display',serif;display:inline-block;margin-bottom:8px" id="hm-qr-amount">₹51</div>
+        <div style="background:linear-gradient(135deg,#5B21B6,#D97706);color:white;border-radius:50px;padding:8px 20px;font-size:20px;font-weight:900;font-family:'Playfair Display',serif;display:inline-block;margin-bottom:8px" id="hm-qr-amount">₹51</div>
         <div style="font-size:11px;color:#64748B">UPI ID: <span style="font-weight:700;color:#1E3A5F">sudarshanchakra@idbi</span></div>
       </div>
       <div style="background:#F8FAFC;border-radius:14px;padding:14px 16px;margin-bottom:16px">
         <div style="display:flex;justify-content:space-between;font-size:12px;color:#64748B;margin-bottom:6px"><span>Provider Contact Fee</span><span style="color:#059669;font-weight:600">FREE</span></div>
         <div style="display:flex;justify-content:space-between;font-size:12px;color:#64748B;margin-bottom:6px"><span>Tip to Provider</span><span id="hm-mb-tip">₹0</span></div>
         <div style="display:flex;justify-content:space-between;font-size:12px;color:#64748B;margin-bottom:6px"><span>Charity Donation</span><span id="hm-mb-charity">₹0</span></div>
-        <div id="hm-fee-row" style="display:flex;justify-content:space-between;font-size:12px;color:#EA580C;font-weight:600;margin-bottom:6px"><span>⚡ Platform Fee</span><span>₹51</span></div>
+        <div id="hm-fee-row" style="display:flex;justify-content:space-between;font-size:12px;color:#5B21B6;font-weight:600;margin-bottom:6px"><span>⚡ Platform Fee</span><span>₹51</span></div>
         <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700;color:#1E3A5F;border-top:1px solid #E2E8F0;padding-top:8px;margin-top:4px"><span>Total</span><span id="hm-mb-total">₹51</span></div>
       </div>
       <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px">
@@ -8653,7 +8654,7 @@ function toggleAdminCat(id, headerEl) {
         <input id="hm-utr-input" type="text" placeholder="12-digit UTR from your UPI app"
           maxlength="20" oninput="hmValidateUTR()"
           style="width:100%;border:1.5px solid #E2E8F0;border-radius:12px;padding:10px 14px;font-size:13px;font-family:monospace;outline:none;transition:border-color 0.2s;"
-          onfocus="this.style.borderColor='#EA580C'" onblur="this.style.borderColor='#E2E8F0'">
+          onfocus="this.style.borderColor='#5B21B6'" onblur="this.style.borderColor='#E2E8F0'">
         <p id="hm-utr-hint" style="font-size:10px;color:#94A3B8;margin-top:5px;">📋 Find in: UPI app → Transactions → Payment detail → UTR / Ref No.</p>
       </div>
       <button id="hm-done-btn" class="donebtn" onclick="hmConfirmPayment()" disabled
@@ -8733,7 +8734,7 @@ function hireWithVerificationCheck(providerId, name, service, location, rating, 
   const decodedService = decodeURIComponent(service);
   const confirmed1 = confirm(
     '⚠️ VERIFICATION PENDING\n\n' +
-    decodedName + ' (' + decodedService + ') is NOT yet verified by Sudarshan Chakra.\n\n' +
+    decodedName + ' (' + decodedService + ') is NOT yet verified by ZiNi.\n\n' +
     'Hiring an unverified provider is at your OWN RISK.\n\n' +
     'Click OK to proceed anyway, or Cancel to wait for verification.'
   );
@@ -8820,7 +8821,7 @@ function hmOpenQR() {
   // Generate real QR code for the current amount (same total as the bill)
   const total = hmCalc().total;
   const UPI_ID    = 'sudarshanchakra@idbi';
-  const noteText  = 'Sudarshan Chakra - Hire Fee';
+  const noteText  = 'ZiNi - Hire Fee';
   const upiUrl    = `upi://pay?pa=${UPI_ID}&pn=Sudarshan%20Chakra&am=${total}&cu=INR&tn=${encodeURIComponent(noteText)}`;
   const qrWrap    = document.getElementById('hm-qr-real');
   if (qrWrap) {
@@ -8857,7 +8858,7 @@ function hmOpenUPI(app) {
   // Same total as the bill (hmCalc)
   const total = hmCalc().total;
   const UPI_ID = 'sudarshanchakra@idbi';
-  const noteText = 'Sudarshan Chakra - Hire Fee';
+  const noteText = 'ZiNi - Hire Fee';
   const note = encodeURIComponent(noteText);
   const upiUrl = `upi://pay?pa=${UPI_ID}&pn=Sudarshan%20Chakra&am=${total}&cu=INR&tn=${note}`;
   const appUrls = {
@@ -8954,14 +8955,14 @@ function hmConfirmPayment() {
                 await _firebase.set(_firebase.ref(_firebase.db, `users/${seekerUid}/transactions/${txnId}`), Object.assign({}, hireRequest, {status:'pending'}));
                 await addNotification(seekerUid, {
                     type: 'payment_pending', title: '⏳ Payment Under Review',
-                    message: `Your hire request for ${hireRequest.providerName || 'the provider'} (UTR: ${utr}) has been received. We are verifying your payment of ₹${amount}. You will be notified once confirmed. Thank you for choosing Sudarshan Chakra! 🔱`,
+                    message: `Your hire request for ${hireRequest.providerName || 'the provider'} (UTR: ${utr}) has been received. We are verifying your payment of ₹${amount}. You will be notified once confirmed. Thank you for choosing ZiNi! ✨`,
                     timestamp: txnId
                 });
             }
             if (hmProviderOwnerUid) {
                 await addNotification(hmProviderOwnerUid, {
                     type: 'hire_request_pending', title: '🔔 New Hire Request Received!',
-                    message: `Dear ${hireRequest.providerName || 'Provider'}, ${seekerName} (${seekerPhone}) has initiated a hire request for your service "${hireRequest.service || 'your service'}". Payment of ₹${amount} (UTR: ${utr}) is being verified by Sudarshan Chakra Portal. You will receive final confirmation once payment is approved. Please be ready! 🔱`,
+                    message: `Dear ${hireRequest.providerName || 'Provider'}, ${seekerName} (${seekerPhone}) has initiated a hire request for your service "${hireRequest.service || 'your service'}". Payment of ₹${amount} (UTR: ${utr}) is being verified by ZiNi Portal. You will receive final confirmation once payment is approved. Please be ready! ✨`,
                     timestamp: txnId
                 });
             }
@@ -9142,7 +9143,7 @@ function hmConfirmPayment() {
                     <button onclick="sendGratitudeWhatsApp()" class="flex-1 bg-green-600 text-white py-2.5 rounded-xl text-sm font-bold hover:bg-green-700 transition">📲 Share on WhatsApp</button>
                     <button onclick="copyGratitudeMessage()" class="flex-1 bg-orange-500 text-white py-2.5 rounded-xl text-sm font-bold hover:bg-orange-600 transition">📋 Copy Message</button>
                 </div>
-                <p class="text-center text-xs text-gray-400">3 pts credited after sharing · Sudarshan Chakra 🙏</p>
+                <p class="text-center text-xs text-gray-400">3 pts credited after sharing · ZiNi 🙏</p>
             </div>
         </div>
     </div>
@@ -9179,7 +9180,7 @@ function hmConfirmPayment() {
                 <button onclick="proceedCharityPayment()" class="w-full bg-teal-600 text-white py-3 rounded-xl font-bold text-base hover:bg-teal-700 shadow-md">
                     🙏 Donate via UPI
                 </button>
-                <p class="text-center text-xs text-gray-400">Powered by Sudarshan Chakra · Dharma &amp; Seva 🌸</p>
+                <p class="text-center text-xs text-gray-400">Powered by ZiNi · Dharma &amp; Seva 🌸</p>
             </div>
         </div>
     </div>
@@ -9197,7 +9198,7 @@ function hmConfirmPayment() {
     <div class="sticky top-0 bg-gradient-to-r from-orange-600 via-orange-500 to-yellow-500 text-white px-5 pt-5 pb-4 rounded-t-3xl z-10">
       <div class="flex justify-between items-center">
         <div>
-          <p class="text-xs text-orange-100 font-medium tracking-wide uppercase">Sudarshan Chakra India</p>
+          <p class="text-xs text-orange-100 font-medium tracking-wide uppercase">ZiNi</p>
           <h2 class="text-xl font-bold mt-0.5" id="scpay-title">Complete Payment</h2>
         </div>
         <button onclick="scPayClose()" class="w-9 h-9 rounded-full bg-white bg-opacity-20 flex items-center justify-center text-white text-xl font-bold hover:bg-opacity-30">✕</button>
@@ -10229,14 +10230,14 @@ function shareReferralLink() {
     const uid = firebaseUser.uid;
     const baseUrl = 'https://sudarshanchakraindia.github.io/zini-test/';
     const referralUrl = baseUrl + '?ref=' + uid.slice(0, 8);
-    const msg = `🙏 Namaste! I use Sudarshan Chakra to find trusted local service providers — plumbers, electricians, beauticians & more near you!
+    const msg = `🙏 Namaste! I use ZiNi to find trusted local service providers — plumbers, electricians, beauticians & more near you!
 
 📲 Join here: ${referralUrl}
 
 🌟 Verified providers · Real reviews · Book easily!`;
 
     if (navigator.share) {
-        navigator.share({ title: 'Sudarshan Chakra', text: msg, url: referralUrl })
+        navigator.share({ title: 'ZiNi', text: msg, url: referralUrl })
             .then(() => {
                 // Award 5 points for sharing
                 awardWalletPoints(5, 'share_referral', 'Shared app referral link');
@@ -10311,7 +10312,7 @@ function showReferProviderModal() {
     const uid = firebaseUser.uid;
     const baseUrl = 'https://sudarshanchakraindia.github.io/zini-test/';
     const referralUrl = baseUrl + '?page=register&ref=' + uid.slice(0, 8);
-    const msg = `🛠️ Are you a skilled professional? Join Sudarshan Chakra and get customers near you!
+    const msg = `🛠️ Are you a skilled professional? Join ZiNi and get customers near you!
 
 ✅ Free to join
 ✅ Get verified
@@ -10396,7 +10397,7 @@ function sendGratitudeWhatsApp() {
     if (!msg || msg.length < 10) { alert('Please write a message (at least 10 characters)'); return; }
     const fullMsg  = `🙏 ${msg}
 
-— Shared via Sudarshan Chakra · India's trusted service marketplace
+— Shared via ZiNi · India's trusted service marketplace
 https://sudarshanchakraindia.github.io/zini-test/`;
     window.open('https://wa.me/?text=' + encodeURIComponent(fullMsg), '_blank');
     awardWalletPoints(3, 'gratitude_share', 'Sent gratitude message via WhatsApp');
@@ -10408,7 +10409,7 @@ function copyGratitudeMessage() {
     if (!msg) { alert('Please write a message first'); return; }
     const fullMsg  = `🙏 ${msg}
 
-— Shared via Sudarshan Chakra
+— Shared via ZiNi
 https://sudarshanchakraindia.github.io/zini-test/`;
     navigator.clipboard.writeText(fullMsg)
         .then(() => {
@@ -10438,7 +10439,7 @@ function hmToggleWalletPts() {
     const dot = document.getElementById('hm-wallet-toggle-dot');
     const row = document.getElementById('hm-pts-applied-row');
     if (cb.checked) {
-        if (bg)  { bg.style.background = '#f97316'; }
+        if (bg)  { bg.style.background = '#7C3AED'; }
         if (dot) { dot.style.left = '19px'; }
         if (row) row.style.display = 'block';
     } else {
@@ -10552,7 +10553,7 @@ window.hmSetAmt               = hmSetAmt;
 
 // Build FAQ accordion
 const FAQ_DATA = [
-  ["Is Sudarshan Chakra India free to use?", "Browsing and searching for providers is completely free for seekers. Providers can register and list a basic profile at no cost. Premium membership tiers (Professional and Elite) are available for providers who want greater visibility — and earned Wallet points can be used to offset the upgrade cost."],
+  ["Is ZiNi free to use?", "Browsing and searching for providers is completely free for seekers. Providers can register and list a basic profile at no cost. Premium membership tiers (Professional and Elite) are available for providers who want greater visibility — and earned Wallet points can be used to offset the upgrade cost."],
   ["How do I login? Is a password required?", "We use secure mobile OTP login — no password needed. Enter your 10-digit mobile number, receive a 6-digit SMS code, enter it and you are in. Your session stays active across visits so you won't need to login every time on the same device."],
   ["Is my personal information safe?", "Yes. Your mobile number is used only for OTP verification and is never displayed publicly. Identity verification documents are seen exclusively by our admin team and are never shared publicly. We do not sell your data to any third party under any circumstances."],
   ["How does the Wallet and Reward Points system work?", "You earn points for daily logins (2 pts), leaving reviews (5 pts), completing bookings, and referring new users. Points accumulate in your Wallet and can be redeemed to reduce membership upgrade fees. You can also donate points to our Charity program to fund skill training for underprivileged youth."],
@@ -10562,7 +10563,7 @@ const FAQ_DATA = [
   ["What is the Charity program and how does it work?", "The Charity program lets you donate your earned Wallet points to a fund that sponsors vocational skill training for underprivileged youth. Even a small donation helps fund a training programme that can transform someone's livelihood. Donate from the Wallet section of your profile."],
   ["How does the Referral program work?", "Every registered user gets a unique referral link in their Wallet page. Share it with friends. When they register as a provider through your link, you earn Wallet points and a commission bonus. Track all referrals and earnings in your Wallet dashboard."],
   ["What if a provider doesn't show up or does poor work?", "Leave an honest review with your star rating — this protects the next seeker. Use the Report feature for serious issues. For booking disputes, contact us at support@sudarshanchakraindia.com and our team will mediate. Building a transparent, accountable community is at our core."],
-  ["How do I install the app on my phone?", "Sudarshan Chakra India is a Progressive Web App (PWA). On Android: open in Chrome → tap three-dot menu → Add to Home Screen. On iPhone: open in Safari → tap Share → Add to Home Screen. The app icon appears on your home screen just like a native app and works offline too."]
+  ["How do I install the app on my phone?", "ZiNi is a Progressive Web App (PWA). On Android: open in Chrome → tap three-dot menu → Add to Home Screen. On iPhone: open in Safari → tap Share → Add to Home Screen. The app icon appears on your home screen just like a native app and works offline too."]
 ];
 
 function buildFAQ() {
@@ -10769,7 +10770,7 @@ function scPayShowToast(msg, duration = 4000) {
 }
 
 // ── AI CHATBOT — LOCAL KNOWLEDGE BASE (no API needed, works on all browsers) ──
-const INFO_CHAT_SYS = `You are the helpful AI guide for Sudarshan Chakra India, a hyperlocal service marketplace app for India.
+const INFO_CHAT_SYS = `You are the helpful AI guide for ZiNi, a hyperlocal service marketplace app for India.
 
 KEY APP FACTS:
 - Connects service seekers (people needing home services) with service providers (skilled workers)
@@ -10807,7 +10808,7 @@ const SC_KB = [
   { k: ['book','booking','hire','service','how to book','hire now'],
     a: "To book a service:\n1️⃣ Search or browse for the service you need\n2️⃣ Tap any provider card to view their full profile\n3️⃣ Check their reviews, rates, and working hours\n4️⃣ Tap 📞 Call, 💬 WhatsApp, or 'Hire Now'\n5️⃣ For Hire Now: fill in date, location and job details, then submit\n\nThe provider will confirm and contact you directly." },
   { k: ['charity','donate','donation','skill','training','fund','underprivileged'],
-    a: "❤️ Charity Program:\nSudarshan Chakra India runs a Skill Development Fund where your earned Wallet points directly sponsor vocational training for underprivileged youth.\n\nTo donate:\n• Go to your Wallet section (login required)\n• Tap 'Donate to Charity'\n• Choose how many points to donate\n\nEven 10 points helps fund someone's skill training. Every donation builds India's future." },
+    a: "❤️ Charity Program:\nZiNi runs a Skill Development Fund where your earned Wallet points directly sponsor vocational training for underprivileged youth.\n\nTo donate:\n• Go to your Wallet section (login required)\n• Tap 'Donate to Charity'\n• Choose how many points to donate\n\nEven 10 points helps fund someone's skill training. Every donation builds India's future." },
   { k: ['refer','referral','invite','link','commission','earn commission'],
     a: "🤝 Referral Program:\n• Login and go to your Wallet page\n• Find your unique referral link\n• Share it with friends and fellow workers\n• When someone registers as a provider through your link, you earn Wallet points + commission!\n\nYou can track all referrals and earnings in your Wallet dashboard. The more you refer, the more you earn." },
   { k: ['login','otp','mobile','password','sign in','log in','number'],
@@ -10821,7 +10822,7 @@ const SC_KB = [
   { k: ['portfolio','photo','work','showcase','picture','image','gallery'],
     a: "📸 Portfolio Photos:\nAfter logging in as a provider:\n1. Go to your profile\n2. Tap 'Add Portfolio Photo'\n3. Upload photos of your completed work\n4. You can add up to 10 photos\n\nA strong portfolio is your most powerful tool — customers choose providers with good work photos. Show your best work!" },
   { k: ['install','pwa','app','home screen','download','offline'],
-    a: "📱 Install the App:\nSudarshan Chakra India is a Progressive Web App — no app store needed!\n\nAndroid (Chrome):\n• Tap the 3-dot menu → 'Add to Home Screen'\n\niPhone (Safari):\n• Tap Share button → 'Add to Home Screen'\n\nThe app icon appears on your home screen and works offline too!" },
+    a: "📱 Install the App:\nZiNi is a Progressive Web App — no app store needed!\n\nAndroid (Chrome):\n• Tap the 3-dot menu → 'Add to Home Screen'\n\niPhone (Safari):\n• Tap Share button → 'Add to Home Screen'\n\nThe app icon appears on your home screen and works offline too!" },
   { k: ['call','phone','contact','whatsapp','message','reach'],
     a: "📞 Contacting Providers:\n• Tap 📞 Call on any provider profile → directly opens your phone dialer\n• Tap 💬 WhatsApp → opens WhatsApp with a pre-filled message\n• Tap 💬 Chat → in-app chat without sharing phone numbers\n\nNo middleman — you connect directly with the provider." },
   { k: ['free','cost','fee','price','charge','money','payment'],
@@ -10903,7 +10904,7 @@ function addInfoMsg(text, type) {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('Sudarshan Chakra SW Registered!', reg))
+        .then(reg => console.log('ZiNi SW Registered!', reg))
         .catch(err => console.log('SW Registration Failed:', err));
     });
   }

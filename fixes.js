@@ -49,7 +49,7 @@
     }
 })();
 /**
- * Sudarshan Chakra — fixes.js v3.0
+ * ZiNi — fixes.js v3.0
  * All bug fixes + RADHEY AI Assistant (fully offline, no API needed)
  * Add before </body> in index.html: <script src="fixes.js"></script>
  */
@@ -86,7 +86,7 @@ window.radheyLocalAnswer = function(quehry) {hh
     if (q.includes('contact') || q.includes('support') || q.includes('help') || q.includes('email'))
         return '📞 Contact:\n✉️ support@sudarshanchakraindia.com\n✉️ partners@sudarshanchakraindia.com\n\n⏰ Mon-Sat, 9 AM - 6 PM IST 🙏';
     if (q.length < 4 || q.includes('namaste') || q.includes('hello') || q === 'hi' || q.includes('thanks') || q.includes('shukriya'))
-        return '🙏 Namaste!\n\nMain RADHEY hoon — Sudarshan Chakra ka AI sahayak.\n\nPoochhen:\n🔍 Service kaise dhundhen\n📝 Registration\n💰 Wallet & Points\n✅ Verified Badge\n📅 Booking process\n\nBataiye kya chahiye? 😊';
+        return '🙏 Namaste!\n\nMain RADHEY hoon — ZiNi ka AI sahayak.\n\nPoochhen:\n🔍 Service kaise dhundhen\n📝 Registration\n💰 Wallet & Points\n✅ Verified Badge\n📅 Booking process\n\nBataiye kya chahiye? 😊';
     return `🤔 "${query}" ke baare mein seedha jawab nahi mil raha.\n\nIn topics par poochhen:\n• Registration / Login\n• Service dhundhna\n• Wallet & Points\n• Verified Badge\n• Membership Plans\n• Booking\n\nOr: support@sudarshanchakraindia.com 🙏`;
 };
 
@@ -109,7 +109,7 @@ window.radheyLocalAnswer = function(quehry) {hh
         fixBug7_ChatModal();
         fixBug8_BookingsTab();
         fixBug9_RoleDetection();
-        console.log('✅ Sudarshan Chakra: All fixes applied!');
+        console.log('✅ ZiNi: All fixes applied!');
     }
 
     // BUG 1: Wallet tab button missing
@@ -448,7 +448,7 @@ window.radheyLocalAnswer = function(quehry) {hh
         const w = document.createElement('div');
         w.id = 'radhey-widget';
         w.title = 'RADHEY — आपका AI सहायक';
-        w.innerHTML = '<div id="radhey-chakra">🔱</div><div id="radhey-widget-text"><div class="r-name">RADHEY</div><div class="r-sub">🙏 Namaste</div></div><div id="radhey-dot"></div>';
+        w.innerHTML = '<div id="radhey-chakra">✨</div><div id="radhey-widget-text"><div class="r-name">RADHEY</div><div class="r-sub">🙏 Namaste</div></div><div id="radhey-dot"></div>';
         const langBtn = nav.querySelector('button[onclick="changeLang()"]');
         if (langBtn) nav.insertBefore(w, langBtn); else nav.appendChild(w);
         w.onclick = radheyToggle;
@@ -459,8 +459,8 @@ window.radheyLocalAnswer = function(quehry) {hh
     panel.id = 'radhey-panel';
     panel.innerHTML = `
         <div id="radhey-head">
-            <div id="radhey-head-avatar">🔱</div>
-            <div style="flex:1"><div style="font-weight:800;font-size:14px;color:white">RADHEY 🙏</div><div style="font-size:10px;color:rgba(255,255,255,0.85)">Sudarshan Chakra · AI सहायक</div></div>
+            <div id="radhey-head-avatar">✨</div>
+            <div style="flex:1"><div style="font-weight:800;font-size:14px;color:white">RADHEY 🙏</div><div style="font-size:10px;color:rgba(255,255,255,0.85)">ZiNi · AI सहायक</div></div>
             <button onclick="radheyStartVoiceReg()" style="background:rgba(255,255,255,0.2);border:none;border-radius:8px;padding:4px 8px;color:white;font-size:11px;cursor:pointer;font-weight:700">🎤 Register</button>
             <button onclick="radheyToggle()" style="background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:26px;height:26px;color:white;font-size:14px;cursor:pointer;margin-left:4px">✕</button>
         </div>
@@ -537,8 +537,8 @@ window.radheyLocalAnswer = function(quehry) {hh
 
     window.radheyGreet = function () {
         const name = (window.firebaseUser && window.userProfile?.name) ? window.userProfile.name.split(' ')[0] : (window._T ? window._T('दोस्त', 'friend') : 'दोस्त');
-        const greetHi = `🙏 Namaste ${name}!\n\nMain RADHEY hoon — Sudarshan Chakra ka AI sahayak.\n\n📝 Voice se register karein\n🔍 Koi bhi service dhundhen\n💰 Wallet & points jaanein\n✅ Verification guide\n\nBataiye kya chahiye? 😊`;
-        const greetEn = `🙏 Hello ${name}!\n\nI am RADHEY — Sudarshan Chakra AI Assistant.\n\n📝 Register via voice\n🔍 Find any service\n💰 Wallet & points info\n✅ Verification guide\n\nHow can I help you? 😊`;
+        const greetHi = `🙏 Namaste ${name}!\n\nMain RADHEY hoon — ZiNi ka AI sahayak.\n\n📝 Voice se register karein\n🔍 Koi bhi service dhundhen\n💰 Wallet & points jaanein\n✅ Verification guide\n\nBataiye kya chahiye? 😊`;
+        const greetEn = `🙏 Hello ${name}!\n\nI am RADHEY — ZiNi AI Assistant.\n\n📝 Register via voice\n🔍 Find any service\n💰 Wallet & points info\n✅ Verification guide\n\nHow can I help you? 😊`;
         radheyBot(window._T ? window._T(greetHi, greetEn) : greetHi);
     };
 
@@ -2489,9 +2489,9 @@ window.radheyStop = function() {
         const INFO_TRANSLATIONS = {
                 hi: {
                             backToHome: '← होम पर वापस',
-                            aboutTitle: '🔱 सुदर्शन चक्र इंडिया',
+                            aboutTitle: '✨ ZiNi इंडिया',
                             aboutSubtitle: 'भारत के कुशल हाथों को हर घर से जोड़ना',
-                            aboutDesc1: 'सुदर्शन चक्र इंडिया भारत के दिल — उसके कुशल, मेहनती लोगों के लिए बना एक हाइपरलोकल सर्विस मार्केटप्लेस है।',
+                            aboutDesc1: 'ZiNi इंडिया भारत के दिल — उसके कुशल, मेहनती लोगों के लिए बना एक हाइपरलोकल सर्विस मार्केटप्लेस है।',
                             aboutDesc2: 'हम सेवा खोजने वालों और सेवा देने वालों के बीच सेतु बनाते हैं — प्लम्बर, इलेक्ट्रीशियन, टीचर, ब्यूटीशियन, रसोइए और अनगिनत अन्य कुशल प्रोफ़ेशनल।',
                             aboutDesc3: '12 भाषाओं में निर्मित: वॉयस सर्च, सत्यापित प्रोफ़ाइल, असली समीक्षाएं, वॉलेट रिवॉर्ड, इन-ऐप चैट, चैरिटी प्रोग्राम और सामुदायिक रेफरल।',
                             forSeekers: 'सेवा खोजने वालों के लिए',
@@ -2531,7 +2531,7 @@ window.radheyStop = function() {
                 // Translate section headings
                 infoPage.querySelectorAll('h2, h3, h4').forEach(el => {
                             const txt = el.textContent.trim();
-                            if (txt.includes('Sudarshan Chakra India') && !txt.includes('Pvt')) el.textContent = t.aboutTitle;
+                            if (txt.includes('ZiNi') && !txt.includes('Pvt')) el.textContent = t.aboutTitle;
                             else if (txt.includes('Key Features')) el.textContent = t.keyFeatures;
                             else if (txt.includes('Our Vision')) el.textContent = t.ourVision;
                             else if (txt.includes('How to Use')) el.textContent = t.howToUse;
